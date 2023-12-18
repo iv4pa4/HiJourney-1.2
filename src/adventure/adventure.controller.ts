@@ -1,15 +1,27 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, Query } from '@nestjs/common';
 import { AdventureService } from './adventure.service';
 import { Adventure, AdventureDto } from './adventure.entity';
 import { NotFoundException } from '@nestjs/common';
+import { paginate, Pagination } from 'nestjs-typeorm-paginate';
+import { FindOneOptions } from 'typeorm';
 
 @Controller('adventure')
 export class AdventureController {
     constructor(private readonly adventureService: AdventureService) {}
 
     @Get()
-    async findAll(): Promise<Adventure[]> {
-        return await this.adventureService.findAll();
+    async findAll(@Query() query: any = {}): Promise<Pagination<Adventure>> {
+        const options: FindOneOptions<Adventure> = {
+            // Do not include the relation if it doesn't exist
+        };
+    
+        const adventures = await paginate<Adventure>(
+            this.adventureService.getRepo(),
+            query,
+            options,
+        );
+    
+        return adventures;
     }
 
     @Get(':id')
@@ -29,8 +41,8 @@ export class AdventureController {
     }
 
     @Patch(':id')
-    async updateAdventure(@Param('id') id: number, @Body() adventure: AdventureDto) {
-      return this.adventureService.update(id, adventure);
+    async updateAdventure(@Param('id') id: number, @Body() adventure: AdventureDto): Promise<Adventure> {
+        return this.adventureService.update(id, adventure);
     }
 
     @Delete(':id')

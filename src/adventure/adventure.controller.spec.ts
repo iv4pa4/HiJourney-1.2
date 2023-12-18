@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AdventureController } from './adventure.controller';
 import { AdventureService } from './adventure.service';
 import { Adventure } from './adventure.entity';
+import { paginate, Pagination, IPaginationOptions, IPaginationMeta } from 'nestjs-typeorm-paginate';
 
 jest.mock('./adventure.service');
 
@@ -12,7 +13,12 @@ describe('AdventureController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AdventureController],
-      providers: [AdventureService],
+      providers: [
+        {
+          provide: AdventureService,
+          useValue: adventureService, // Use the mocked instance directly
+        },
+      ],
     }).compile();
 
     controller = module.get<AdventureController>(AdventureController);
@@ -25,9 +31,17 @@ describe('AdventureController', () => {
 
   it('should get all adventures', async () => {
     const adventures: Adventure[] = [{ id: 1, name: 'Adventure 1', description: 'Description 1' }];
-    jest.spyOn(adventureService, 'findAll').mockResolvedValue(adventures);
-    expect(await controller.findAll()).toBe(adventures);
-  });
+
+    // Wrap the adventures array in a Pagination object
+    const pagination: Pagination<Adventure, IPaginationMeta> = {
+        items: adventures,
+        links: {},
+        meta: { itemCount: adventures.length, totalItems: adventures.length, itemsPerPage: 10, totalPages: 1, currentPage: 1 },
+    };
+
+    jest.spyOn(adventureService, 'findAll').mockResolvedValue(pagination);
+    expect(await controller.findAll({})).toBe(pagination);
+});
 
   it('should get a single adventure', async () => {
     const adventureId = 1;
