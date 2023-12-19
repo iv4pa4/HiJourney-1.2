@@ -84,7 +84,9 @@
 		D723F9D02B2C536A009F035D /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				D7CC15C02B31848200F45436 /* ScreenViews */,
 				D723F9D12B2C536A009F035D /* Preview Assets.xcassets */,
+				D7CC15C12B3184A900F45436 /* ScreenViews */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -117,6 +119,22 @@
 				D77974E52B30F5060037AF0D /* ExploreAdventuresScreenView.swift */,
 			);
 			path = ScreenViews;
+			sourceTree = "<group>";
+		};
+		D7CC15C02B31848200F45436 /* ScreenViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ScreenViews;
+			path = "Preview Content/ScreenViews";
+			sourceTree = SOURCE_ROOT;
+		};
+		D7CC15C12B3184A900F45436 /* ScreenViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ScreenViews;
+			path = ../../../../../../../../.Trash/ScreenViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
