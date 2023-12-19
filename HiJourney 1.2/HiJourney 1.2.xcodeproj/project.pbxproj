@@ -8,17 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		D7CC15CF2B31851E00F45436 /* HiJourney_1_2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */; };
-		D7CC15D12B31851E00F45436 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15D02B31851E00F45436 /* ContentView.swift */; };
 		D7CC15D32B31852000F45436 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7CC15D22B31852000F45436 /* Assets.xcassets */; };
 		D7CC15D62B31852000F45436 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7CC15D52B31852000F45436 /* Preview Assets.xcassets */; };
+		D7CC15E12B31854D00F45436 /* WelcomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */; };
+		D7CC15E22B31854D00F45436 /* ExploreMainPageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */; };
+		D7CC15E32B31854D00F45436 /* SignInScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */; };
+		D7CC15E42B31854D00F45436 /* ExploreAdventuresScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15DF2B31854D00F45436 /* ExploreAdventuresScreenView.swift */; };
+		D7CC15E52B31854D00F45436 /* SignUpScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15E02B31854D00F45436 /* SignUpScreenView.swift */; };
+		D7CC15E82B31855600F45436 /* LogicMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15E62B31855600F45436 /* LogicMockup.swift */; };
+		D7CC15E92B31855600F45436 /* DatabaseMockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15E72B31855600F45436 /* DatabaseMockup.swift */; };
+		D7CC15EB2B31855D00F45436 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15EA2B31855D00F45436 /* Connection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D7CC15CB2B31851E00F45436 /* HiJourney 1.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HiJourney 1.2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiJourney_1_2App.swift; sourceTree = "<group>"; };
-		D7CC15D02B31851E00F45436 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D7CC15D22B31852000F45436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D7CC15D52B31852000F45436 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeScreenView.swift; path = ../../WelcomeScreenView.swift; sourceTree = "<group>"; };
+		D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreMainPageScreen.swift; path = ../../ExploreMainPageScreen.swift; sourceTree = "<group>"; };
+		D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInScreenView.swift; path = ../../SignInScreenView.swift; sourceTree = "<group>"; };
+		D7CC15DF2B31854D00F45436 /* ExploreAdventuresScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreAdventuresScreenView.swift; path = ../../ExploreAdventuresScreenView.swift; sourceTree = "<group>"; };
+		D7CC15E02B31854D00F45436 /* SignUpScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpScreenView.swift; path = ../../SignUpScreenView.swift; sourceTree = "<group>"; };
+		D7CC15E62B31855600F45436 /* LogicMockup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogicMockup.swift; path = ../../LogicMockup.swift; sourceTree = "<group>"; };
+		D7CC15E72B31855600F45436 /* DatabaseMockup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatabaseMockup.swift; path = ../../DatabaseMockup.swift; sourceTree = "<group>"; };
+		D7CC15EA2B31855D00F45436 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Connection.swift; path = ../../Connection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +66,14 @@
 			isa = PBXGroup;
 			children = (
 				D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */,
-				D7CC15D02B31851E00F45436 /* ContentView.swift */,
+				D7CC15DF2B31854D00F45436 /* ExploreAdventuresScreenView.swift */,
+				D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */,
+				D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */,
+				D7CC15E02B31854D00F45436 /* SignUpScreenView.swift */,
+				D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */,
+				D7CC15E72B31855600F45436 /* DatabaseMockup.swift */,
+				D7CC15E62B31855600F45436 /* LogicMockup.swift */,
+				D7CC15EA2B31855D00F45436 /* Connection.swift */,
 				D7CC15D22B31852000F45436 /* Assets.xcassets */,
 				D7CC15D42B31852000F45436 /* Preview Content */,
 			);
@@ -137,8 +158,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7CC15D12B31851E00F45436 /* ContentView.swift in Sources */,
+				D7CC15E12B31854D00F45436 /* WelcomeScreenView.swift in Sources */,
+				D7CC15E82B31855600F45436 /* LogicMockup.swift in Sources */,
+				D7CC15E32B31854D00F45436 /* SignInScreenView.swift in Sources */,
+				D7CC15E42B31854D00F45436 /* ExploreAdventuresScreenView.swift in Sources */,
+				D7CC15E52B31854D00F45436 /* SignUpScreenView.swift in Sources */,
+				D7CC15E92B31855600F45436 /* DatabaseMockup.swift in Sources */,
+				D7CC15EB2B31855D00F45436 /* Connection.swift in Sources */,
 				D7CC15CF2B31851E00F45436 /* HiJourney_1_2App.swift in Sources */,
+				D7CC15E22B31854D00F45436 /* ExploreMainPageScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
