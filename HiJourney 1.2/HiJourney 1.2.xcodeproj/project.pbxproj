@@ -25,13 +25,13 @@
 		D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiJourney_1_2App.swift; sourceTree = "<group>"; };
 		D7CC15D22B31852000F45436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D7CC15D52B31852000F45436 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeScreenView.swift; path = ../../WelcomeScreenView.swift; sourceTree = "<group>"; };
-		D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreMainPageScreen.swift; path = ../../ExploreMainPageScreen.swift; sourceTree = "<group>"; };
-		D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInScreenView.swift; path = ../../SignInScreenView.swift; sourceTree = "<group>"; };
-		D7CC15DF2B31854D00F45436 /* ExploreAdventuresScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreAdventuresScreenView.swift; path = ../../ExploreAdventuresScreenView.swift; sourceTree = "<group>"; };
-		D7CC15E02B31854D00F45436 /* SignUpScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpScreenView.swift; path = ../../SignUpScreenView.swift; sourceTree = "<group>"; };
-		D7CC15E62B31855600F45436 /* LogicMockup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogicMockup.swift; path = ../../LogicMockup.swift; sourceTree = "<group>"; };
-		D7CC15E72B31855600F45436 /* DatabaseMockup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatabaseMockup.swift; path = ../../DatabaseMockup.swift; sourceTree = "<group>"; };
+		D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreenView.swift; sourceTree = "<group>"; };
+		D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreMainPageScreen.swift; sourceTree = "<group>"; };
+		D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInScreenView.swift; sourceTree = "<group>"; };
+		D7CC15DF2B31854D00F45436 /* ExploreAdventuresScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreAdventuresScreenView.swift; sourceTree = "<group>"; };
+		D7CC15E02B31854D00F45436 /* SignUpScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpScreenView.swift; sourceTree = "<group>"; };
+		D7CC15E62B31855600F45436 /* LogicMockup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicMockup.swift; sourceTree = "<group>"; };
+		D7CC15E72B31855600F45436 /* DatabaseMockup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseMockup.swift; sourceTree = "<group>"; };
 		D7CC15EA2B31855D00F45436 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Connection.swift; path = ../../Connection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -46,6 +46,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D78FBD0F2B318912001E3644 /* ScreenViews */ = {
+			isa = PBXGroup;
+			children = (
+				D7CC15DF2B31854D00F45436 /* ExploreAdventuresScreenView.swift */,
+				D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */,
+				D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */,
+				D7CC15E02B31854D00F45436 /* SignUpScreenView.swift */,
+				D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */,
+			);
+			path = ScreenViews;
+			sourceTree = "<group>";
+		};
+		D78FBD102B318940001E3644 /* LogicMockup */ = {
+			isa = PBXGroup;
+			children = (
+				D7CC15E72B31855600F45436 /* DatabaseMockup.swift */,
+				D7CC15E62B31855600F45436 /* LogicMockup.swift */,
+			);
+			path = LogicMockup;
+			sourceTree = "<group>";
+		};
 		D7CC15C22B31851E00F45436 = {
 			isa = PBXGroup;
 			children = (
@@ -66,13 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */,
-				D7CC15DF2B31854D00F45436 /* ExploreAdventuresScreenView.swift */,
-				D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */,
-				D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */,
-				D7CC15E02B31854D00F45436 /* SignUpScreenView.swift */,
-				D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */,
-				D7CC15E72B31855600F45436 /* DatabaseMockup.swift */,
-				D7CC15E62B31855600F45436 /* LogicMockup.swift */,
+				D78FBD102B318940001E3644 /* LogicMockup */,
+				D78FBD0F2B318912001E3644 /* ScreenViews */,
 				D7CC15EA2B31855D00F45436 /* Connection.swift */,
 				D7CC15D22B31852000F45436 /* Assets.xcassets */,
 				D7CC15D42B31852000F45436 /* Preview Content */,
