@@ -1,6 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, RelationCount } from 'typeorm';
 import { Adventure } from 'src/adventure/adventure.entity';
-import { AdventureDto } from 'src/adventure/adventure.entity';
 
 @Entity()
 export class Adventurer {
@@ -19,14 +18,15 @@ export class Adventurer {
   @ManyToMany(() => Adventure, { cascade: true })
   @JoinTable()
   attendedAdventures: Adventure[];
+
+  @RelationCount((adventurer: Adventurer) => adventurer.attendedAdventures)
+  attendedAdventuresCount: number;
 }
 
 export class AdventurerDto {
   username: string;
   email: string;
   password: string;
-
-  // You can include any additional fields or validation logic here
 }
 
 export class AdventurerResponseDto {
