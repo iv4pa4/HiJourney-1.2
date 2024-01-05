@@ -1,54 +1,58 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, Query } from '@nestjs/common';
 import { CreatorService } from './creator.service';
-import { Creator } from './creator.entity';
+import { Creator, CreatorDto } from './creator.entity'; 
 import { NotFoundException } from '@nestjs/common';
-
+import { paginate, Pagination } from 'nestjs-typeorm-paginate';
+import { FindOneOptions } from 'typeorm';
 
 @Controller('creator')
-export class CreatorController {
-    constructor(private readonly creatorService: CreatorService) {}
+export class CreatorController { 
+    constructor(private readonly creatorService: CreatorService) {} 
 
-    // get all users
     @Get()
-    async findAll(): Promise<Creator[]> {
-        return await this.creatorService.findAll();
+    async findAll(@Query() query: any = {}): Promise<Pagination<Creator>> { 
+        const options: FindOneOptions<Creator> = {
+           
+        };
+    
+        const creators = await paginate<Creator>(
+            this.creatorService.getRepo(), 
+            query,
+            options,
+        );
+    
+        return creators;
     }
 
-    //get one user
     @Get(':id')
-    async getCreator(@Param('id') id: string): Promise<Creator> {
-        const creator = await this.creatorService.getSingleCreator(+id);
-    
+    async getCreator(@Param('id') id: string): Promise<Creator> { 
+        const creator = await this.creatorService.getSingleCreator(+id); 
+
         if (!creator) {
-            throw new NotFoundException(`Creator with ID ${id} not found`);
+            throw new NotFoundException(`Creator with ID ${id} not found`); 
         }
-    
+
         return creator;
     }
-    
 
-    //create user
     @Post()
-    async createCreator(@Body() creator: Creator): Promise<Creator>{
-        return await this.creatorService.create(creator);
+    async createCreator(@Body() creatorDto: CreatorDto): Promise<Creator> { 
+        return await this.creatorService.create(creatorDto); 
     }
 
-    //update user
-    @Put(':id')
-    async updateCreator(@Param('id') id: number, @Body() creator: Creator): Promise<Creator> {
-        return await this.creatorService.update(id, creator);
+    @Patch(':id')
+    async updateCreator(@Param('id') id: number, @Body() creator: CreatorDto): Promise<Creator> { 
+        return this.creatorService.update(id, creator); 
     }
-    
 
-    //delete user
     @Delete(':id')
-    async deleteCreator(@Param('id') id: number): Promise<void>{
-        const creator = await this.creatorService.getSingleCreator(id);
-        if(!creator){
-            throw new Error("User not found");
+    async deleteCreator(@Param('id') id: number): Promise<void> { 
+        const creator = await this.creatorService.getSingleCreator(id); 
+
+        if (!creator) {
+            throw new NotFoundException(`Creator with ID ${id} not found`); 
         }
-        this.creatorService.deleteAdventure(id);
+
+        await this.creatorService.deleteCreator(id); 
     }
-
-
 }

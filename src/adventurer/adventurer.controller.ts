@@ -1,54 +1,58 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, Query } from '@nestjs/common';
 import { AdventurerService } from './adventurer.service';
-import { Adventurer } from './adventurer.entity';
+import { Adventurer, AdventurerDto } from './adventurer.entity'; 
 import { NotFoundException } from '@nestjs/common';
-
+import { paginate, Pagination } from 'nestjs-typeorm-paginate';
+import { FindOneOptions } from 'typeorm';
 
 @Controller('adventurer')
-export class AdventurerController {
-    constructor(private readonly adventurerService: AdventurerService) {}
+export class AdventurerController { 
+    constructor(private readonly adventurerService: AdventurerService) {} 
 
-    // get all users
     @Get()
-    async findAll(): Promise<Adventurer[]> {
-        return await this.adventurerService.findAll();
+    async findAll(@Query() query: any = {}): Promise<Pagination<Adventurer>> { 
+        const options: FindOneOptions<Adventurer> = {
+           
+        };
+    
+        const adventurers = await paginate<Adventurer>(
+            this.adventurerService.getRepo(), 
+            query,
+            options,
+        );
+    
+        return adventurers;
     }
 
-    //get one user
     @Get(':id')
-    async getAdventurer(@Param('id') id: string): Promise<Adventurer> {
-        const adventurer = await this.adventurerService.getSingleAdventurer(+id);
-    
+    async getAdventurer(@Param('id') id: string): Promise<Adventurer> { 
+        const adventurer = await this.adventurerService.getSingleAdventurer(+id); 
+
         if (!adventurer) {
-            throw new NotFoundException(`Adventurer with ID ${id} not found`);
+            throw new NotFoundException(`Adventurer with ID ${id} not found`); 
         }
-    
+
         return adventurer;
     }
-    
 
-    //create user
     @Post()
-    async createAdventurer(@Body() adventurer: Adventurer): Promise<Adventurer>{
-        return await this.adventurerService.create(adventurer);
+    async createAdventurer(@Body() adventurerDto: AdventurerDto): Promise<Adventurer> { 
+        return await this.adventurerService.create(adventurerDto); 
     }
 
-    //update user
-    @Put(':id')
-    async updateAdventurer(@Param('id') id: number, @Body() adventurer: Adventurer): Promise<Adventurer> {
-        return await this.adventurerService.update(id, adventurer);
+    @Patch(':id')
+    async updateAdventurer(@Param('id') id: number, @Body() adventurer: AdventurerDto): Promise<Adventurer> { 
+        return this.adventurerService.update(id, adventurer); 
     }
-    
 
-    //delete user
     @Delete(':id')
-    async deleteAdventurer(@Param('id') id: number): Promise<void>{
-        const adventurer = await this.adventurerService.getSingleAdventurer(id);
-        if(!adventurer){
-            throw new Error("User not found");
+    async deleteAdventurer(@Param('id') id: number): Promise<void> { 
+        const adventurer = await this.adventurerService.getSingleAdventurer(id); 
+
+        if (!adventurer) {
+            throw new NotFoundException(`Adventurer with ID ${id} not found`); 
         }
-        this.adventurerService.deleteAdventure(id);
+
+        await this.adventurerService.deleteAdventurer(id); 
     }
-
-
 }

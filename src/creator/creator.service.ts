@@ -1,72 +1,79 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UpdateDateColumn } from 'typeorm';
-import { Creator } from './creator.entity';
-import { NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { Entity, CustomRepositoryNotFoundError} from 'typeorm';
-
-import { EntityManager } from 'typeorm';
-
-
-
-
+import { Repository, FindOneOptions } from 'typeorm';
+import { Creator, CreatorDto } from './creator.entity'; 
+import { paginate, Pagination, IPaginationOptions, IPaginationMeta } from 'nestjs-typeorm-paginate';
 
 @Injectable()
-export class CreatorService {
-
+export class CreatorService { 
     constructor(
-        @InjectRepository(Creator)
-        private creatorsRepository: Repository<Creator>,
-    ){}
-    //get all
-    async findAll(): Promise<Creator[]>{
-        return await this.creatorsRepository.find();
+        @InjectRepository(Creator) 
+        private creatorsRepository: Repository<Creator>, 
+    ) {}
+
+    getRepo() {
+        return this.creatorsRepository; 
     }
-    //get one user
-    async getSingleCreator(id: number): Promise<Creator> {
-        const creator = await this.findAdventure(id);
+
+    async findAll(page: number = 1, limit: number = 10, fields?: (keyof Creator)[]): Promise<Pagination<Creator>> { // Updated return type and entity name
+        const options: FindOneOptions<Creator> = {
+            select: fields || ['id', 'username', 'email', 'password'],
+        };
+
+        const paginationOptions: IPaginationOptions = { page, limit };
+
+        const result = await paginate<Creator>( 
+            this.creatorsRepository,
+            paginationOptions,
+            options,
+        );
+
+        
+        const creators: Pagination<Creator> = result as Pagination<Creator>; 
+
+        return creators;
+    }
+
+    async getSingleCreator(id: number): Promise<Creator> { 
+        const creator = await this.creatorsRepository.findOneOrFail({
+            where: { id },
+            select: ['id', 'username', 'email', 'password'],
+        });
+
         if (!creator) {
-            throw new NotFoundException('Creator not found');
+            throw new NotFoundException('Creator not found'); 
         }
+
         return creator;
     }
     
-    //create user
-    async create(creator: Creator): Promise<Creator>{
-        const newUser = this.creatorsRepository.create(creator);
-        return await this.creatorsRepository.save(newUser);
-    }
-    
 
-    //delet user
-    async deleteAdventure(id: number): Promise<Creator> {
-    const creator = await this.findAdventure(id);
-    await this.creatorsRepository.delete(id);
-    return creator;
+    async create(creator: CreatorDto): Promise<Creator> { 
+        const newCreator = this.creatorsRepository.create(creator);
+        return await this.creatorsRepository.save(newCreator); 
     }
 
-    async deleteUser(id: number): Promise<void>{
+    async deleteCreator(id: number): Promise<Creator> { 
+        const creator = await this.getSingleCreator(id);
         await this.creatorsRepository.delete(id);
+        return creator;
     }
 
-
-    async update(id: number, creator: Creator): Promise<Creator> {
+    async update(id: number, creator: CreatorDto): Promise<Creator> { 
         try {
-            const updatedCreator = await this.findAdventure(id);
-            this.creatorsRepository.merge(updatedCreator, creator);
-            return await this.creatorsRepository.save(updatedCreator);
+            const updatedCreator = await this.getSingleCreator(id);
+
+            if (!updatedCreator) {
+                throw new NotFoundException('Creator not found');
+            }
+
+            this.creatorsRepository.merge(updatedCreator, creator); 
+            return await this.creatorsRepository.save(updatedCreator); 
         } catch (error) {
             if (error.name === 'EntityNotFound') {
-                throw new NotFoundException('Creator not found');
+                throw new NotFoundException('Creator not found'); 
             }
             throw error;
         }
     }
-
-    // find Creator
-    private async findAdventure(id: number): Promise<Creator | undefined> {
-        return await this.creatorsRepository.findOne({ where: { id } as any });
-    }
-
 }

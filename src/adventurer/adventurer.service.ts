@@ -1,65 +1,79 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UpdateDateColumn } from 'typeorm';
-import { Adventurer } from './adventurer.entity';
-import { NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, FindOneOptions } from 'typeorm';
+import { Adventurer, AdventurerDto } from './adventurer.entity'; 
+import { paginate, Pagination, IPaginationOptions, IPaginationMeta } from 'nestjs-typeorm-paginate';
 
 @Injectable()
-export class AdventurerService {
-
+export class AdventurerService { 
     constructor(
-        @InjectRepository(Adventurer)
-        private adventurersRepository: Repository<Adventurer>,
-    ){}
-    //get all
-    async findAll(): Promise<Adventurer[]>{
-        return await this.adventurersRepository.find();
+        @InjectRepository(Adventurer) 
+        private adventurersRepository: Repository<Adventurer>, 
+    ) {}
+
+    getRepo() {
+        return this.adventurersRepository; 
     }
-    //get one user
-    async getSingleAdventurer(id: number): Promise<Adventurer> {
-        const adventurer = await this.findAdventurer(id);
+
+    async findAll(page: number = 1, limit: number = 10, fields?: (keyof Adventurer)[]): Promise<Pagination<Adventurer>> { // Updated return type and entity name
+        const options: FindOneOptions<Adventurer> = {
+            select: fields || ['id', 'username', 'email', 'password'],
+        };
+
+        const paginationOptions: IPaginationOptions = { page, limit };
+
+        const result = await paginate<Adventurer>( 
+            this.adventurersRepository,
+            paginationOptions,
+            options,
+        );
+
+        
+        const adventurers: Pagination<Adventurer> = result as Pagination<Adventurer>; 
+
+        return adventurers;
+    }
+
+    async getSingleAdventurer(id: number): Promise<Adventurer> { 
+        const adventurer = await this.adventurersRepository.findOneOrFail({
+            where: { id },
+            select: ['id', 'username', 'email', 'password'],
+        });
+
         if (!adventurer) {
-            throw new NotFoundException('Adventurer not found');
+            throw new NotFoundException('adventurer not found'); 
         }
+
         return adventurer;
     }
     
-    //create user
-    async create(adventurer: Adventurer): Promise<Adventurer>{
-        const newUser = this.adventurersRepository.create(adventurer);
-        return await this.adventurersRepository.save(newUser);
-    }
-    
 
-    //delet user
-    async deleteAdventure(id: number): Promise<Adventurer> {
-    const adventurer = await this.findAdventurer(id);
-    await this.adventurersRepository.delete(id);
-    return adventurer;
+    async create(adventurer: AdventurerDto): Promise<Adventurer> { 
+        const newAdventurer = this.adventurersRepository.create(adventurer);
+        return await this.adventurersRepository.save(newAdventurer); 
     }
 
-    async deleteUser(id: number): Promise<void>{
+    async deleteAdventurer(id: number): Promise<Adventurer> { 
+        const adventurer = await this.getSingleAdventurer(id);
         await this.adventurersRepository.delete(id);
+        return adventurer;
     }
 
-
-    async update(id: number, adventurer: Adventurer): Promise<Adventurer> {
+    async update(id: number, adventurer: AdventurerDto): Promise<Adventurer> { 
         try {
-            const updatedAdventurer = await this.findAdventurer(id);
-            this.adventurersRepository.merge(updatedAdventurer, adventurer);
-            return await this.adventurersRepository.save(updatedAdventurer);
+            const updatedAdventurer = await this.getSingleAdventurer(id);
+
+            if (!updatedAdventurer) {
+                throw new NotFoundException('adventurer not found');
+            }
+
+            this.adventurersRepository.merge(updatedAdventurer, adventurer); 
+            return await this.adventurersRepository.save(updatedAdventurer); 
         } catch (error) {
             if (error.name === 'EntityNotFound') {
-                throw new NotFoundException('Adventurer not found');
+                throw new NotFoundException('Creator not found'); 
             }
             throw error;
         }
     }
-
-    // find adventurer
-    private async findAdventurer(id: number): Promise<Adventurer | undefined> {
-        return await this.adventurersRepository.findOne({ where: { id } as any });
-    }
-
 }
