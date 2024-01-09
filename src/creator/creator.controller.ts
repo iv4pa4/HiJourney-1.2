@@ -4,6 +4,7 @@ import { Creator, CreatorDto } from './creator.entity';
 import { NotFoundException } from '@nestjs/common';
 import { paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { FindOneOptions } from 'typeorm';
+import { Adventure, AdventureDto } from 'src/adventure/adventure.entity';
 
 @Controller('creator')
 export class CreatorController { 
@@ -55,4 +56,12 @@ export class CreatorController {
 
         await this.creatorService.deleteCreator(id); 
     }
+
+    @Post(':id/adventures')
+  async createAdventure(
+    @Param('id') id: number,
+    @Body() adventureDto: AdventureDto,
+  ): Promise<Adventure> {
+    return this.creatorService.createAdventure(id, adventureDto);
+  }
 }
