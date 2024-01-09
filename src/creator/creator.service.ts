@@ -93,9 +93,31 @@ export class CreatorService {
   
     const newAdventure = this.adventuresRepository.create({
       ...adventureDto,
+      creators: [creator], 
     });
   
     return await this.adventuresRepository.save(newAdventure);
   }
+  
+
+  async getCreatorAdventures(creatorId: number): Promise<Adventure[]> {
+    const creator = await this.getSingleCreator(creatorId);
+  
+    if (!creator) {
+      throw new NotFoundException('Creator not found');
+    }
+  
+    console.log('Creator:', creator); 
+    const adventures = await this.adventuresRepository
+      .createQueryBuilder('adventure')
+      .leftJoinAndSelect('adventure.creators', 'creator')
+      .where('creator.id = :creatorId', { creatorId })
+      .getMany();
+  
+  
+    return adventures;
+  }
+  
+  
   
 }

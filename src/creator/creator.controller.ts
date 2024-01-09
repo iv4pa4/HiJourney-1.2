@@ -64,4 +64,15 @@ export class CreatorController {
   ): Promise<Adventure> {
     return this.creatorService.createAdventure(id, adventureDto);
   }
+
+  @Get(':id/adventures')
+  async getCreatorAdventures(@Param('id') id: string): Promise<Adventure[]> { 
+      const adventures = await this.creatorService.getCreatorAdventures(+id);
+
+      if (!adventures || adventures.length === 0) {
+          throw new NotFoundException(`Adventures not found for Creator with ID ${id}`);
+      }
+
+      return adventures;
+  }
 }
