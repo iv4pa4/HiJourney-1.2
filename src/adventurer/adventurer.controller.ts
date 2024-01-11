@@ -56,17 +56,19 @@ export class AdventurerController {
         await this.adventurerService.deleteAdventurer(id); 
     }
 
-    @Post(':id/attend/:adventureId')
+    @Post(':adventurerId/attend/:adventureId')
     async attendAdventure(
-        @Param('id') adventurerId: number,
-        @Param('adventureId') adventureId: number,
-    ): Promise<Adventurer> { 
-        const adventurer = await this.attendAdventure(adventurerId, adventureId);
-        
-        if (!adventurer) {
-            throw new NotFoundException(`Adventurer with ID ${adventurerId} not found`); 
-        }
+    @Param('adventurerId') adventurerId: number,
+    @Param('adventureId') adventureId: number,
+    ): Promise<Adventurer> {
+    const adventurer = await this.adventurerService.attendAdventure(adventurerId, adventureId);
 
-        return adventurer;
+    if (!adventurer) {
+        throw new NotFoundException(`Adventurer with ID ${adventurerId} not found`);
     }
+
+    return adventurer;
+    }
+
+
 }

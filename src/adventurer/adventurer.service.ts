@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOneOptions } from 'typeorm';
 import { Adventurer, AdventurerDto } from './adventurer.entity';
 import { paginate, Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate';
+import { AdventureService } from 'src/adventure/adventure.service';
 
 @Injectable()
 export class AdventurerService {
   constructor(
     @InjectRepository(Adventurer)
     private adventurersRepository: Repository<Adventurer>,
+    private adventureService: AdventureService,
   ) {}
 
   getRepo() {
@@ -80,4 +82,19 @@ export class AdventurerService {
       throw error;
     }
   }
+
+  async attendAdventure(adventurerId: number, adventureId: number): Promise<Adventurer> {
+    const adventurer = await this.getSingleAdventurer(adventurerId);
+
+    const adventure = await this.adventureService.getSingleAdventure(adventureId);
+
+    if (!adventure) {
+      throw new NotFoundException('Adventure not found');
+    }
+
+    adventurer.attendedAdventures.push(adventure);
+
+    return await this.adventurersRepository.save(adventurer);
+  }
+
 }
