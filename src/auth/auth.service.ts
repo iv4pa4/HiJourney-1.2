@@ -6,7 +6,6 @@ import { Adventurer } from 'src/adventurer/adventurer.entity';
 import * as bcrypt from 'bcrypt';
 import { Adventure } from 'src/adventure/adventure.entity';
 
-// Define a new type/interface for the response without sensitive fields
 type SafeAdventurer = {
   id: number;
   username: string;
