@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CreatorModule } from './creator/creator.module';
 import { AdventureModule } from './adventure/adventure.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -14,6 +15,7 @@ import { AdventureModule } from './adventure/adventure.module';
     AdventurerModule,
     CreatorModule,
     AdventureModule,
+    AuthModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
