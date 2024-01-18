@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Delete, Patch, Query, NotFoundException } from '@nestjs/common';
 import { AdventureService } from './adventure.service';
 import { Adventure, AdventureDto } from './adventure.entity';
-import { AdventurerService } from '../adventurer/adventurer.service'; // Import AdventurerService
+import { AdventurerService } from '../adventurer/adventurer.service'; 
 import { paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { FindOneOptions } from 'typeorm';
 
@@ -34,6 +34,7 @@ export class AdventureController {
         if (!adventure) {
             throw new NotFoundException(`Adventure with ID ${id} not found`);
         }
+        this.adventureService.displayAdventure(adventure);
 
         return adventure;
     }

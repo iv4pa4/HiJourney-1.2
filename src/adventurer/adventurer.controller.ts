@@ -70,5 +70,24 @@ export class AdventurerController {
     return adventurer;
     }
 
+    @Post(':adventurerId/add-to-wishlist/:adventureId')
+    async addToWishlist(
+        @Param('adventurerId') adventurerId: number,
+        @Param('adventureId') adventureId: number,
+    ): Promise<Adventurer> {
+        const adventurer = await this.adventurerService.addToWishlist(adventurerId, adventureId);
+
+        if (!adventurer) {
+            throw new NotFoundException(`Adventurer with ID ${adventurerId} not found`);
+        }
+
+        return adventurer;
+    }
+
+    @Get(':adventurerId/wishlist')
+    async displayWishlist(@Param('adventurerId') adventurerId: number): Promise<void> {
+        await this.adventurerService.displayWishlist(adventurerId);
+    }
+
 
 }

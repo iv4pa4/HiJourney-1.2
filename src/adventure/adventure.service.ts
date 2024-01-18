@@ -83,6 +83,31 @@ export class AdventureService {
     }
   }
 
+   displayAdventure(adventure: Adventure): void {
+    console.log('Adventure Details:');
+    console.log(`ID: ${adventure.id}`);
+    console.log(`Name: ${adventure.name}`);
+    console.log(`Description: ${adventure.description}`);
+  
+    if (adventure.adventurers && adventure.adventurers.length > 0) {
+      console.log('Adventurers:');
+      adventure.adventurers.forEach((adventurer) => {
+        console.log(`- ${adventurer.username}`);
+      });
+    } else {
+      console.log('No adventurers associated with this adventure.');
+    }
+  
+    if (adventure.creators && adventure.creators.length > 0) {
+      console.log('Creators:');
+      adventure.creators.forEach((creator) => {
+        console.log(`- ${creator.username}`);
+      });
+    } else {
+      console.log('No creators associated with this adventure.');
+    };
+  }
+
   async attendAdventure(adventurerId: number, adventureId: number): Promise<Adventure> {
     const adventurer = await this.adventurersRepository.findOneOrFail({
       where: { id: adventurerId },
@@ -97,6 +122,8 @@ export class AdventureService {
   
     return adventure;
   }
+
+  
   
   
 }

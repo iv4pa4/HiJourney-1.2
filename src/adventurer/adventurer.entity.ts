@@ -26,6 +26,10 @@ export class Adventurer {
   @JoinTable()
   attendedAdventures: Adventure[];
 
+  @ManyToMany(() => Adventure, { cascade: true })
+  @JoinTable()
+  wishlist: Adventure[];
+
   @RelationCount((adventurer: Adventurer) => adventurer.attendedAdventures)
   attendedAdventuresCount: number;
 

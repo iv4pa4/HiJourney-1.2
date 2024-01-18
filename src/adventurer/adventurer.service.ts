@@ -97,4 +97,36 @@ export class AdventurerService {
     return await this.adventurersRepository.save(adventurer);
   }
 
+  async addToWishlist(adventurerId: number, adventureId: number): Promise<Adventurer> {
+    const adventurer = await this.getSingleAdventurer(adventurerId);
+    const adventure = await this.adventureService.getSingleAdventure(adventureId);
+
+    if (!adventure) {
+      throw new NotFoundException('Adventure not found');
+    }
+
+    adventurer.wishlist = [...(adventurer.wishlist || []), adventure];
+
+    return await this.adventurersRepository.save(adventurer);
+  }
+
+  async displayWishlist(adventurerId: number) {
+    const adventurer = await this.getSingleAdventurer(adventurerId);
+
+    if (!adventurer) {
+      throw new NotFoundException('Adventurer not found');
+    }
+
+    console.log(`Wishlist for Adventurer ${adventurer.username}:`);
+    
+    if (adventurer.wishlist && adventurer.wishlist.length > 0) {
+      adventurer.wishlist.forEach((adventure) => {
+        this.adventureService.displayAdventure(adventure);
+      });
+    } else {
+      console.log('Wishlist is empty.');
+    }
+  }
 }
+
+
