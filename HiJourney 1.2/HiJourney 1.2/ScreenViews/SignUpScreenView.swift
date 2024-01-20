@@ -16,6 +16,14 @@ struct SignUpScreenView: View {
     private let offsetForButton: CGFloat = 260
     private let logoWidth: CGFloat = 156
     private let logoHeight: CGFloat = 149
+    private let offsetShowZone: CGFloat = 50
+    private let offsetShowLogo: CGFloat = -162
+    private let offsetSignUpText: CGFloat = -60
+    private let signUpTextWidth: CGFloat = 128
+    private let signUpTextHeight: CGFloat = 45
+    private let signUpTextCornerRadius: CGFloat = 30
+    private let signUpTextFontSize: CGFloat = 15
+    
     @State var username: String = ""
     @State var password: String = ""
     @State var repassword: String = ""
@@ -29,7 +37,7 @@ struct SignUpScreenView: View {
                 showLogo
                 signUpText
                 usernameField()
-                signInButton
+                signUpButton
             }
         }
     }
@@ -38,14 +46,14 @@ struct SignUpScreenView: View {
         Rectangle()
             .fill(.white)
             .frame(width: rectangleWidth, height: rectangleHeight)
-            .cornerRadius(50)
+            .cornerRadius(offsetShowZone)
     }
     
     var showLogo: some View{
         Image("logo_new")
             .resizable()
             .frame(width: logoWidth, height: logoHeight)
-            .offset(y: -162)
+            .offset(y: offsetShowLogo)
             
     }
     
@@ -53,25 +61,29 @@ struct SignUpScreenView: View {
         Text("Sign up")
             .font(.largeTitle)
             .foregroundColor(.black)
-            .offset(y: -60)
+            .offset(y: offsetSignUpText)
     }
     
-    var signInButton: some View{
+    var signUpButton: some View{
         Button(action: {
-            viewModel.signUp()
+            signUpAction()
         }, label: {
             Text("Sign up")
-                .frame(width: 128, height: 45)
+                .frame(width: signUpTextWidth, height: signUpTextHeight)
                 .foregroundColor(.black)
                 .background(Color("BlueForButtons"))
-                .clipShape(RoundedRectangle(cornerRadius: 30))
+                .clipShape(RoundedRectangle(cornerRadius: signUpTextCornerRadius))
                 .offset(y: offsetForButton)
-                .font(.custom("Poppins-Bold", size:15))
+                .font(.custom("Poppins-Bold", size:signUpTextFontSize))
                 .shadow(color: .black, radius: 4, x: 3, y: 4)
         })
        
     }
 
+    func signUpAction() {
+        viewModel.signUp()
+    }
+    
 
     func usernameField() -> some View {
             VStack {

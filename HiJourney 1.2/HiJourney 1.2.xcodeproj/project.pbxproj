@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D75185AD2B5BDCD100D685CF /* AdventurerDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185AC2B5BDCD100D685CF /* AdventurerDisplayView.swift */; };
+		D75185AF2B5BFC4100D685CF /* AdventureDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185AE2B5BFC4000D685CF /* AdventureDisplayView.swift */; };
+		D75185B12B5BFCC200D685CF /* TypesStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185B02B5BFCC200D685CF /* TypesStructs.swift */; };
 		D7CC15CF2B31851E00F45436 /* HiJourney_1_2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */; };
 		D7CC15D32B31852000F45436 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7CC15D22B31852000F45436 /* Assets.xcassets */; };
 		D7CC15D62B31852000F45436 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7CC15D52B31852000F45436 /* Preview Assets.xcassets */; };
@@ -21,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D75185AC2B5BDCD100D685CF /* AdventurerDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventurerDisplayView.swift; sourceTree = "<group>"; };
+		D75185AE2B5BFC4000D685CF /* AdventureDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventureDisplayView.swift; sourceTree = "<group>"; };
+		D75185B02B5BFCC200D685CF /* TypesStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesStructs.swift; sourceTree = "<group>"; };
 		D7CC15CB2B31851E00F45436 /* HiJourney 1.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HiJourney 1.2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiJourney_1_2App.swift; sourceTree = "<group>"; };
 		D7CC15D22B31852000F45436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,6 +60,8 @@
 				D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */,
 				D7CC15E02B31854D00F45436 /* SignUpScreenView.swift */,
 				D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */,
+				D75185AC2B5BDCD100D685CF /* AdventurerDisplayView.swift */,
+				D75185AE2B5BFC4000D685CF /* AdventureDisplayView.swift */,
 			);
 			path = ScreenViews;
 			sourceTree = "<group>";
@@ -63,6 +71,7 @@
 			children = (
 				D7CC15E72B31855600F45436 /* DatabaseMockup.swift */,
 				D7CC15E62B31855600F45436 /* LogicMockup.swift */,
+				D75185B02B5BFCC200D685CF /* TypesStructs.swift */,
 			);
 			path = LogicMockup;
 			sourceTree = "<group>";
@@ -182,6 +191,9 @@
 				D7CC15E92B31855600F45436 /* DatabaseMockup.swift in Sources */,
 				D7CC15EB2B31855D00F45436 /* Connection.swift in Sources */,
 				D7CC15CF2B31851E00F45436 /* HiJourney_1_2App.swift in Sources */,
+				D75185AF2B5BFC4100D685CF /* AdventureDisplayView.swift in Sources */,
+				D75185AD2B5BDCD100D685CF /* AdventurerDisplayView.swift in Sources */,
+				D75185B12B5BFCC200D685CF /* TypesStructs.swift in Sources */,
 				D7CC15E22B31854D00F45436 /* ExploreMainPageScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

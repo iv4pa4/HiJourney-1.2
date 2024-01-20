@@ -12,10 +12,10 @@ class Connection: ObservableObject {
     //@Published private var databaseMockup = DatabaseMockup()
 
     func signIn() {
-        model.signIn()
+        
     }
     func signUp(){
-        model.signUp()
+        
     }
 }
 
