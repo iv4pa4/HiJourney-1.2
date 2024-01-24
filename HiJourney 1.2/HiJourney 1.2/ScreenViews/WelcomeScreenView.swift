@@ -15,8 +15,7 @@ struct WelcomeScreenView: View {
     private let offsetForButton2: CGFloat = 160
     private let logoWidth: CGFloat = 266
     private let logoHeight: CGFloat = 266
-    @State var username: String = ""
-    @State var password: String = ""
+
     
     var body: some View {
         NavigationView{
@@ -25,8 +24,9 @@ struct WelcomeScreenView: View {
                     showZone
                     showLogo
                     signUpText
-                    signInLink
                     signUpLink
+                    signInLink
+                    
             }
         }
     }
