@@ -1,10 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, RelationCount, BeforeInsert } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, BeforeInsert, BaseEntity } from 'typeorm';
 import { Adventure } from 'src/adventure/adventure.entity';
 import * as bcrypt from 'bcrypt';
-import { IsNotEmpty, IsEmail, MinLength } from 'class-validator';
+import { IsNotEmpty, IsEmail, MinLength, validate } from 'class-validator';
+import { ValidationError } from 'class-validator';
 
 @Entity()
-export class Adventurer {
+export class Adventurer extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -22,19 +23,23 @@ export class Adventurer {
   @MinLength(6)
   password: string;
 
-  @ManyToMany(() => Adventure, { cascade: true })
-  @JoinTable()
-  attendedAdventures: Adventure[];
+  @Column("int", { array: true, default: []})
+  attendedAdventureIds: number[];
 
-  @ManyToMany(() => Adventure, { cascade: true })
-  @JoinTable()
-  wishlist: Adventure[];
+  @Column("int", { array: true })
+  wishlistAdventureIds: number[];
 
-  @RelationCount((adventurer: Adventurer) => adventurer.attendedAdventures)
-  attendedAdventuresCount: number;
+  @Column("int", { array: true, default: []})
+  connected: number[];
 
   @BeforeInsert()
   async hashPassword() {
+    const errors: ValidationError[] = await validate(this, { skipMissingProperties: true });
+
+    if (errors.length > 0) {
+      throw new Error(errors.toString());
+    }
+
     this.password = await bcrypt.hash(this.password, 10);
   }
 }
@@ -56,10 +61,14 @@ export class AdventurerResponseDto {
   id: number;
   username: string;
   email: string;
+  attendedAdventureIds: number[];
+  wishlistAdventureIds: number[];
 
   constructor(adventurer: Adventurer) {
     this.id = adventurer.id;
     this.username = adventurer.username;
     this.email = adventurer.email;
+    this.attendedAdventureIds = adventurer.attendedAdventureIds;
+    this.wishlistAdventureIds = adventurer.wishlistAdventureIds;
   }
 }

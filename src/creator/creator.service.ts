@@ -93,7 +93,7 @@ export class CreatorService {
   
     const newAdventure = this.adventuresRepository.create({
       ...adventureDto,
-      creators: [creator], 
+      creator: creator, 
     });
   
     return await this.adventuresRepository.save(newAdventure);
@@ -110,7 +110,7 @@ export class CreatorService {
     console.log('Creator:', creator); 
     const adventures = await this.adventuresRepository
       .createQueryBuilder('adventure')
-      .leftJoinAndSelect('adventure.creators', 'creator')
+      .leftJoinAndSelect('adventure.creator', 'creator')
       .where('creator.id = :creatorId', { creatorId })
       .getMany();
   

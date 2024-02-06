@@ -60,12 +60,16 @@ export class AdventureController {
         await this.adventureService.deleteAdventure(id);
     }
 
-    @Post(':adventureId/attend/:adventurerId')
-    async attendAdventure(
-        @Param('adventureId') adventureId: number,
-        @Param('adventurerId') adventurerId: number,
-    ) {
-        return this.attendAdventure(adventureId, adventurerId)
-    }
+    // @Get(':id/attended-adventurers')
+    // async getAttendedAdventurersNames(@Param('id') id: string): Promise<string[]> {
+    //   const adventureId = +id; // Convert id to a number
+  
+    //   try {
+    //     const attendedAdventurerNames = await this.adventureService.getAttendedAdventurersNames(adventureId);
+    //     return attendedAdventurerNames;
+    //   } catch (error) {
+    //     throw new NotFoundException(`Adventure with ID ${id} not found`);
+    //   }
+    // }
 
 }

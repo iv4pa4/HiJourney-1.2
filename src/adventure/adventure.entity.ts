@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne } from 'typeorm';
 import { Adventurer } from 'src/adventurer/adventurer.entity';
 import { Creator } from 'src/creator/creator.entity';
 @Entity()
@@ -12,30 +12,30 @@ export class Adventure {
   @Column()
   description: string;
 
-  @ManyToMany(() => Adventurer, { cascade: true })
-  @JoinTable()
-  adventurers: Adventurer[];
+  @Column("int", { array: true, default: [] })
+  attendedAdventurerIds: number[];
 
-  @ManyToMany(() => Creator, { cascade: true })
+  @ManyToOne(() => Creator, { cascade: true })
   @JoinTable()
-  creators: Creator[];
+  creator: Creator;
 }
 
 export class AdventureDto {
   name: string;
   description: string;
-
-  // You can include any additional fields or validation logic here
+  attendedAdventurerIds: number[];
 }
 
 export class AdventureResponseDto {
   id: number;
   name: string;
   description: string;
+  attendedAdventurerIds: number[];
 
   constructor(adventure: Adventure) {
     this.id = adventure.id;
     this.name = adventure.name;
     this.description = adventure.description;
+    this.attendedAdventurerIds = adventure.attendedAdventurerIds;
   }
 }

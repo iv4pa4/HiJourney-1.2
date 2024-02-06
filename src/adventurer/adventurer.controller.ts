@@ -85,9 +85,10 @@ export class AdventurerController {
     }
 
     @Get(':adventurerId/wishlist')
-    async displayWishlist(@Param('adventurerId') adventurerId: number): Promise<void> {
-        await this.adventurerService.displayWishlist(adventurerId);
+    async displayWishlist(@Param('adventurerId') adventurerId: number): Promise<{ name: string; description: string; attendedAdventurerIds: number[] }[]> {
+        return await this.adventurerService.displayWishlist(adventurerId);
     }
+    
 
 
 }

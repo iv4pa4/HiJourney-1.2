@@ -4,6 +4,8 @@ import { Repository, FindOneOptions } from 'typeorm';
 import { Adventure, AdventureDto } from './adventure.entity';
 import { Adventurer } from '../adventurer/adventurer.entity'; // Import Adventurer entity
 import { paginate, Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate';
+import { SelectQueryBuilder } from 'typeorm';
+
 
 @Injectable()
 export class AdventureService {
@@ -18,6 +20,11 @@ export class AdventureService {
   getRepo() {
     return this.adventuresRepository;
   }
+
+  async saveAdventure(adventure: Adventure): Promise<Adventure> {
+    return await this.adventuresRepository.save(adventure);
+  }
+  
 
   async findAll(
     page: number = 1,
@@ -83,47 +90,71 @@ export class AdventureService {
     }
   }
 
-   displayAdventure(adventure: Adventure): void {
+  async displayAdventure(adventure: Adventure): Promise<void> {
     console.log('Adventure Details:');
     console.log(`ID: ${adventure.id}`);
     console.log(`Name: ${adventure.name}`);
     console.log(`Description: ${adventure.description}`);
   
-    if (adventure.adventurers && adventure.adventurers.length > 0) {
+    if (adventure.attendedAdventurerIds && adventure.attendedAdventurerIds.length > 0) {
       console.log('Adventurers:');
-      adventure.adventurers.forEach((adventurer) => {
-        console.log(`- ${adventurer.username}`);
-      });
+      for (const id of adventure.attendedAdventurerIds) {
+        try {
+          // Correcting the method call here
+          const adventurer = await this.adventurersRepository.findOne({ where: { id } });
+          if (adventurer) {
+            console.log(`- ${adventurer.username}`);
+          } else {
+            console.log(`- Adventurer with ID ${id} not found`);
+          }
+        } catch (error) {
+          console.error(`Error fetching adventurer with ID ${id}:`, error.message);
+        }
+      }
     } else {
       console.log('No adventurers associated with this adventure.');
     }
+  }
   
-    if (adventure.creators && adventure.creators.length > 0) {
-      console.log('Creators:');
-      adventure.creators.forEach((creator) => {
-        console.log(`- ${creator.username}`);
-      });
-    } else {
-      console.log('No creators associated with this adventure.');
-    };
+
+  async addAdventurerToAdventure(adventurerId: number, adventureId: number): Promise<Adventure> {
+    try {
+      const adventurer = await this.adventurersRepository.findOneOrFail({ where: { id: adventurerId } });
+
+      const adventure = await this.getSingleAdventure(adventureId);
+
+      adventure.attendedAdventurerIds = adventure.attendedAdventurerIds || [];
+
+      if (!adventure.attendedAdventurerIds.includes(adventurerId)) {
+        adventure.attendedAdventurerIds.push(adventurerId);
+        await this.adventurersRepository.save(adventurer);
+      }
+
+      await this.adventuresRepository.save(adventure);
+
+      return adventure;
+    } catch (error) {
+      if (error.name === 'EntityNotFound') {
+        throw new NotFoundException('Adventurer or Adventure not found');
+      }
+      throw error;
+    }
   }
 
-  async attendAdventure(adventurerId: number, adventureId: number): Promise<Adventure> {
-    const adventurer = await this.adventurersRepository.findOneOrFail({
-      where: { id: adventurerId },
-      relations: ['attendedAdventures'],
-    });
-  
+  async getAttendedAdventurersNames(adventureId: number): Promise<string[]> {
     const adventure = await this.getSingleAdventure(adventureId);
-  
-    adventurer.attendedAdventures = [...(adventurer.attendedAdventures || []), adventure];
-  
-    await this.adventurersRepository.save(adventurer);
-  
-    return adventure;
+
+    const attendedAdventurerIds = adventure.attendedAdventurerIds || [];
+
+    const adventurers = await this.adventurersRepository.createQueryBuilder('adventurer')
+    .select(['adventurer.id', 'adventurer.username'])
+    .whereInIds(attendedAdventurerIds)
+    .getMany();
+
+
+    const adventurerNames = adventurers.map((adventurer) => adventurer.username);
+
+    return adventurerNames;
   }
 
-  
-  
-  
 }

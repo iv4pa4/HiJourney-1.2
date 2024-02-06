@@ -23,8 +23,8 @@ export class AdventurerService {
     fields?: (keyof Adventurer)[],
   ): Promise<Pagination<Adventurer>> {
     const options: FindOneOptions<Adventurer> = {
-      select: fields || ['id', 'username', 'email', 'password'],
-      relations: ['attendedAdventures'], 
+      select: fields || ['id', 'username', 'email', 'password','attendedAdventureIds', 'wishlistAdventureIds'],
+      //relations: ['attendedAdventures'], 
     };
 
     const paginationOptions: IPaginationOptions = { page, limit };
@@ -43,8 +43,8 @@ export class AdventurerService {
   async getSingleAdventurer(id: number): Promise<Adventurer> {
     const adventurer = await this.adventurersRepository.findOneOrFail({
       where: { id },
-      select: ['id', 'username', 'email', 'password'],
-      relations: ['attendedAdventures'], 
+      select: ['id', 'username', 'email', 'password','attendedAdventureIds', 'wishlistAdventureIds'],
+      //relations: ['attendedAdventures'], 
     });
 
     if (!adventurer) {
@@ -92,7 +92,7 @@ export class AdventurerService {
       throw new NotFoundException('Adventure not found');
     }
 
-    adventurer.attendedAdventures.push(adventure);
+    adventurer.attendedAdventureIds.push(adventure.id);
 
     return await this.adventurersRepository.save(adventurer);
   }
@@ -100,33 +100,48 @@ export class AdventurerService {
   async addToWishlist(adventurerId: number, adventureId: number): Promise<Adventurer> {
     const adventurer = await this.getSingleAdventurer(adventurerId);
     const adventure = await this.adventureService.getSingleAdventure(adventureId);
-
+  
     if (!adventure) {
       throw new NotFoundException('Adventure not found');
     }
-
-    adventurer.wishlist = [...(adventurer.wishlist || []), adventure];
-
+      adventurer.wishlistAdventureIds = adventurer.wishlistAdventureIds || [];
+    if (!adventurer.wishlistAdventureIds.includes(adventureId)) {
+      adventurer.wishlistAdventureIds.push(adventure.id);
+      this.adventureService.addAdventurerToAdventure(adventurer.id, adventure.id)
+    }
+  
     return await this.adventurersRepository.save(adventurer);
   }
+  
 
-  async displayWishlist(adventurerId: number) {
+  async displayWishlist(adventurerId: number): Promise<{ name: string; description: string; attendedAdventurerIds: number[] }[]> {
     const adventurer = await this.getSingleAdventurer(adventurerId);
-
+    
     if (!adventurer) {
       throw new NotFoundException('Adventurer not found');
     }
-
-    console.log(`Wishlist for Adventurer ${adventurer.username}:`);
-    
-    if (adventurer.wishlist && adventurer.wishlist.length > 0) {
-      adventurer.wishlist.forEach((adventure) => {
-        this.adventureService.displayAdventure(adventure);
-      });
-    } else {
-      console.log('Wishlist is empty.');
+  
+    const wishlist: { name: string; description: string; attendedAdventurerIds: number[] }[] = [];
+  
+    if (adventurer.wishlistAdventureIds && adventurer.wishlistAdventureIds.length > 0) {
+      for (const id of adventurer.wishlistAdventureIds) {
+        try {
+          const adventure = await this.adventureService.getSingleAdventure(id);
+          wishlist.push({
+            name: adventure.name,
+            description: adventure.description,
+            attendedAdventurerIds: adventure.attendedAdventurerIds,
+          });
+        } catch (error) {
+          console.error(`Error fetching adventure with ID ${id}:`, error.message);
+        }
+      }
     }
+  
+    return wishlist;
   }
+  
 }
+  
 
 
