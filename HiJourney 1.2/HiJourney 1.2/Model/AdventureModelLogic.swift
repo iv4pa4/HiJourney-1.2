@@ -8,9 +8,15 @@
 import SwiftUI
 import CryptoKit
 
-var currentAdventurer: Adventurer = Adventurer(id: 0, username: "String", email: "String", password: "String", attendedAdventureIds: [], wishlistAdventureIds: [], connectedAdventurers: [])
+
+var currentAdventurer: Adventurer = Adventurer(id: 34, username: "String", email: "String", password: "String", attendedAdventureIds: [], wishlistAdventureIds: [], connectedAdventurers: [])
+
+
+
 
 struct AdventureModelLogic {
+    var wishlist: [WishlistItem] = [] 
+    
     
     func setCurrentAdventurer(){}
     func createCurrentAdventurer(){
@@ -21,11 +27,11 @@ struct AdventureModelLogic {
             completion(false)
             return
         }
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         // Using currentAdventurer as the only element in the creators array
         let body: [String: AnyHashable] = [
             "name": name,
@@ -33,7 +39,7 @@ struct AdventureModelLogic {
             "creators": [currentAdventurer]
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
-
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data, error == nil {
                 do {
@@ -66,7 +72,7 @@ struct AdventureModelLogic {
         }
         task.resume()
     }
-
+    
     func createUser(username: String, email: String, password: String, completion: @escaping (Result<Adventurer, Error>) -> Void) {
         let adventurerDto = AdventurerDto(username: username, email: email, password: password)
         guard let url = URL(string: "http://localhost:3001/adventurer") else {
@@ -94,7 +100,11 @@ struct AdventureModelLogic {
                         // Decode the response data to get the created adventurer
                         let adventurer = try JSONDecoder().decode(Adventurer.self, from: data)
                         // Update the currentAdventurer variable
-                        currentAdventurer = adventurer
+                        currentAdventurer.id = adventurer.id
+                        currentAdventurer.username = adventurer.username
+                        currentAdventurer.email = adventurer.email
+                        currentAdventurer.password = adventurer.password
+                        
                         completion(.success(adventurer))
                     } catch {
                         completion(.failure(error))
@@ -105,11 +115,10 @@ struct AdventureModelLogic {
             completion(.failure(error))
         }
     }
-
-
-
-
+    
+    
 }
+
 
 
 

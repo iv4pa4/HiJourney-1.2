@@ -9,6 +9,9 @@ import SwiftUI
 
 struct DetailedAdventureView: View {
     var adventure: Adventure
+    @ObservedObject var viewModel: Connection
+
+        @State private var isAddedToWishlist = false
         var body: some View {
                VStack {
                    HStack {
@@ -50,15 +53,13 @@ struct DetailedAdventureView: View {
                                Image(systemName: "heart")
                            }
                            Button(action: {
-                           }) {
-                               Text("Jump in")
-                                   .frame(width: 128, height: 45)
-                                   .foregroundColor(.black)
-                                   .background(Color("BlueForButtons"))
-                                   .clipShape(RoundedRectangle(cornerRadius: 30))
-                                   .font(.custom("Poppins-Bold", size:15))
-                                   .shadow(color: .black, radius: 4, x: 3, y: 4)
-                           }
+                                           addToWishlist()
+                               viewModel.fetchWishlistData()
+                                       }) {
+                                           Image(systemName: isAddedToWishlist ? "heart.fill" : "heart")
+                                       }
+                                       .padding()
+                                   }
                        }
                        
                        // Description text
@@ -72,10 +73,39 @@ struct DetailedAdventureView: View {
                    .padding()
                    
                    Spacer()
+            
                }
+    func addToWishlist() {
+        guard let url = URL(string: "http://localhost:3001/adventurer/\(currentAdventurer.id)/add-to-wishlist/\(adventure.id)") else {
+               print("Invalid URL")
+               return
            }
-}
+
+           var request = URLRequest(url: url)
+           request.httpMethod = "POST"
+
+           URLSession.shared.dataTask(with: request) { data, response, error in
+               guard let data = data, error == nil else {
+                   print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                   return
+               }
+
+               if let httpResponse = response as? HTTPURLResponse {
+                   if httpResponse.statusCode == 200 {
+                       DispatchQueue.main.async {
+                           // Update UI or handle success
+                           self.isAddedToWishlist = true
+                       }
+                   } else {
+                       print("HTTP Status Code: \(httpResponse.statusCode)")
+                       // Handle error
+                   }
+               }
+           }.resume()
+       }
+           }
+
 
 #Preview {
-    DetailedAdventureView(adventure: Adventure(id: 2, name: "String", description: "String", creatorName: "String"))
+    DetailedAdventureView(adventure: Adventure(id: 2, name: "String", description: "String", creatorName: "String"), viewModel: Connection())
 }

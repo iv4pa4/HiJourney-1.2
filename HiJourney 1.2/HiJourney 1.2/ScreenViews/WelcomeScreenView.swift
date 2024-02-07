@@ -33,7 +33,7 @@ struct WelcomeScreenView: View {
     
     var signUpLink: some View{
         NavigationLink(
-            destination: SignUpScreenView(viewModel: viewModel),
+            destination: ChosingRoleScreen(viewModel: viewModel),
             label: {
                 Text("Sign Up")
                     .frame(width: 128, height: 45)
@@ -48,7 +48,7 @@ struct WelcomeScreenView: View {
     
     var signInLink: some View{
         NavigationLink(
-            destination: SignInScreenView(viewModel: viewModel),
+            destination: ChosingRoleForSignIn(viewModel: viewModel),
             label: {
                 Text("Sign in")
                     .frame(width: 128, height: 45)

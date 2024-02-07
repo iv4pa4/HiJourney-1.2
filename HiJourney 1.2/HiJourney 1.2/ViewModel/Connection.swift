@@ -10,34 +10,36 @@ import SwiftUI
 class Connection: ObservableObject {
     @Published private var model = AdventureModelLogic()
     @Published var adventures: [Adventure] = []
+    @Published var wishlist: [WishlistItem] = [] 
     init() {
-       // fetchData()
+        // fetchData()
+        //fetchWishlistData()
     }
-    //@Published private var databaseMockup = DatabaseMockup()
-
+    
     func signIn() {
         
     }
-   
+    
     
     func createUser(username: String, email: String, password: String, completion: @escaping (Result<Adventurer, Error>) -> Void) {
-            // Call the createUser function from the model
-            model.createUser(username: username, email: email, password: password) { result in
-                switch result {
-                case .success(let adventurer):
-                    currentAdventurer = adventurer
-                    completion(.success(adventurer))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
+        // Call the createUser function from the model
+        model.createUser(username: username, email: email, password: password) { result in
+            switch result {
+            case .success(let adventurer):
+                currentAdventurer = adventurer
+                self.fetchWishlistData()
+                completion(.success(adventurer))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
-
-
+    }
     
-//    func createNewAdventure(name: String, description: String, completion: @escaping (Bool) -> Void){
-//        model.createNewAdventure(name: name, description: description, completion: completion)
-//    }
+    
+    
+    //    func createNewAdventure(name: String, description: String, completion: @escaping (Bool) -> Void){
+    //        model.createNewAdventure(name: name, description: description, completion: completion)
+    //    }
     
     func setCurrentAdventurer(){
         model.setCurrentAdventurer()
@@ -46,7 +48,34 @@ class Connection: ObservableObject {
     func createCurrentAdventurer(){
         model.createCurrentAdventurer()
     }
+    
+    
+    func fetchWishlistData(){
+            guard let url = URL(string: "http://localhost:3001/adventurer/\(currentAdventurer.id)/wishlist") else {
+                return
+            }
 
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                guard let data = data, error == nil else {
+                    print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
 
+                if let jsonString = String(data: data, encoding: .utf8) {
+                    print("JSON response: \(jsonString)")
+                }
+
+                do {
+                    let result = try JSONDecoder().decode([WishlistItem].self, from: data)
+                    DispatchQueue.main.async {
+                        self.wishlist = result // Use self.wishlist to access the property
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }.resume()
+        }
+    
 }
+
 

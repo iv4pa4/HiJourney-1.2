@@ -51,3 +51,10 @@ struct AdventurerDto: Codable {
     }
 }
 
+struct WishlistItem: Identifiable, Decodable {
+    let id = UUID()
+    let name: String
+    let description: String
+}
+
+

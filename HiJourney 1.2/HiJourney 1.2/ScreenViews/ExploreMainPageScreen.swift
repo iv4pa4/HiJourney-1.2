@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ExploreMainPageScreen: View {
+    //TODO: Remove back tags !!!
     @State var currentTab: Tab = .Explore
     @ObservedObject var viewModel: Connection
 
@@ -14,12 +15,12 @@ struct ExploreMainPageScreen: View {
     var body: some View {
         
         TabView(selection: $currentTab) {
-            AdventureDisplayView()
+            AdventureDisplayView(viewModel: viewModel)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(Tab.Explore)
             
-            Text("WishList View")
+            WishlistAdventuresDisplayedView(viewModel: viewModel)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(Tab.WishList)

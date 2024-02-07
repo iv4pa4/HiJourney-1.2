@@ -16,7 +16,12 @@
 		D75185BB2B638A0E00D685CF /* CreateNewAdventureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185BA2B638A0E00D685CF /* CreateNewAdventureView.swift */; };
 		D75185BD2B638CAC00D685CF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185BC2B638CAC00D685CF /* ProfileView.swift */; };
 		D75AD0E12B73635B009CF949 /* AdventureFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75AD0E02B73635B009CF949 /* AdventureFetcher.swift */; };
-		D75AD0E92B738E06009CF949 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75AD0E82B738E06009CF949 /* SwiftUIView.swift */; };
+		D75AD0EB2B739F8E009CF949 /* ChosingRoleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75AD0EA2B739F8E009CF949 /* ChosingRoleScreen.swift */; };
+		D75AD0ED2B73A34E009CF949 /* DetailedRoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75AD0EC2B73A34E009CF949 /* DetailedRoleView.swift */; };
+		D76DC5802B73B7BF006FBD7D /* ChosingRoleForSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76DC57F2B73B7BF006FBD7D /* ChosingRoleForSignIn.swift */; };
+		D76DC5862B73BC55006FBD7D /* SignUpScreenCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76DC5852B73BC55006FBD7D /* SignUpScreenCreatorView.swift */; };
+		D76DC5882B73BCB7006FBD7D /* SignInScreenCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76DC5872B73BCB7006FBD7D /* SignInScreenCreatorView.swift */; };
+		D76DC58E2B73CEFF006FBD7D /* WishlistAdventuresDisplayedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76DC58D2B73CEFF006FBD7D /* WishlistAdventuresDisplayedView.swift */; };
 		D7CC15CF2B31851E00F45436 /* HiJourney_1_2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */; };
 		D7CC15D32B31852000F45436 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7CC15D22B31852000F45436 /* Assets.xcassets */; };
 		D7CC15D62B31852000F45436 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7CC15D52B31852000F45436 /* Preview Assets.xcassets */; };
@@ -37,7 +42,12 @@
 		D75185BA2B638A0E00D685CF /* CreateNewAdventureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewAdventureView.swift; sourceTree = "<group>"; };
 		D75185BC2B638CAC00D685CF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D75AD0E02B73635B009CF949 /* AdventureFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventureFetcher.swift; sourceTree = "<group>"; };
-		D75AD0E82B738E06009CF949 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		D75AD0EA2B739F8E009CF949 /* ChosingRoleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosingRoleScreen.swift; sourceTree = "<group>"; };
+		D75AD0EC2B73A34E009CF949 /* DetailedRoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedRoleView.swift; sourceTree = "<group>"; };
+		D76DC57F2B73B7BF006FBD7D /* ChosingRoleForSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosingRoleForSignIn.swift; sourceTree = "<group>"; };
+		D76DC5852B73BC55006FBD7D /* SignUpScreenCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenCreatorView.swift; sourceTree = "<group>"; };
+		D76DC5872B73BCB7006FBD7D /* SignInScreenCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenCreatorView.swift; sourceTree = "<group>"; };
+		D76DC58D2B73CEFF006FBD7D /* WishlistAdventuresDisplayedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistAdventuresDisplayedView.swift; sourceTree = "<group>"; };
 		D7CC15CB2B31851E00F45436 /* HiJourney 1.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HiJourney 1.2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiJourney_1_2App.swift; sourceTree = "<group>"; };
 		D7CC15D22B31852000F45436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,20 +78,57 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		D76DC5812B73BB1C006FBD7D /* SignUpScreens */ = {
+			isa = PBXGroup;
+			children = (
+				D75185B22B615E4700D685CF /* SignUpScreenView.swift */,
+				D76DC5852B73BC55006FBD7D /* SignUpScreenCreatorView.swift */,
+			);
+			path = SignUpScreens;
+			sourceTree = "<group>";
+		};
+		D76DC5822B73BB4B006FBD7D /* SignInScreens */ = {
+			isa = PBXGroup;
+			children = (
+				D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */,
+				D76DC5872B73BCB7006FBD7D /* SignInScreenCreatorView.swift */,
+			);
+			path = SignInScreens;
+			sourceTree = "<group>";
+		};
+		D76DC5832B73BB72006FBD7D /* ChosingRoleScreens */ = {
+			isa = PBXGroup;
+			children = (
+				D75AD0EC2B73A34E009CF949 /* DetailedRoleView.swift */,
+				D76DC57F2B73B7BF006FBD7D /* ChosingRoleForSignIn.swift */,
+				D75AD0EA2B739F8E009CF949 /* ChosingRoleScreen.swift */,
+			);
+			path = ChosingRoleScreens;
+			sourceTree = "<group>";
+		};
+		D76DC5842B73BBB8006FBD7D /* ExploreAdventureScreens */ = {
+			isa = PBXGroup;
+			children = (
+				D75185AC2B5BDCD100D685CF /* AdventurerDisplayView.swift */,
+				D75185B82B6385EE00D685CF /* DetailedAdventureView.swift */,
+				D75185B62B630E4A00D685CF /* AdventureView.swift */,
+				D75185AE2B5BFC4000D685CF /* AdventureDisplayView.swift */,
+			);
+			path = ExploreAdventureScreens;
+			sourceTree = "<group>";
+		};
 		D78FBD0F2B318912001E3644 /* ScreenViews */ = {
 			isa = PBXGroup;
 			children = (
-				D75185BA2B638A0E00D685CF /* CreateNewAdventureView.swift */,
-				D75185AC2B5BDCD100D685CF /* AdventurerDisplayView.swift */,
+				D76DC5842B73BBB8006FBD7D /* ExploreAdventureScreens */,
+				D76DC5832B73BB72006FBD7D /* ChosingRoleScreens */,
+				D76DC5822B73BB4B006FBD7D /* SignInScreens */,
+				D76DC5812B73BB1C006FBD7D /* SignUpScreens */,
 				D75185BC2B638CAC00D685CF /* ProfileView.swift */,
-				D75185B82B6385EE00D685CF /* DetailedAdventureView.swift */,
-				D75185B62B630E4A00D685CF /* AdventureView.swift */,
-				D75AD0E82B738E06009CF949 /* SwiftUIView.swift */,
-				D75185AE2B5BFC4000D685CF /* AdventureDisplayView.swift */,
-				D75185B22B615E4700D685CF /* SignUpScreenView.swift */,
-				D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */,
-				D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */,
+				D75185BA2B638A0E00D685CF /* CreateNewAdventureView.swift */,
 				D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */,
+				D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */,
+				D76DC58D2B73CEFF006FBD7D /* WishlistAdventuresDisplayedView.swift */,
 			);
 			path = ScreenViews;
 			sourceTree = "<group>";
@@ -203,18 +250,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D75AD0ED2B73A34E009CF949 /* DetailedRoleView.swift in Sources */,
 				D75185B32B615E4700D685CF /* SignUpScreenView.swift in Sources */,
 				D7CC15E12B31854D00F45436 /* WelcomeScreenView.swift in Sources */,
-				D75AD0E92B738E06009CF949 /* SwiftUIView.swift in Sources */,
+				D75AD0EB2B739F8E009CF949 /* ChosingRoleScreen.swift in Sources */,
 				D7CC15E82B31855600F45436 /* AdventureModelLogic.swift in Sources */,
 				D7CC15E32B31854D00F45436 /* SignInScreenView.swift in Sources */,
+				D76DC5862B73BC55006FBD7D /* SignUpScreenCreatorView.swift in Sources */,
 				D75185B72B630E4A00D685CF /* AdventureView.swift in Sources */,
 				D7CC15EB2B31855D00F45436 /* Connection.swift in Sources */,
 				D75AD0E12B73635B009CF949 /* AdventureFetcher.swift in Sources */,
+				D76DC5802B73B7BF006FBD7D /* ChosingRoleForSignIn.swift in Sources */,
 				D7CC15CF2B31851E00F45436 /* HiJourney_1_2App.swift in Sources */,
 				D75185AF2B5BFC4100D685CF /* AdventureDisplayView.swift in Sources */,
+				D76DC58E2B73CEFF006FBD7D /* WishlistAdventuresDisplayedView.swift in Sources */,
 				D75185AD2B5BDCD100D685CF /* AdventurerDisplayView.swift in Sources */,
 				D75185B12B5BFCC200D685CF /* TypesStructs.swift in Sources */,
+				D76DC5882B73BCB7006FBD7D /* SignInScreenCreatorView.swift in Sources */,
 				D7CC15E22B31854D00F45436 /* ExploreMainPageScreen.swift in Sources */,
 				D75185B92B6385EE00D685CF /* DetailedAdventureView.swift in Sources */,
 				D75185BD2B638CAC00D685CF /* ProfileView.swift in Sources */,
