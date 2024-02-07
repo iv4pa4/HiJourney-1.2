@@ -89,6 +89,13 @@ export class AdventurerController {
         return await this.adventurerService.displayWishlist(adventurerId);
     }
     
-
+    @Post('/connect/:adventurerId1/with/:adventurerId2')
+    async connectAdventurers(
+    @Param('adventurerId1') adventurerId1: number,
+    @Param('adventurerId2') adventurerId2: number,
+    ): Promise<void> {
+    await this.adventurerService.connectAdventurers(adventurerId1, adventurerId2);
+    return;
+    }
 
 }

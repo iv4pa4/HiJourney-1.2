@@ -29,8 +29,9 @@ export class Adventurer extends BaseEntity {
   @Column("int", { array: true })
   wishlistAdventureIds: number[];
 
+
   @Column("int", { array: true, default: []})
-  connected: number[];
+  connectedAdventurers: number[];
 
   @BeforeInsert()
   async hashPassword() {

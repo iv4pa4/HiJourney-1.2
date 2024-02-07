@@ -40,19 +40,29 @@ export class AdventurerService {
     return adventurers;
   }
 
+
   async getSingleAdventurer(id: number): Promise<Adventurer> {
-    const adventurer = await this.adventurersRepository.findOneOrFail({
-      where: { id },
-      select: ['id', 'username', 'email', 'password','attendedAdventureIds', 'wishlistAdventureIds'],
-      //relations: ['attendedAdventures'], 
-    });
+      const adventurer = await this.adventurersRepository.findOneOrFail({
+        where: { id },
+        select: ['id', 'username', 'email', 'password', 'attendedAdventureIds', 'wishlistAdventureIds', 'connectedAdventurers'], // Include 'connectedAdventurers' in the select statement
+      });
 
-    if (!adventurer) {
-      throw new NotFoundException('Adventurer not found');
-    }
+      if (!adventurer) {
+          throw new NotFoundException('Adventurer not found');
+      }
 
-    return adventurer;
+      const newAdventurer = new Adventurer();
+      newAdventurer.id = adventurer.id;
+      newAdventurer.username = adventurer.username;
+      newAdventurer.email = adventurer.email;
+      newAdventurer.password = adventurer.password;
+      newAdventurer.attendedAdventureIds = adventurer.attendedAdventureIds;
+      newAdventurer.wishlistAdventureIds = adventurer.wishlistAdventureIds;
+      newAdventurer.connectedAdventurers = adventurer.connectedAdventurers;
+
+      return newAdventurer;
   }
+
 
   async create(adventurer: AdventurerDto): Promise<Adventurer> {
     const newAdventurer = this.adventurersRepository.create(adventurer);
@@ -139,6 +149,28 @@ export class AdventurerService {
     }
   
     return wishlist;
+  }
+
+  async connectAdventurers(adventurerId1: number, adventurerId2: number): Promise<void> {
+    const adventurer1 = await this.getSingleAdventurer(adventurerId1);
+    const adventurer2 = await this.getSingleAdventurer(adventurerId2);
+    if(adventurer1.connectedAdventurers.length > 0) {
+      if (!adventurer1.connectedAdventurers.includes(adventurerId2)) {
+        adventurer1.connectedAdventurers.push(adventurerId2);
+        await this.adventurersRepository.save(adventurer1);
+      }
+    
+      if (!adventurer2.connectedAdventurers.includes(adventurerId1)) {
+        adventurer2.connectedAdventurers.push(adventurerId1);
+        await this.adventurersRepository.save(adventurer2);
+      }
+    }
+    else {
+      adventurer1.connectedAdventurers.push(adventurerId2);
+      await this.adventurersRepository.save(adventurer1);
+      adventurer2.connectedAdventurers.push(adventurerId1);
+      await this.adventurersRepository.save(adventurer2);
+    }
   }
   
 }

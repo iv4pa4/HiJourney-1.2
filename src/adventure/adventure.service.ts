@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, FindOneOptions } from 'typeorm';
+import { Repository, FindOneOptions, Like, ILike } from 'typeorm';
 import { Adventure, AdventureDto } from './adventure.entity';
 import { Adventurer } from '../adventurer/adventurer.entity'; // Import Adventurer entity
 import { paginate, Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate';
@@ -60,6 +60,34 @@ export class AdventureService {
 
     return adventure;
   }
+
+  async searchByName(name: string): Promise<Adventure[]> {
+    const adventures = await this.adventuresRepository.find({
+        where: {
+            name: ILike(`%${name}%`)
+        }
+    });
+
+    if (!adventures || adventures.length === 0) {
+        throw new NotFoundException(`No adventures found with the name containing "${name}"`);
+    }
+
+    return adventures;  
+  }
+
+  async searchByDescription(keyword: string): Promise<Adventure[]> {
+    const adventures = await this.adventuresRepository.find({
+        where: {
+            description: ILike(`%${keyword}%`)
+        }
+    });
+
+    if (!adventures || adventures.length === 0) {
+        throw new NotFoundException(`No adventures found with descriptions containing "${keyword}"`);
+    }
+
+    return adventures;
+}
 
   async create(adventure: AdventureDto): Promise<Adventure> {
     const newAdventure = this.adventuresRepository.create(adventure);
@@ -141,20 +169,5 @@ export class AdventureService {
     }
   }
 
-  async getAttendedAdventurersNames(adventureId: number): Promise<string[]> {
-    const adventure = await this.getSingleAdventure(adventureId);
-
-    const attendedAdventurerIds = adventure.attendedAdventurerIds || [];
-
-    const adventurers = await this.adventurersRepository.createQueryBuilder('adventurer')
-    .select(['adventurer.id', 'adventurer.username'])
-    .whereInIds(attendedAdventurerIds)
-    .getMany();
-
-
-    const adventurerNames = adventurers.map((adventurer) => adventurer.username);
-
-    return adventurerNames;
-  }
-
+ 
 }

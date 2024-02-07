@@ -39,6 +39,16 @@ export class AdventureController {
         return adventure;
     }
 
+    @Get('search/:name')
+    async searchAdventureByName(@Param('name') name: string): Promise<Adventure[]> {
+        return this.adventureService.searchByName(name);
+    }
+
+    @Get('search/description/:keyword')
+    async searchAdventureByDescription(@Param('keyword') keyword: string): Promise<Adventure[]> {
+        return this.adventureService.searchByDescription(keyword);
+    }
+
     @Post()
     async createAdventure(@Body() adventureDto: AdventureDto): Promise<Adventure> {
         return await this.adventureService.create(adventureDto);
@@ -60,16 +70,5 @@ export class AdventureController {
         await this.adventureService.deleteAdventure(id);
     }
 
-    // @Get(':id/attended-adventurers')
-    // async getAttendedAdventurersNames(@Param('id') id: string): Promise<string[]> {
-    //   const adventureId = +id; // Convert id to a number
-  
-    //   try {
-    //     const attendedAdventurerNames = await this.adventureService.getAttendedAdventurersNames(adventureId);
-    //     return attendedAdventurerNames;
-    //   } catch (error) {
-    //     throw new NotFoundException(`Adventure with ID ${id} not found`);
-    //   }
-    // }
 
 }
