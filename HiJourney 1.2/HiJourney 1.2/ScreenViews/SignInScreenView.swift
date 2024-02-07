@@ -29,6 +29,7 @@ struct SignInScreenView: View {
             signInButton
             
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     var showZone: some View{

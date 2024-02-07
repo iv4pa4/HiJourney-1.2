@@ -37,18 +37,27 @@ class AdventurerViewModel: ObservableObject {
 }
 
 struct AdventurerDisplayView: View {
-    @ObservedObject var viewModel = AdventurerViewModel()
-
+    @ObservedObject var viewModel : AdventurerViewModel
+    var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    
     var body: some View {
+        
         NavigationView {
-            List(viewModel.adventurers) { adventurer in
-                VStack(alignment: .leading) {
-                    Text("ID: \(adventurer.id)")
-                    Text("Username: \(adventurer.username)")
-                    Text("Email: \(adventurer.email)")
-                    Text("Attended Adventures: \(adventurer.attendedAdventuresCount)")
-                }
-            }
+                   ScrollView {
+                       LazyVGrid(columns: columns, spacing: 20) {
+                           ForEach(viewModel.adventurers, id: \.id) { adventurer in
+                               VStack(alignment: .leading) {
+                                   Text("ID: \(adventurer.id)")
+                                   Text("Username: \(adventurer.username)")
+                                   Text("Email: \(adventurer.email)")
+                               }
+                               .padding()
+                               .background(Color.gray.opacity(0.2)) // Optional styling
+                               .cornerRadius(10)
+                           }
+                       }
+                       .padding()
+                   }
             .navigationBarTitle("Adventurers")
         }
     }

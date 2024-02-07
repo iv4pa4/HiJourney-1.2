@@ -1,49 +1,23 @@
 import SwiftUI
 
-class AdventureViewModel: ObservableObject {
-    @Published var adventures: [Adventure] = []
-
-    init() {
-        fetchData()
-    }
-
-    func fetchData() {
-        guard let url = URL(string: "http://localhost:3001/adventure") else {
-            return
-        }
-
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data, error == nil else {
-                print("Error: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
-
-            do {
-                let adventures = try JSONDecoder().decode([Adventure].self, from: data)
-                DispatchQueue.main.async {
-                    self.adventures = adventures
-                }
-            } catch {
-                print("Error decoding JSON: \(error)")
-            }
-        }.resume()
-    }
-
-}
-
-
 struct AdventureDisplayView: View {
-    @ObservedObject var viewModel = AdventureViewModel()
+
+    @ObservedObject var adventureFetcher = AdventureFetcher()
+    var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 1)
 
     var body: some View {
         NavigationView {
-            List(viewModel.adventures) { adventure in
-                VStack(alignment: .leading) {
-                    Text("Name: \(adventure.name)")
-                    Text("Description: \(adventure.description)")
-                    ForEach(adventure.creators, id: \.id) { creator in
-                        Text("Creator: \(creator.name)")
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 20) {
+                    ForEach(adventureFetcher.adventures) { adventure in
+                        NavigationLink(destination: DetailedAdventureView(adventure: adventure)) {
+                            AdventureView(title: adventure.name, adventurePhoto: "rafting", profilePhoto: "profilePic")
+                        }
                     }
+                }
+                .padding()
+                .onAppear {
+                    adventureFetcher.fetchData()
                 }
             }
             .navigationBarTitle("Adventures")
@@ -51,7 +25,8 @@ struct AdventureDisplayView: View {
     }
 }
 
-
+// Preview
 #Preview {
     AdventureDisplayView()
 }
+

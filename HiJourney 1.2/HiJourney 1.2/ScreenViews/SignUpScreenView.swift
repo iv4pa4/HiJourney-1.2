@@ -32,24 +32,25 @@ struct SignUpScreenView: View {
                 Image("wp3")
                 showZone
                 showLogo
-                signUpText
+                
                 textFieldUsername
                 button
-                NavigationLink(destination: ExploreMainPageScreen(), isActive: $navigateToExplore) {
+                NavigationLink(destination: ExploreMainPageScreen(viewModel: viewModel), isActive: $navigateToExplore) {
                     EmptyView()
                                 }
             }
         }
-        
+        .navigationBarBackButtonHidden(true)
     }
     var button: some View {
-        Button("Sign Up")
-        {
+        Button(action: {
             print(username)
             print(email)
             print(password)
             print(repassword)
-            signUpNewUser(username: username, email: email, password: password)
+            createUser(username: self.username, email: self.email, password: self.password)
+        }) {
+            Text("Sign Up")
         }
         .frame(width: signUpTextWidth, height: signUpTextHeight)
         .foregroundColor(.black)
@@ -57,7 +58,6 @@ struct SignUpScreenView: View {
         .clipShape(RoundedRectangle(cornerRadius: signUpTextCornerRadius))
         .offset(y: offsetForButton)
         .font(.custom("Poppins-Bold", size:signUpTextFontSize))
-        .shadow(color: .black, radius: 4, x: 3, y: 4)
     }
 
     
@@ -114,15 +114,27 @@ struct SignUpScreenView: View {
     }
         
     
-    func signUpNewUser(username: String, email: String, password: String){
-        viewModel.signUpNewUserRes(username: username, email: email, password: password) { success in
-            if success {
+    func createUser(username: String, email: String, password: String) {
+        viewModel.createUser(username: username, email: email, password: password) { result in
+            switch result {
+            case .success:
                 self.navigateToExplore = true
+            case .failure(let error):
+                print("User NOT created \(error)")
             }
         }
+    }
 
+
+
+    
+    func setCurrentAdventurer(){
+        //viewModel.setCurrentAdventurer()
     }
     
+    func craeteCurrentAdventurer(){
+       // viewModel.createCurrentAdventurer()
+    }
     
 }
 

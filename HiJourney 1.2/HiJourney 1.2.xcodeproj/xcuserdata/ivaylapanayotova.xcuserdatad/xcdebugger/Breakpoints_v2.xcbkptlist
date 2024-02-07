@@ -49,6 +49,21 @@
                   endingLineNumber = "21"
                   offsetFromSymbolStart = "528">
                </Location>
+               <Location
+                  uuid = "54F1F85A-3F0E-4447-A00B-5F8C04A802F8 - e12375b973b7e57b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HiJourney_1_2.Connection.signUpNewUser(username: Swift.String, email: Swift.String, password: Swift.String) -&gt; ()"
+                  moduleName = "HiJourney 1.2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ivaylapanayotova/Documents/%D0%A2%D0%A3%D0%95%D0%A1/Diploma%20project/IOS/Develop/HiJourney-1.2/Connection.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "668">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>

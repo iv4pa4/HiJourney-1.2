@@ -2,39 +2,38 @@ import SwiftUI
 
 struct ExploreMainPageScreen: View {
     @State var currentTab: Tab = .Explore
+    @ObservedObject var viewModel: Connection
 
-    init() {
+    init(viewModel: Connection) {
         UITabBar.appearance().isHidden = true
+        self.viewModel = viewModel
     }
 
     @Namespace var animations
 
     var body: some View {
+        
         TabView(selection: $currentTab) {
-            Text("Add View")
+            AdventureDisplayView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
-                .tag(Tab.Add)
-
+                .tag(Tab.Explore)
+            
             Text("WishList View")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(Tab.WishList)
 
-            AdventureDisplayView()
+            CreateNewAdventureView(viewModel: viewModel)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
-                .tag(Tab.Explore)
+                .tag(Tab.Add)
 
-            Text("Profile View")
+            ProfileView(adventurer: currentAdventurer)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea()) // Change "primaryColor" to your primary color
                 .tag(Tab.Profile)
 
-            Text("Notifications View")
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color("primaryColor").ignoresSafeArea())
-                .tag(Tab.Notifications)
         }
         .overlay(
             HStack(spacing: 0) {
@@ -48,6 +47,7 @@ struct ExploreMainPageScreen: View {
             alignment: .bottom
         )
         .ignoresSafeArea(.all, edges: .bottom)
+        .navigationBarBackButtonHidden(true)
     }
 
     func TabButton(tab: Tab) -> some View {
@@ -87,14 +87,13 @@ struct ExploreMainPageScreen: View {
 }
 
 #Preview {
-    ExploreMainPageScreen()
+    ExploreMainPageScreen(viewModel: Connection())
 }
 
 enum Tab: String, CaseIterable{
-    case Add = "plus.app"
-    case WishList = "heart"
     case Explore = "house"
-    case Notifications = "bell"
+    case WishList = "heart"
+    case Add = "plus.app"
     case Profile = "person"
     
     var tabName: String{
@@ -105,8 +104,6 @@ enum Tab: String, CaseIterable{
             return "WishList"
         case .Explore:
             return "Explore"
-        case .Notifications:
-            return "Notifications"
         case .Profile:
             return "Profile"
         }
