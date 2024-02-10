@@ -10,8 +10,7 @@ import { AdventurerModule } from 'src/adventurer/adventurer.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Adventure]),
-    TypeOrmModule.forFeature([Adventurer]),
-  ],
+    TypeOrmModule.forFeature([Adventurer]),  ],
   controllers: [AdventureController],
   providers: [AdventureService, AdventurerService],
 })

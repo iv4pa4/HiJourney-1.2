@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOneOptions, Like, ILike } from 'typeorm';
-import { Adventure, AdventureDto } from './adventure.entity';
+import { Adventure, AdventureDto, AdventureResponseDto } from './adventure.entity';
 import { Adventurer } from '../adventurer/adventurer.entity'; // Import Adventurer entity
 import { paginate, Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate';
 import { SelectQueryBuilder } from 'typeorm';
@@ -26,27 +26,20 @@ export class AdventureService {
   }
   
 
-  async findAll(
-    page: number = 1,
-    limit: number = 10,
-    fields?: (keyof Adventure)[],
-  ): Promise<Pagination<Adventure>> {
+
+  async findAll(fields?: (keyof Adventure)[]): Promise<AdventureResponseDto[]> {
     const options: FindOneOptions<Adventure> = {
-      select: fields || ['id', 'name', 'description'],
+        select: fields || ['id', 'name', 'description'],
+        relations: ['creator'] // Include the 'creator' relation to fetch creator data
     };
 
-    const paginationOptions: IPaginationOptions = { page, limit };
+    const adventures = await this.adventuresRepository.find(options);
 
-    const result = await paginate<Adventure>(
-      this.adventuresRepository,
-      paginationOptions,
-      options,
-    );
-
-    const adventures: Pagination<Adventure> = result as Pagination<Adventure>;
-
-    return adventures;
+    return adventures.map(adventure => new AdventureResponseDto(adventure));
   }
+
+
+
 
   async getSingleAdventure(id: number): Promise<Adventure> {
     const adventure = await this.adventuresRepository.findOneOrFail({

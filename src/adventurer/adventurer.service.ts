@@ -1,7 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOneOptions } from 'typeorm';
-import { Adventurer, AdventurerDto } from './adventurer.entity';
+import { Adventurer, AdventurerDto, AdventurerResponseDto } from './adventurer.entity';
 import { paginate, Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate';
 import { AdventureService } from 'src/adventure/adventure.service';
 
@@ -40,6 +40,23 @@ export class AdventurerService {
     return adventurers;
   }
 
+  async findByEmail(email: string): Promise<Adventurer> {
+    try {
+      const adventurer = await this.adventurersRepository.findOneOrFail({ where: { email } });
+      return adventurer;
+    } catch (error) {
+      if (error.name === 'EntityNotFoundError') {
+        throw new NotFoundException('Adventurer not found');
+      }
+      throw error;
+    }
+  }
+
+
+
+  async findOne(condition: any): Promise<Adventurer>{
+    return this.adventurersRepository.findOne(condition);
+  }
 
   async getSingleAdventurer(id: number): Promise<Adventurer> {
       const adventurer = await this.adventurersRepository.findOneOrFail({
@@ -62,10 +79,22 @@ export class AdventurerService {
 
       return newAdventurer;
   }
+  //add more validation
+  async validate(email: string, password: string): Promise<boolean> {
+    const adventurer = await this.findByEmail(email);
+    if (adventurer && password === adventurer.password) {
+      return true;
+    }
+    return false;
+  }
+  
 
 
   async create(adventurer: AdventurerDto): Promise<Adventurer> {
     const newAdventurer = this.adventurersRepository.create(adventurer);
+    newAdventurer.wishlistAdventureIds = [];
+    newAdventurer.connectedAdventurers = [];
+    newAdventurer.attendedAdventureIds = [];
     return await this.adventurersRepository.save(newAdventurer);
   }
 
@@ -106,6 +135,8 @@ export class AdventurerService {
 
     return await this.adventurersRepository.save(adventurer);
   }
+
+  
 
   async addToWishlist(adventurerId: number, adventureId: number): Promise<Adventurer> {
     const adventurer = await this.getSingleAdventurer(adventurerId);
@@ -172,6 +203,30 @@ export class AdventurerService {
       await this.adventurersRepository.save(adventurer2);
     }
   }
+
+  async displayConnectedAdventurers(adventurerId: number): Promise<AdventurerResponseDto[]> {
+    const adventurer = await this.getSingleAdventurer(adventurerId);
+    
+    if (!adventurer) {
+      throw new NotFoundException('Adventurer not found');
+    }
+
+    const connectedAdventurers: AdventurerResponseDto[] = [];
+
+    if (adventurer.connectedAdventurers && adventurer.connectedAdventurers.length > 0) {
+      for (const id of adventurer.connectedAdventurers) {
+        try {
+          const connectedAdventurer = await this.getSingleAdventurer(id);
+          connectedAdventurers.push(new AdventurerResponseDto(connectedAdventurer));
+        } catch (error) {
+          console.error(`Error fetching connected adventurer with ID ${id}:`, error.message);
+        }
+      }
+    }
+
+    return connectedAdventurers;
+  }
+
   
 }
   

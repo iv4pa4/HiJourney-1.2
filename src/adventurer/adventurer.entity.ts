@@ -13,6 +13,7 @@ export class Adventurer extends BaseEntity {
   @IsNotEmpty()
   username: string;
 
+  //{unique: true}
   @Column()
   @IsNotEmpty()
   @IsEmail()
@@ -33,16 +34,6 @@ export class Adventurer extends BaseEntity {
   @Column("int", { array: true, default: []})
   connectedAdventurers: number[];
 
-  @BeforeInsert()
-  async hashPassword() {
-    const errors: ValidationError[] = await validate(this, { skipMissingProperties: true });
-
-    if (errors.length > 0) {
-      throw new Error(errors.toString());
-    }
-
-    this.password = await bcrypt.hash(this.password, 10);
-  }
 }
 
 export class AdventurerDto {

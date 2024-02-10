@@ -30,12 +30,12 @@ export class AdventureResponseDto {
   id: number;
   name: string;
   description: string;
-  attendedAdventurerIds: number[];
+  creatorName: string;
 
   constructor(adventure: Adventure) {
     this.id = adventure.id;
     this.name = adventure.name;
     this.description = adventure.description;
-    this.attendedAdventurerIds = adventure.attendedAdventurerIds;
+    this.creatorName = adventure.creator.username
   }
 }

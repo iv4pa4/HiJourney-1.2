@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, Query, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, Query, NotFoundException, HttpException, HttpStatus } from '@nestjs/common';
 import { AdventureService } from './adventure.service';
-import { Adventure, AdventureDto } from './adventure.entity';
+import { Adventure, AdventureDto, AdventureResponseDto } from './adventure.entity';
 import { AdventurerService } from '../adventurer/adventurer.service'; 
 import { paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { FindOneOptions } from 'typeorm';
@@ -13,19 +13,18 @@ export class AdventureController {
     ) {}
 
     @Get()
-    async findAll(@Query() query: any = {}): Promise<Pagination<Adventure>> {
-        const options: FindOneOptions<Adventure> = {
-            
-        };
+    async findAll(@Query() query: any = {}): Promise<AdventureResponseDto[]> {
+        const fields = query.fields || ['id', 'name', 'description'];
     
-        const adventures = await paginate<Adventure>(
-            this.adventureService.getRepo(),
-            query,
-            options,
-        );
-    
-        return adventures;
+        try {
+            const adventures = await this.adventureService.findAll(fields);
+            return adventures;
+        } catch (error) {
+            // Handle errors appropriately
+            throw new HttpException('Failed to fetch adventures', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @Get(':id')
     async getAdventure(@Param('id') id: string): Promise<Adventure> {
