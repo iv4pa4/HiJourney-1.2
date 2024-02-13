@@ -1,0 +1,489 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D75185AD2B5BDCD100D685CF /* AdventurerDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185AC2B5BDCD100D685CF /* AdventurerDisplayView.swift */; };
+		D75185AF2B5BFC4100D685CF /* AdventureDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185AE2B5BFC4000D685CF /* AdventureDisplayView.swift */; };
+		D75185B12B5BFCC200D685CF /* TypesStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185B02B5BFCC200D685CF /* TypesStructs.swift */; };
+		D75185B32B615E4700D685CF /* SignUpScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185B22B615E4700D685CF /* SignUpScreenView.swift */; };
+		D75185B72B630E4A00D685CF /* AdventureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185B62B630E4A00D685CF /* AdventureView.swift */; };
+		D75185B92B6385EE00D685CF /* DetailedAdventureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185B82B6385EE00D685CF /* DetailedAdventureView.swift */; };
+		D75185BB2B638A0E00D685CF /* CreateNewAdventureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185BA2B638A0E00D685CF /* CreateNewAdventureView.swift */; };
+		D75185BD2B638CAC00D685CF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185BC2B638CAC00D685CF /* ProfileView.swift */; };
+		D75AD0E12B73635B009CF949 /* AdventureFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75AD0E02B73635B009CF949 /* AdventureFetcher.swift */; };
+		D75AD0EB2B739F8E009CF949 /* ChosingRoleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75AD0EA2B739F8E009CF949 /* ChosingRoleScreen.swift */; };
+		D75AD0ED2B73A34E009CF949 /* DetailedRoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75AD0EC2B73A34E009CF949 /* DetailedRoleView.swift */; };
+		D76DC5802B73B7BF006FBD7D /* ChosingRoleForSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76DC57F2B73B7BF006FBD7D /* ChosingRoleForSignIn.swift */; };
+		D76DC5862B73BC55006FBD7D /* SignUpScreenCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76DC5852B73BC55006FBD7D /* SignUpScreenCreatorView.swift */; };
+		D76DC5882B73BCB7006FBD7D /* SignInScreenCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76DC5872B73BCB7006FBD7D /* SignInScreenCreatorView.swift */; };
+		D795767D2B7B56D700B38BB2 /* WishlistAdventuresDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795767C2B7B56D700B38BB2 /* WishlistAdventuresDisplayView.swift */; };
+		D795767F2B7B5BC300B38BB2 /* DetailedWishlistViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795767E2B7B5BC300B38BB2 /* DetailedWishlistViewScreen.swift */; };
+		D79576812B7B8FC900B38BB2 /* TestAddToWishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79576802B7B8FC900B38BB2 /* TestAddToWishlistView.swift */; };
+		D7CC15CF2B31851E00F45436 /* HiJourney_1_2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */; };
+		D7CC15D32B31852000F45436 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7CC15D22B31852000F45436 /* Assets.xcassets */; };
+		D7CC15D62B31852000F45436 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7CC15D52B31852000F45436 /* Preview Assets.xcassets */; };
+		D7CC15E12B31854D00F45436 /* WelcomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */; };
+		D7CC15E22B31854D00F45436 /* ExploreMainPageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */; };
+		D7CC15E32B31854D00F45436 /* SignInScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */; };
+		D7CC15E82B31855600F45436 /* AdventureModelLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15E62B31855600F45436 /* AdventureModelLogic.swift */; };
+		D7CC15EB2B31855D00F45436 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15EA2B31855D00F45436 /* Connection.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D75185AC2B5BDCD100D685CF /* AdventurerDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventurerDisplayView.swift; sourceTree = "<group>"; };
+		D75185AE2B5BFC4000D685CF /* AdventureDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventureDisplayView.swift; sourceTree = "<group>"; };
+		D75185B02B5BFCC200D685CF /* TypesStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesStructs.swift; sourceTree = "<group>"; };
+		D75185B22B615E4700D685CF /* SignUpScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenView.swift; sourceTree = "<group>"; };
+		D75185B62B630E4A00D685CF /* AdventureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventureView.swift; sourceTree = "<group>"; };
+		D75185B82B6385EE00D685CF /* DetailedAdventureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedAdventureView.swift; sourceTree = "<group>"; };
+		D75185BA2B638A0E00D685CF /* CreateNewAdventureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewAdventureView.swift; sourceTree = "<group>"; };
+		D75185BC2B638CAC00D685CF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D75AD0E02B73635B009CF949 /* AdventureFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventureFetcher.swift; sourceTree = "<group>"; };
+		D75AD0EA2B739F8E009CF949 /* ChosingRoleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosingRoleScreen.swift; sourceTree = "<group>"; };
+		D75AD0EC2B73A34E009CF949 /* DetailedRoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedRoleView.swift; sourceTree = "<group>"; };
+		D76DC57F2B73B7BF006FBD7D /* ChosingRoleForSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosingRoleForSignIn.swift; sourceTree = "<group>"; };
+		D76DC5852B73BC55006FBD7D /* SignUpScreenCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenCreatorView.swift; sourceTree = "<group>"; };
+		D76DC5872B73BCB7006FBD7D /* SignInScreenCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenCreatorView.swift; sourceTree = "<group>"; };
+		D795767C2B7B56D700B38BB2 /* WishlistAdventuresDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistAdventuresDisplayView.swift; sourceTree = "<group>"; };
+		D795767E2B7B5BC300B38BB2 /* DetailedWishlistViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedWishlistViewScreen.swift; sourceTree = "<group>"; };
+		D79576802B7B8FC900B38BB2 /* TestAddToWishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAddToWishlistView.swift; sourceTree = "<group>"; };
+		D7CC15CB2B31851E00F45436 /* HiJourney 1.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HiJourney 1.2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiJourney_1_2App.swift; sourceTree = "<group>"; };
+		D7CC15D22B31852000F45436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D7CC15D52B31852000F45436 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreenView.swift; sourceTree = "<group>"; };
+		D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreMainPageScreen.swift; sourceTree = "<group>"; };
+		D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInScreenView.swift; sourceTree = "<group>"; };
+		D7CC15E62B31855600F45436 /* AdventureModelLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventureModelLogic.swift; sourceTree = "<group>"; };
+		D7CC15EA2B31855D00F45436 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D7CC15C82B31851E00F45436 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D75185B52B63094400D685CF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D7CC15EA2B31855D00F45436 /* Connection.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D76DC5812B73BB1C006FBD7D /* SignUpScreens */ = {
+			isa = PBXGroup;
+			children = (
+				D75185B22B615E4700D685CF /* SignUpScreenView.swift */,
+				D76DC5852B73BC55006FBD7D /* SignUpScreenCreatorView.swift */,
+			);
+			path = SignUpScreens;
+			sourceTree = "<group>";
+		};
+		D76DC5822B73BB4B006FBD7D /* SignInScreens */ = {
+			isa = PBXGroup;
+			children = (
+				D7CC15DE2B31854D00F45436 /* SignInScreenView.swift */,
+				D76DC5872B73BCB7006FBD7D /* SignInScreenCreatorView.swift */,
+			);
+			path = SignInScreens;
+			sourceTree = "<group>";
+		};
+		D76DC5832B73BB72006FBD7D /* ChosingRoleScreens */ = {
+			isa = PBXGroup;
+			children = (
+				D75AD0EC2B73A34E009CF949 /* DetailedRoleView.swift */,
+				D76DC57F2B73B7BF006FBD7D /* ChosingRoleForSignIn.swift */,
+				D75AD0EA2B739F8E009CF949 /* ChosingRoleScreen.swift */,
+			);
+			path = ChosingRoleScreens;
+			sourceTree = "<group>";
+		};
+		D76DC5842B73BBB8006FBD7D /* ExploreAdventureScreens */ = {
+			isa = PBXGroup;
+			children = (
+				D75185AC2B5BDCD100D685CF /* AdventurerDisplayView.swift */,
+				D75185B82B6385EE00D685CF /* DetailedAdventureView.swift */,
+				D75185B62B630E4A00D685CF /* AdventureView.swift */,
+				D75185AE2B5BFC4000D685CF /* AdventureDisplayView.swift */,
+			);
+			path = ExploreAdventureScreens;
+			sourceTree = "<group>";
+		};
+		D78FBD0F2B318912001E3644 /* ScreenViews */ = {
+			isa = PBXGroup;
+			children = (
+				D76DC5842B73BBB8006FBD7D /* ExploreAdventureScreens */,
+				D76DC5832B73BB72006FBD7D /* ChosingRoleScreens */,
+				D76DC5822B73BB4B006FBD7D /* SignInScreens */,
+				D76DC5812B73BB1C006FBD7D /* SignUpScreens */,
+				D75185BC2B638CAC00D685CF /* ProfileView.swift */,
+				D75185BA2B638A0E00D685CF /* CreateNewAdventureView.swift */,
+				D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */,
+				D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */,
+				D795767C2B7B56D700B38BB2 /* WishlistAdventuresDisplayView.swift */,
+				D795767E2B7B5BC300B38BB2 /* DetailedWishlistViewScreen.swift */,
+				D79576802B7B8FC900B38BB2 /* TestAddToWishlistView.swift */,
+			);
+			path = ScreenViews;
+			sourceTree = "<group>";
+		};
+		D78FBD102B318940001E3644 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D7CC15E62B31855600F45436 /* AdventureModelLogic.swift */,
+				D75185B02B5BFCC200D685CF /* TypesStructs.swift */,
+				D75AD0E02B73635B009CF949 /* AdventureFetcher.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D7CC15C22B31851E00F45436 = {
+			isa = PBXGroup;
+			children = (
+				D7CC15CD2B31851E00F45436 /* HiJourney 1.2 */,
+				D7CC15CC2B31851E00F45436 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D7CC15CC2B31851E00F45436 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D7CC15CB2B31851E00F45436 /* HiJourney 1.2.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D7CC15CD2B31851E00F45436 /* HiJourney 1.2 */ = {
+			isa = PBXGroup;
+			children = (
+				D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */,
+				D78FBD102B318940001E3644 /* Model */,
+				D78FBD0F2B318912001E3644 /* ScreenViews */,
+				D75185B52B63094400D685CF /* ViewModel */,
+				D7CC15D22B31852000F45436 /* Assets.xcassets */,
+				D7CC15D42B31852000F45436 /* Preview Content */,
+			);
+			path = "HiJourney 1.2";
+			sourceTree = "<group>";
+		};
+		D7CC15D42B31852000F45436 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D7CC15D52B31852000F45436 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D7CC15CA2B31851E00F45436 /* HiJourney 1.2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7CC15D92B31852000F45436 /* Build configuration list for PBXNativeTarget "HiJourney 1.2" */;
+			buildPhases = (
+				D7CC15C72B31851E00F45436 /* Sources */,
+				D7CC15C82B31851E00F45436 /* Frameworks */,
+				D7CC15C92B31851E00F45436 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HiJourney 1.2";
+			productName = "HiJourney 1.2";
+			productReference = D7CC15CB2B31851E00F45436 /* HiJourney 1.2.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D7CC15C32B31851E00F45436 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					D7CC15CA2B31851E00F45436 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+				};
+			};
+			buildConfigurationList = D7CC15C62B31851E00F45436 /* Build configuration list for PBXProject "HiJourney 1.2" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D7CC15C22B31851E00F45436;
+			productRefGroup = D7CC15CC2B31851E00F45436 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D7CC15CA2B31851E00F45436 /* HiJourney 1.2 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D7CC15C92B31851E00F45436 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7CC15D62B31852000F45436 /* Preview Assets.xcassets in Resources */,
+				D7CC15D32B31852000F45436 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D7CC15C72B31851E00F45436 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D79576812B7B8FC900B38BB2 /* TestAddToWishlistView.swift in Sources */,
+				D75AD0ED2B73A34E009CF949 /* DetailedRoleView.swift in Sources */,
+				D75185B32B615E4700D685CF /* SignUpScreenView.swift in Sources */,
+				D7CC15E12B31854D00F45436 /* WelcomeScreenView.swift in Sources */,
+				D75AD0EB2B739F8E009CF949 /* ChosingRoleScreen.swift in Sources */,
+				D7CC15E82B31855600F45436 /* AdventureModelLogic.swift in Sources */,
+				D7CC15E32B31854D00F45436 /* SignInScreenView.swift in Sources */,
+				D76DC5862B73BC55006FBD7D /* SignUpScreenCreatorView.swift in Sources */,
+				D75185B72B630E4A00D685CF /* AdventureView.swift in Sources */,
+				D7CC15EB2B31855D00F45436 /* Connection.swift in Sources */,
+				D75AD0E12B73635B009CF949 /* AdventureFetcher.swift in Sources */,
+				D76DC5802B73B7BF006FBD7D /* ChosingRoleForSignIn.swift in Sources */,
+				D7CC15CF2B31851E00F45436 /* HiJourney_1_2App.swift in Sources */,
+				D795767D2B7B56D700B38BB2 /* WishlistAdventuresDisplayView.swift in Sources */,
+				D75185AF2B5BFC4100D685CF /* AdventureDisplayView.swift in Sources */,
+				D75185AD2B5BDCD100D685CF /* AdventurerDisplayView.swift in Sources */,
+				D75185B12B5BFCC200D685CF /* TypesStructs.swift in Sources */,
+				D76DC5882B73BCB7006FBD7D /* SignInScreenCreatorView.swift in Sources */,
+				D7CC15E22B31854D00F45436 /* ExploreMainPageScreen.swift in Sources */,
+				D75185B92B6385EE00D685CF /* DetailedAdventureView.swift in Sources */,
+				D795767F2B7B5BC300B38BB2 /* DetailedWishlistViewScreen.swift in Sources */,
+				D75185BD2B638CAC00D685CF /* ProfileView.swift in Sources */,
+				D75185BB2B638A0E00D685CF /* CreateNewAdventureView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D7CC15D72B31852000F45436 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D7CC15D82B31852000F45436 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D7CC15DA2B31852000F45436 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HiJourney 1.2/Preview Content\"";
+				DEVELOPMENT_TEAM = Q6AG3WP543;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "iv4pa4.HiJourney-1-2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D7CC15DB2B31852000F45436 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HiJourney 1.2/Preview Content\"";
+				DEVELOPMENT_TEAM = Q6AG3WP543;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "iv4pa4.HiJourney-1-2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D7CC15C62B31851E00F45436 /* Build configuration list for PBXProject "HiJourney 1.2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7CC15D72B31852000F45436 /* Debug */,
+				D7CC15D82B31852000F45436 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D7CC15D92B31852000F45436 /* Build configuration list for PBXNativeTarget "HiJourney 1.2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7CC15DA2B31852000F45436 /* Debug */,
+				D7CC15DB2B31852000F45436 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D7CC15C32B31851E00F45436 /* Project object */;
+}
