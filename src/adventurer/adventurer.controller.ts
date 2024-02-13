@@ -30,6 +30,8 @@ export class AdventurerController {
     }
 
     @Get(':id')
+    @UseGuards(AuthenticationGuard)
+
     async getAdventurer(@Param('id') id: string): Promise<Adventurer> { 
         const adventurer = await this.adventurerService.getSingleAdventurer(+id); 
         const parsedId = parseInt(id, 10); 
@@ -43,18 +45,18 @@ export class AdventurerController {
         return adventurer;
     }
 
-    // @Get('email/:email')
-    // async getAdventurerByEmail(@Param('email') email: string): Promise<Adventurer> {
-    //   try {
-    //     const adventurer = await this.adventurerService.findByEmail(email);
-    //     return adventurer;
-    //   } catch (error) {
-    //     if (error instanceof NotFoundException) {
-    //       throw new NotFoundException(error.message);
-    //     }
-    //     throw error;
-    //   }
-    // }
+    @Get('email/:email')
+    async getAdventurerByEmail(@Param('email') email: string): Promise<Adventurer> {
+      try {
+        const adventurer = await this.adventurerService.findByEmail(email);
+        return adventurer;
+      } catch (error) {
+        if (error instanceof NotFoundException) {
+          throw new NotFoundException(error.message);
+        }
+        throw error;
+      }
+    }
 
     @Post()
     async createAdventurer(@Body() adventurerDto: AdventurerDto): Promise<Adventurer> { 
@@ -77,15 +79,17 @@ export class AdventurerController {
 
     }
 
-    
-
 
     @Patch(':id')
+    @UseGuards(AuthenticationGuard)
+
     async updateAdventurer(@Param('id') id: number, @Body() adventurer: AdventurerDto): Promise<Adventurer> { 
         return this.adventurerService.update(id, adventurer); 
     }
 
     @Delete(':id')
+    @UseGuards(AuthenticationGuard)
+
     async deleteAdventurer(@Param('id') id: number): Promise<void> { 
         const adventurer = await this.adventurerService.getSingleAdventurer(id); 
 
@@ -97,6 +101,8 @@ export class AdventurerController {
     }
 
     @Post(':adventurerId/attend/:adventureId')
+    @UseGuards(AuthenticationGuard)
+
     async attendAdventure(
     @Param('adventurerId') adventurerId: number,
     @Param('adventureId') adventureId: number,
@@ -113,6 +119,8 @@ export class AdventurerController {
     
 
     @Post(':adventurerId/add-to-wishlist/:adventureId')
+    @UseGuards(AuthenticationGuard)
+
     async addToWishlist(
         @Param('adventurerId') adventurerId: number,
         @Param('adventureId') adventureId: number,
@@ -127,11 +135,15 @@ export class AdventurerController {
     }
 
     @Get(':adventurerId/wishlist')
+    //@UseGuards(AuthenticationGuard)
+
     async displayWishlist(@Param('adventurerId') adventurerId: number): Promise<{ name: string; description: string; attendedAdventurerIds: number[] }[]> {
         return await this.adventurerService.displayWishlist(adventurerId);
     }
     
     @Post('/connect/:adventurerId1/with/:adventurerId2')
+    @UseGuards(AuthenticationGuard)
+
     async connectAdventurers(
     @Param('adventurerId1') adventurerId1: number,
     @Param('adventurerId2') adventurerId2: number,
@@ -141,6 +153,8 @@ export class AdventurerController {
     }
 
     @Get(':adventurerId/connected-adventurers')
+    @UseGuards(AuthenticationGuard)
+
     async displayConnectedAdventurers(@Param('adventurerId') adventurerId: number): Promise<AdventurerResponseDto[]> {
         return await this.adventurerService.displayConnectedAdventurers(adventurerId);
     }
