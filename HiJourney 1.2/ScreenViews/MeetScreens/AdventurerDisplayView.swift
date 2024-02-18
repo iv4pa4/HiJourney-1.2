@@ -14,7 +14,10 @@ class AdventurerViewModel: ObservableObject {
             return
         }
 
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        var request = URLRequest(url: url)
+        request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data, error == nil else {
                 print("Error: \(error?.localizedDescription ?? "Unknown error")")
                 return
@@ -34,7 +37,9 @@ class AdventurerViewModel: ObservableObject {
             }
         }.resume()
     }
+
 }
+
 
 struct AdventurerDisplayView: View {
     @ObservedObject var viewModel : AdventurerViewModel

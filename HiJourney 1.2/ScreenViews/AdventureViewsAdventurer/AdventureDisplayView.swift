@@ -11,7 +11,7 @@ struct AdventureDisplayView: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(adventureFetcher.adventures) { adventure in
-                        NavigationLink(destination: DetailedAdventureView(adventure: adventure, viewModel: viewModel)) {
+                        NavigationLink(destination: DetailedAdventureView(adventure: adventure, viewModel: viewModel, viewModelAdv: AttendedAdventuresVModel())) {
                             AdventureView(title: adventure.name, adventurePhoto: "rafting", profilePhoto: "profilePic")
                         }
                     }

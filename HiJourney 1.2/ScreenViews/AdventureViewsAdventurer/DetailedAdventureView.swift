@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailedAdventureView: View {
     var adventure: Adventure
     @ObservedObject var viewModel: Connection
+    @ObservedObject var viewModelAdv: AttendedAdventuresVModel
     
     @State private var isAddedToWishlist = false
     var body: some View {
@@ -49,26 +50,25 @@ struct DetailedAdventureView: View {
                     Text(adventure.creatorName).font(.headline)
                     Spacer()
                     Button(action: {
-                    }) {
-                        Image(systemName: "heart")
-                    }
-                    Button(action: {
                         viewModel.addToWishlist(adventurerId: currentAdventurer.id, adventureId: adventure.id)
                         viewModel.fetchWishlistData()
                     }) {
                         Image(systemName: isAddedToWishlist ? "heart.fill" : "heart")
                     }
                     .padding()
+                    
+                    Button(action: {
+                        viewModel.attendAdventures(adventurerId: currentAdventurer.id, adventureId: adventure.id)
+                        viewModelAdv.getCurrAttendedAdventures()
+                    }) {
+                        Text("Jump in")
+                    }
                 }
             }
             
-            // Description text
             Text(adventure.description)
                 .lineLimit(3)
             
-            //                       Button("Read more") {
-            //                       }
-            //                       .foregroundColor(.blue)
         }
         .padding()
         
@@ -78,6 +78,6 @@ struct DetailedAdventureView: View {
     
 }
 
-//#Preview {
-//    DetailedAdventureView(adventure: Adventure(id: 2, name: "String", description: "String", creatorName: "String"), viewModel: Connection())
-//}
+#Preview {
+    DetailedAdventureView(adventure: Adventure(id: 2, name: "String", description: "String", creatorName: "String"), viewModel: Connection(), viewModelAdv: AttendedAdventuresVModel())
+}

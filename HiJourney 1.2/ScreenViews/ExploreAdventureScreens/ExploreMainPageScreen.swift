@@ -48,7 +48,7 @@ struct ExploreMainPageScreen: View {
             alignment: .bottom
         )
         .ignoresSafeArea(.all, edges: .bottom)
-        .navigationBarBackButtonHidden()
+        .navigationBarBackButtonHidden(true)
     }
 
     func TabButton(tab: Tab) -> some View {
