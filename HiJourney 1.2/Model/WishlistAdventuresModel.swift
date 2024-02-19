@@ -7,24 +7,6 @@
 
 import Foundation
 
-//struct WishlistItem: Identifiable, Decodable {
-//    var id: Int
-//    let name: String
-//    let description: String
-//    
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        self.name = try container.decode(String.self, forKey: .name)
-//        self.description = try container.decode(String.self, forKey: .description)
-//        self.id = try container.decode(Int.self, forKey: .id)
-//    }
-//    
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case name
-//        case description
-//    }
-//}
 
 struct WishlistModel{
     var wishlist: [WishlistItem] = []

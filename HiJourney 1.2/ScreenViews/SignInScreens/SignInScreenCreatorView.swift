@@ -33,7 +33,7 @@ struct SignInViewCreatorScreen: View {
             }
             
             .background(NavigationLink(
-                destination: WelcomeScreenView(viewModel: viewModel), // New view to navigate to
+                destination: ExploreMainScreenCreator(viewModel: viewModel), // New view to navigate to
                 isActive: $isSignedIn,
                 label: { EmptyView() }
             ))
@@ -90,13 +90,19 @@ struct SignInViewCreatorScreen: View {
     
     var signInButton: some View{
         Button(action: {
-           // viewModel.validateCreator(email: email, password: password)
-            self.isSignedIn = viewModel.getSignedStatus()
-            
+            viewModel.signInCreator(email: email, password: password) { result in
+                switch result {
+                case .success:
+                    isSignedIn = true // Set sign-in status to true upon successful sign-in
+                case .failure(let error):
+                    print("Sign-in failed: \(error.localizedDescription)")
+                }
+            }
         }, label: {
             Text("Sign in")
             
         })
+        
         .frame(width: 128, height: 45)
         .foregroundColor(.black)
         .background(Color("BlueForButtons"))

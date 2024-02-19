@@ -29,7 +29,17 @@ class Connection: ObservableObject {
             }
         }
     }
-
+    
+    func signInCreator(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        model.signInCreator(email: email, password: password) { result in
+            switch result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 
 
     func getAdventurerByEmail(email: String, token: String) {
@@ -47,41 +57,8 @@ class Connection: ObservableObject {
         }
     }
 
-//    func signInCreator(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
-//        model.signInCreator(email: email, password: password) { result in
-//            switch result {
-//            case .success:
-//                completion(.success(()))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
-//
-//
-//
-//    func getCreatorByEmail(email: String, token: String) {
-//        model.getCreatorByEmail(email: email, token: token) { result in
-//            switch result {
-//            case .success(let creator):
-//                currentCreator = creator
-//                print("Successful login")
-//            case .failure(let error):
-//                print("Failed to fetch adventurer: \(error)")
-//            }
-//        }
-//    }
-    
-//    func signInCreator(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
-//        model.signInCreator(email: email, password: password) { result in
-//            switch result {
-//            case .success:
-//                completion(.success(())) // Pass success result
-//            case .failure(let error):
-//                completion(.failure(error)) // Pass failure result
-//            }
-//        }
-//    }
+
+
     
 
     func setCurrentAdventurer(){
@@ -154,51 +131,11 @@ class Connection: ObservableObject {
     func connectAdventurers(adventurerId1: Int, adventurerId2: Int, token: String){
         modelA.connectAdventurers(adventurerId1: adventurerId1, adventurerId2: adventurerId2, token: token)
     }
-    
-//    func fetchCreatorByEmail(email: String){
-//        model.fetchCreator(email: email) { result in
-//            switch result {
-//            case .success(let fetchedCreator):
-//                currentCreator.id = fetchedCreator.id
-//                currentCreator.username = fetchedCreator.username
-//                currentCreator.email = fetchedCreator.email
-//                currentCreator.password = fetchedCreator.password
-//            case .failure(let error):
-//                print("Error fetching creator: \(error)")
-//            }
-//        }
-//    }
-//    func validateCreator(email: String, password: String){
-//        model.validateCreator(email: email, password: password) { result in
-//            switch result {
-//            case .success(let token):
-//                print("Token: \(token)")
-//                jwtToken = token
-//                self.model.fetchCreatorByEmail(email: email){ result in
-//                    switch result {
-//                    case .success(let fetchedCreator):
-//                        currentCreator.id = fetchedCreator.id
-//                        currentCreator.username = fetchedCreator.username
-//                        currentCreator.email = fetchedCreator.email
-//                        currentCreator.password = fetchedCreator.password
-//                        self.isSignedIn = true
-//                    case .failure(let error):
-//                        print("Error fetching creator: \(error)")
-//                    }
-//                }
-//            case .failure(let error):
-//                print("Error: \(error.localizedDescription)")
-//            }
-//        }
-//    }
-    
+
     func getSignedStatus() -> Bool {
         return self.isSignedIn
     }
-//    func signInCreator(email: String, password: String){
-//        validateCreator(email: email, password: password)
-//        
-//    }
+
     
 }
 

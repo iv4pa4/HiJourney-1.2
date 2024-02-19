@@ -20,7 +20,7 @@ struct ExploreMainScreenCreator: View {
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(TabCreator.Explore)
             
-            CreateNewAdventureView(viewModel: AdventureFetcher())
+            CreateNewAdventureView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(TabCreator.Add)
@@ -31,7 +31,7 @@ struct ExploreMainScreenCreator: View {
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(TabCreator.Search)
 
-            ProfileViewCreator(adventurer: currentAdventurer)
+            ProfileViewCreator(creator: currentCreator)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea()) // Change "primaryColor" to your primary color
                 .tag(TabCreator.Profile)
