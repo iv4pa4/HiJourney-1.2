@@ -8,11 +8,49 @@
 import SwiftUI
 
 struct AdventurerDetailedView: View {
+    var adventurer : Adventurer
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            base
+            whiteBase
+            VStack {
+                profileImage
+                adventurerUsername
+            }
+        }
     }
+    
+    var base: some View{
+        DiagonalGradientView(squareFrame: 105)
+            .cornerRadius(9)
+    }
+    var whiteBase: some View{
+        Rectangle()
+            .fill(.white)
+            .cornerRadius(9)
+            .frame(width: 90, height: 90) // Increased height to accommodate image and text
+    }
+    var profileImage: some View {
+        Image("profilePic")
+            .resizable()
+            .frame(width: 65, height: 65)
+            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+            .padding(.top, 3) // Adjusted padding
+    }
+    
+    var adventurerUsername: some View {
+        Text("@\(adventurer.username)")
+            .padding(.top, 1)
+            .bold()
+            .foregroundColor(.black)
+            .lineLimit(1) // Limit the text to one line
+            .fixedSize(horizontal: false, vertical: true) // Ensure the text doesn't exceed its container
+            .frame(maxWidth: 80) // Set a maximum width for the text
+            .padding(.horizontal) // Add horizontal padding
+    }
+
 }
 
 #Preview {
-    AdventurerDetailedView()
+    AdventurerDetailedView(adventurer: Adventurer(id: 2, username: "test", email: "", password: "", attendedAdventureIds: [], wishlistAdventureIds: [], connectedAdventurers: []))
 }

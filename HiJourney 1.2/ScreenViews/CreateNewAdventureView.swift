@@ -10,15 +10,14 @@ import SwiftUI
 struct CreateNewAdventureView: View {
     @State private var adventureTitle: String = ""
     @State private var description: String = ""
-    @State private var date: Date = Date()
     @State private var isPaidEvent: Bool = false
-    @ObservedObject var viewModel: Connection
+    @ObservedObject var viewModel: AdventureFetcher
     
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Adventure Title")) {
-                    TextField("Text input", text: $adventureTitle)
+                    TextField("Name input", text: $adventureTitle)
                 }
                 
                 Section(header: Text("Add Photos")) {
@@ -26,7 +25,6 @@ struct CreateNewAdventureView: View {
                         HStack {
                             ForEach(0..<3) { _ in
                                 Button(action: {
-                                    //TODO  Action to add photo
                                 }) {
                                     Image(systemName: "plus")
                                         .frame(width: 60, height: 60)
@@ -38,22 +36,12 @@ struct CreateNewAdventureView: View {
                 }
                 
                 Section(header: Text("Description")) {
-                    TextField("Text input", text: $description)
-                }
-                
-                Section(header: Text("Date")) {
-                    DatePicker("Date picker", selection: $date, displayedComponents: .date)
-                }
-                
-                Section {
-                    Toggle(isOn: $isPaidEvent) {
-                        Text("Paid event")
-                    }
+                    TextField("Description input", text: $description)
                 }
                 
 
                     Button("Create Adventure") {
-                        //TODO Action to create adventure
+                        viewModel.createAdventure(name: adventureTitle, description: description)
                     }
                     .frame(width: 128, height: 45)
                     .foregroundColor(.black)
@@ -65,7 +53,7 @@ struct CreateNewAdventureView: View {
                 }
             .navigationBarTitle("Create Adventure", displayMode: .inline)
             .navigationBarItems(leading: Button(action: {
-                // TODO Action for back button
+
             }) {
                 Image(systemName: "chevron.left")
             })
@@ -78,5 +66,5 @@ struct CreateNewAdventureView: View {
 
 
 #Preview {
-    CreateNewAdventureView(viewModel: Connection())
+    CreateNewAdventureView(viewModel: AdventureFetcher())
 }

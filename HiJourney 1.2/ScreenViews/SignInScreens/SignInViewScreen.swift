@@ -9,9 +9,10 @@ import SwiftUI
 
 
 
-struct ContentView: View {
+struct SignInViewScreen: View {
     @State private var email = ""
     @State private var password = ""
+    @State private var isSignedIn = false // Track sign-in status
     @ObservedObject var viewModel: Connection
     private let rectangleWidth: CGFloat = 350
     private let rectangleHeight: CGFloat = 670
@@ -19,20 +20,25 @@ struct ContentView: View {
     private let logoWidth: CGFloat = 156
     private let logoHeight: CGFloat = 149
     
-    
     var body: some View {
-        ZStack{
-            Image("wp3")
-            showZone
-            showLogo
-            signInText
-            textFields
-            signInButton
+        NavigationView {
+            ZStack{
+                Image("wp3")
+                showZone
+                showLogo
+                signInText
+                textFields
+                signInButton
+                
+            }
             
-        }
-        .navigationBarBackButtonHidden(true)
+            .background(NavigationLink(
+                destination: ExploreMainPageScreen(viewModel: viewModel), // New view to navigate to
+                isActive: $isSignedIn,
+                label: { EmptyView() }
+            ))
+        }.navigationBarBackButtonHidden(true)
     }
-    
     
     var showZone: some View{
         Rectangle()
@@ -62,20 +68,20 @@ struct ContentView: View {
                 .padding()
                 .background(Color.white)
                 .cornerRadius(10)
-                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
+                .border(Color.black)
                 .offset(y:90)
                 .autocorrectionDisabled()
-                .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                .autocapitalization(.none)
                 .textContentType(nil)
             
             SecureField("Password", text: $password)
                 .padding()
                 .background(Color.white)
                 .cornerRadius(10)
-                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
+                .border(Color.black)
                 .offset(y:90)
                 .autocorrectionDisabled()
-                .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                .autocapitalization(.none)
                 .textContentType(nil)
         }
         .frame(width: 300)
@@ -84,11 +90,20 @@ struct ContentView: View {
     
     var signInButton: some View{
         Button(action: {
-            viewModel.signIn(email: email, password: password)
+            viewModel.signIn(email: email, password: password) { result in
+                switch result {
+                case .success:
+                    isSignedIn = true // Set sign-in status to true upon successful sign-in
+                case .failure(let error):
+                    // Handle sign-in failure here (e.g., display an error message)
+                    print("Sign-in failed: \(error.localizedDescription)")
+                }
+            }
         }, label: {
             Text("Sign in")
             
         })
+        
         .frame(width: 128, height: 45)
         .foregroundColor(.black)
         .background(Color("BlueForButtons"))
@@ -96,11 +111,9 @@ struct ContentView: View {
         .offset(y: offsetForButton)
         .font(.custom("Poppins-Bold", size:15))
         .shadow(color: .black, radius: 4, x: 3, y: 4)
-
     }
-    
-    
 }
+
 #Preview {
-    ContentView(viewModel: Connection())
+    SignInViewScreen(viewModel: Connection())
 }

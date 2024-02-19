@@ -4,6 +4,8 @@ struct ExploreMainPageScreen: View {
     //TODO: Remove back tags !!!
     @State var currentTab: Tab = .Explore
     @ObservedObject var viewModel: Connection
+    var iconFrame: CGFloat = 25
+    var textPadding: CGFloat = 50
 
     init(viewModel: Connection) {
         UITabBar.appearance().isHidden = true
@@ -13,6 +15,7 @@ struct ExploreMainPageScreen: View {
     @Namespace var animations
 
     var body: some View {
+        
         
         TabView(selection: $currentTab) {
             AdventureDisplayView(viewModel: viewModel)
@@ -25,14 +28,15 @@ struct ExploreMainPageScreen: View {
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(Tab.WishList)
 
-            CreateNewAdventureView(viewModel: viewModel)
+           
+            AdventurerDisplayView(viewModel: AdventurerViewModel(), viewModelCon: viewModel)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(Tab.Add)
 
             ProfileView(adventurer: currentAdventurer)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color("primaryColor").ignoresSafeArea()) // Change "primaryColor" to your primary color
+                .background(Color("primaryColor").ignoresSafeArea())
                 .tag(Tab.Profile)
 
         }
@@ -59,11 +63,11 @@ struct ExploreMainPageScreen: View {
                 }
             }, label: {
                 VStack(spacing: 0) {
-                    Image(systemName: currentTab == tab ? tab.rawValue + ".fill" : tab.rawValue)
+                    Image(systemName:  tab.rawValue )
 
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 25, height: 25)
+                        .frame(width: iconFrame, height: iconFrame)
                         .frame(maxWidth: .infinity)
                         .foregroundColor(currentTab == tab ? .primary : .secondary)
                         .padding(currentTab == tab ? 15 : 0)
@@ -74,7 +78,7 @@ struct ExploreMainPageScreen: View {
                                         .clipShape(Circle())
                                         .matchedGeometryEffect(id: "TAB", in: animations)
 
-                                    Text(tab.tabName).foregroundColor(.primary).font(.footnote).padding(.top, 50)
+                                    Text(tab.tabName).foregroundColor(.primary).font(.footnote).padding(.top, textPadding)
                                 }
                             }
                         )
@@ -94,13 +98,13 @@ struct ExploreMainPageScreen: View {
 enum Tab: String, CaseIterable{
     case Explore = "house"
     case WishList = "heart"
-    case Add = "plus.app"
+    case Add = "figure.2"
     case Profile = "person"
     
     var tabName: String{
         switch self {
         case .Add:
-            return "Add"
+            return "Meet"
         case .WishList:
             return "WishList"
         case .Explore:
@@ -135,7 +139,5 @@ struct MaterialEffect: UIViewRepresentable{
         return view
     }
     
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-        //
-    }
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {}
 }

@@ -1,80 +1,101 @@
-//
-//  AdventureSearchView.swift
-//  HiJourney 1.2
-//
-//  Created by Ivayla  Panayotova on 16.02.24.
-//
-
 import SwiftUI
 
-
 struct AdventureSearchView: View {
-    @State private var searchInput = ""
-    @State private var adventures: [Adventure] = []
+    @State private var name: String = ""
+    @State private var authToken: String = "" // Assuming you have a token
+    @State private var adventures: [SearchAdventure] = []
     
-    func searchAdventures() {
-        let searchTerms = searchInput.split(separator: " ").map { String($0) }
-        
-        guard !searchTerms.isEmpty else {
-            print("Please enter at least one search term")
-            return
+    var body: some View {
+        VStack {
+            TextField("Enter keyword", text: $name)
+                .padding()
+            
+            Button("Search") {
+                searchAdventureByName(name: name)
+                searchAdventureByDescription(desc: name)
+            }
+            .frame(width: 128, height: 45)
+            .foregroundColor(.black)
+            .background(Color("BlueForButtons"))
+            .clipShape(RoundedRectangle(cornerRadius: 30))
+            .font(.custom("Poppins-Bold", size:15))
+            .shadow(color: .black, radius: 4, x: 3, y: 4)
+            
+            List(adventures, id: \.id) { adventure in
+                SearchView(adventure: adventure)
+            }
         }
-        
-        let queryItems = searchTerms.map { URLQueryItem(name: "keyword", value: $0) }
-        var urlComponents = URLComponents(string: "http://localhost:3001/search/description")!
-        urlComponents.queryItems = queryItems
-        
-        guard let url = urlComponents.url else {
-            print("Failed to construct URL")
+    }
+    
+    func searchAdventureByName(name: String) {
+        guard let url = URL(string: "http://localhost:3001/adventure/search/\(name)") else {
+            print("Invalid URL")
             return
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
+        request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                print("Error: \(error?.localizedDescription ?? "Unknown error")")
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
                 return
             }
             
-            if let decodedResponse = try? JSONDecoder().decode([Adventure].self, from: data) {
-                DispatchQueue.main.async {
-                    self.adventures = decodedResponse
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                return
+            }
+            
+            if let data = data {
+                do {
+                    let decodedAdventures = try JSONDecoder().decode([SearchAdventure].self, from: data)
+                    DispatchQueue.main.async {
+                        self.adventures = decodedAdventures
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error.localizedDescription)")
                 }
-            } else {
-                print("Failed to decode response")
             }
         }.resume()
     }
     
-    var body: some View {
-        VStack {
-            TextField("Search Adventure by Description", text: $searchInput)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            Button("Search Adventures") {
-                searchAdventures()
+    func searchAdventureByDescription(desc: String) {
+        guard let url = URL(string: "http://localhost:3001/adventure/search/description/\(desc)") else {
+            print("Invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
             }
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(8)
             
-            List(adventures, id: \.id) { adventure in
-                VStack(alignment: .leading) {
-                    Text("Name: \(adventure.name)")
-                    Text("Description: \(adventure.description)")
-                    Text("Creator: \(adventure.creatorName)")
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                return
+            }
+            
+            if let data = data {
+                do {
+                    let decodedAdventures = try JSONDecoder().decode([SearchAdventure].self, from: data)
+                    DispatchQueue.main.async {
+                        self.adventures = decodedAdventures
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error.localizedDescription)")
                 }
             }
-        }
-        .padding()
+        }.resume()
     }
 }
 
-
-#Preview {
-    AdventureSearchView()
+struct AdventureSearchView_Previews: PreviewProvider {
+    static var previews: some View {
+        AdventureSearchView()
+    }
 }

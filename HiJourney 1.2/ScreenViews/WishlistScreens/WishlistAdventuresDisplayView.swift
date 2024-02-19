@@ -2,7 +2,7 @@ import SwiftUI
 
 struct WishlistAdventuresDisplayView: View {
     @State private var adventurerId: Int = currentAdventurer.id// Set the default adventurer ID
-    @State private var wishlistAdventures: [WishlistItem2] = []
+    @State private var wishlistAdventures: [WishlistItem] = []
     
     var body: some View {
         NavigationView {
@@ -37,7 +37,6 @@ struct WishlistAdventuresDisplayView: View {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        // Add JWT token to the Authorization header
         request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -51,9 +50,9 @@ struct WishlistAdventuresDisplayView: View {
             }
             
             do {
-                let result = try JSONDecoder().decode([WishlistItem2].self, from: data)
+                let result = try JSONDecoder().decode([WishlistItem].self, from: data)
                 DispatchQueue.main.async {
-                    self.wishlistAdventures = result // Use self.wishlist to access the property
+                    self.wishlistAdventures = result
                 }
             } catch {
                 print("Error decoding JSON: \(error)")

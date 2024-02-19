@@ -1,14 +1,18 @@
 //
-//  SignInScreenCreatorView.swift
+//  SignInView.swift
 //  HiJourney 1.2
 //
-//  Created by Ivayla  Panayotova on 7.02.24.
+//  Created by Ivayla  Panayotova on 13.02.24.
 //
 
 import SwiftUI
 
 
-struct SignInScreenCreatorView: View {
+
+struct SignInViewCreatorScreen: View {
+    @State private var email = ""
+    @State private var password = ""
+    @State private var isSignedIn = false // Track sign-in status
     @ObservedObject var viewModel: Connection
     private let rectangleWidth: CGFloat = 350
     private let rectangleHeight: CGFloat = 670
@@ -16,20 +20,24 @@ struct SignInScreenCreatorView: View {
     private let logoWidth: CGFloat = 156
     private let logoHeight: CGFloat = 149
     
-    @State var username: String = ""
-    @State var password: String = ""
-    
     var body: some View {
-        ZStack{
-            Image("wp3")
-            showZone
-            showLogo
-            signInText
-            usernameField()
-            signInButton
+        NavigationView {
+            ZStack{
+                Image("wp3")
+                showZone
+                showLogo
+                signInText
+                textFields
+                signInButton
+                
+            }
             
-        }
-        .navigationBarBackButtonHidden(true)
+            .background(NavigationLink(
+                destination: WelcomeScreenView(viewModel: viewModel), // New view to navigate to
+                isActive: $isSignedIn,
+                label: { EmptyView() }
+            ))
+        }.navigationBarBackButtonHidden(true)
     }
     
     var showZone: some View{
@@ -54,51 +62,51 @@ struct SignInScreenCreatorView: View {
             .offset(y: -50)
     }
     
-    var signInButton: some View{
-        Button(action: {
-            viewModel.signIn()
-        }, label: {
-            Text("Sign in")
-                .frame(width: 128, height: 45)
-                .foregroundColor(.black)
-                .background(Color("BlueForButtons"))
-                .clipShape(RoundedRectangle(cornerRadius: 30))
-                .offset(y: offsetForButton)
-                .font(.custom("Poppins-Bold", size:15))
-                .shadow(color: .black, radius: 4, x: 3, y: 4)
-        })
-       
-    }
-
-
-    func usernameField() -> some View {
-            VStack {
-                TextField("Email", text: $username)
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
-                    .offset(y:90)
-                    .autocorrectionDisabled()
-                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-
-                SecureField("Password", text: $password)
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
-                    .offset(y:120)
-                    .autocorrectionDisabled()
-                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-            }
-            .frame(width: 300)
-            .offset(y: -10)
+    var textFields: some View {
+        VStack{
+            TextField("Email", text: $email)
+                .padding()
+                .background(Color.white)
+                .cornerRadius(10)
+                .border(Color.black)
+                .offset(y:90)
+                .autocorrectionDisabled()
+                .autocapitalization(.none)
+                .textContentType(nil)
+            
+            SecureField("Password", text: $password)
+                .padding()
+                .background(Color.white)
+                .cornerRadius(10)
+                .border(Color.black)
+                .offset(y:90)
+                .autocorrectionDisabled()
+                .autocapitalization(.none)
+                .textContentType(nil)
+        }
+        .frame(width: 300)
+        .offset(y: -10)
     }
     
+    var signInButton: some View{
+        Button(action: {
+           // viewModel.validateCreator(email: email, password: password)
+            self.isSignedIn = viewModel.getSignedStatus()
+            
+        }, label: {
+            Text("Sign in")
+            
+        })
+        .frame(width: 128, height: 45)
+        .foregroundColor(.black)
+        .background(Color("BlueForButtons"))
+        .clipShape(RoundedRectangle(cornerRadius: 30))
+        .offset(y: offsetForButton)
+        .font(.custom("Poppins-Bold", size:15))
+        .shadow(color: .black, radius: 4, x: 3, y: 4)
+    }
 }
 
-
-
 #Preview {
-    SignInScreenCreatorView(viewModel: Connection())
+    SignInViewCreatorScreen(viewModel: Connection())
 }

@@ -12,6 +12,7 @@ struct SignUpScreenView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var repassword: String = ""
+    @State var profilephoto: String = ""
     @State private var navigateToExplore = false
     private let rectangleWidth: CGFloat = 350
     private let rectangleHeight: CGFloat = 670
@@ -32,7 +33,7 @@ struct SignUpScreenView: View {
                 Image("wp3")
                 showZone
                 showLogo
-                
+                signUpText
                 textFieldUsername
                 button
                 NavigationLink(destination: ExploreMainPageScreen(viewModel: viewModel), isActive: $navigateToExplore) {
@@ -48,7 +49,7 @@ struct SignUpScreenView: View {
             print(email)
             print(password)
             print(repassword)
-            createUser(username: self.username, email: self.email, password: self.password)
+            createUser(username: self.username, email: self.email, password: self.password, profilephoto: profilephoto)
         }) {
             Text("Sign Up")
         }
@@ -132,8 +133,8 @@ struct SignUpScreenView: View {
     }
         
     
-    func createUser(username: String, email: String, password: String) {
-        viewModel.createUser(username: username, email: email, password: password) { result in
+    func createUser(username: String, email: String, password: String, profilephoto: String) {
+        viewModel.createUserAdventurer(username: username, email: email, password: password, profilephoto: profilephoto) { result in
             switch result {
             case .success:
                 DispatchQueue.main.async {
@@ -147,17 +148,6 @@ struct SignUpScreenView: View {
         }
     }
 
-
-
-
-    
-    func setCurrentAdventurer(){
-        //viewModel.setCurrentAdventurer()
-    }
-    
-    func craeteCurrentAdventurer(){
-       // viewModel.createCurrentAdventurer()
-    }
     
 }
 

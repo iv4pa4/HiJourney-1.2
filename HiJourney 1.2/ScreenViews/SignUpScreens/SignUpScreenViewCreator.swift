@@ -1,13 +1,4 @@
 //
-//  SignUpScreenCreatorView.swift
-//  HiJourney 1.2
-//
-//  Created by Ivayla  Panayotova on 7.02.24.
-//
-
-import SwiftUI
-
-//
 //  SwiftUIView.swift
 //  HiJourney 1.2
 //
@@ -16,11 +7,12 @@ import SwiftUI
 
 import SwiftUI
 
-struct SignUpScreenCreatorView: View {
+struct SignUpScreenViewCreator: View {
     @State var username: String = ""
     @State var email: String = ""
     @State var password: String = ""
     @State var repassword: String = ""
+    @State var profilephoto: String = ""
     @State private var navigateToExplore = false
     private let rectangleWidth: CGFloat = 350
     private let rectangleHeight: CGFloat = 670
@@ -41,10 +33,10 @@ struct SignUpScreenCreatorView: View {
                 Image("wp3")
                 showZone
                 showLogo
-                
+                signUpText
                 textFieldUsername
                 button
-                NavigationLink(destination: ExploreMainPageScreen(viewModel: viewModel), isActive: $navigateToExplore) {
+                NavigationLink(destination: ExploreMainScreenCreator(viewModel: viewModel), isActive: $navigateToExplore) {
                     EmptyView()
                                 }.navigationBarBackButtonHidden()
             }
@@ -57,7 +49,7 @@ struct SignUpScreenCreatorView: View {
             print(email)
             print(password)
             print(repassword)
-            createUser(username: self.username, email: self.email, password: self.password)
+            createUserCreator(username: self.username, email: self.email, password: self.password)
         }) {
             Text("Sign Up")
         }
@@ -80,6 +72,8 @@ struct SignUpScreenCreatorView: View {
                 .offset(y:90)
                 .autocorrectionDisabled()
                 .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                .textContentType(nil)
+                
             TextField("Email", text: $email)
                 .padding()
                 .background(Color.white)
@@ -88,6 +82,7 @@ struct SignUpScreenCreatorView: View {
                 .offset(y:90)
                 .autocorrectionDisabled()
                 .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                .textContentType(nil)
             SecureField("Password", text: $password)
                 .padding()
                 .background(Color.white)
@@ -96,6 +91,7 @@ struct SignUpScreenCreatorView: View {
                 .offset(y:90)
                 .autocorrectionDisabled()
                 .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                .textContentType(nil)
             SecureField("Retype password", text: $repassword)
                 .padding()
                 .background(Color.white)
@@ -104,6 +100,7 @@ struct SignUpScreenCreatorView: View {
                 .offset(y:90)
                 .autocorrectionDisabled()
                 .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                .textContentType(nil)
         }
         .frame(width: 300)
     }
@@ -120,6 +117,8 @@ struct SignUpScreenCreatorView: View {
             .resizable()
             .frame(width: logoWidth, height: logoHeight)
             .offset(y: offsetShowLogo)
+            .autocorrectionDisabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+            .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
             
     }
     
@@ -128,34 +127,31 @@ struct SignUpScreenCreatorView: View {
             .font(.largeTitle)
             .foregroundColor(.black)
             .offset(y: offsetSignUpText)
+            .autocorrectionDisabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+            .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+        
     }
         
     
-    func createUser(username: String, email: String, password: String) {
-        viewModel.createUser(username: username, email: email, password: password) { result in
+    func createUserCreator(username: String, email: String, password: String) {
+        viewModel.createUserCreator(username: username, email: email, password: password) { result in
             switch result {
             case .success:
-                self.navigateToExplore = true
+                DispatchQueue.main.async {
+                    self.navigateToExplore = true
+                    print(jwtToken)
+                }
             case .failure(let error):
                 print("User NOT created \(error)")
+                // Handle the failure case as needed
             }
         }
     }
 
-
-
-    
-    func setCurrentAdventurer(){
-        //viewModel.setCurrentAdventurer()
-    }
-    
-    func craeteCurrentAdventurer(){
-       // viewModel.createCurrentAdventurer()
-    }
     
 }
 
 
 #Preview {
-    SignUpScreenCreatorView(viewModel: Connection())
+    SignUpScreenViewCreator(viewModel: Connection())
 }

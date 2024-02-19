@@ -45,7 +45,7 @@ struct ChosingRoleScreen: View {
     //TODO: change to signup for creator
     var creator: some View {
         NavigationLink(
-            destination: SignUpScreenCreatorView(viewModel: viewModel),
+            destination: SignUpScreenViewCreator(viewModel: viewModel),
             label: {
                 details.creatorDeatiledRoleView
             })

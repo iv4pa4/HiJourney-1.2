@@ -5,6 +5,9 @@
 //
 
 import SwiftUI
+import FirebaseStorage
+import FirebaseFirestore
+import URLImage
 
 struct DetailedWishlistViewScreen: View {
     private var squareFrameW: CGFloat = 300
@@ -12,9 +15,10 @@ struct DetailedWishlistViewScreen: View {
     private var squareFrameHPicture: CGFloat = 150
     private var squareFrameWPicture: CGFloat = 265
     private var cornerRadius: CGFloat = 20
-    var wishlistAdventure: WishlistItem2
+    @State var retrivedImage = UIImage(named: "default_picture")!
+    var wishlistAdventure: WishlistItem
     
-    init(wishlistAdventure: WishlistItem2) {
+    init(wishlistAdventure: WishlistItem) {
            self.wishlistAdventure = wishlistAdventure
        }
     
@@ -23,11 +27,14 @@ struct DetailedWishlistViewScreen: View {
             gradientBase
             whiteBase {
                 HStack {
-                    generateAdventureImage(url: "rafting")
+                    generateAdventureImage()
                     Spacer()
                     titleText(title: wishlistAdventure.name)
                 }
             }
+        }
+        .onAppear{
+            retrivePhoto(url: wishlistAdventure.photoURL)
         }
     }
     
@@ -44,8 +51,8 @@ struct DetailedWishlistViewScreen: View {
             .overlay(content())
     }
     
-    func generateAdventureImage(url: String) -> some View {
-        Image(url)
+    func generateAdventureImage() -> some View {
+        Image(uiImage: retrivedImage)
             .resizable()
             .scaledToFit()
             .frame(maxWidth: squareFrameWPicture - 120)
@@ -61,10 +68,28 @@ struct DetailedWishlistViewScreen: View {
             .foregroundColor(.black)
             .frame(maxWidth: .infinity)
     }
+    func retrivePhoto(url: String){
+        Storage.storage().reference().child(url).downloadURL { (url, error) in
+            DispatchQueue.main.async {
+                guard let downloadURL = url else {
+                    // Handle error, perhaps display a placeholder image
+                    return
+                }
+        
+                URLSession.shared.dataTask(with: downloadURL) { data, response, error in
+                    guard let data = data else { return }
+                    if let image = UIImage(data: data) {
+                        retrivedImage = image
+                        print("Succesfull")
+                    }
+                }.resume()
+            }
+        }
+    }
 }
 
 
-//#Preview {
-//    DetailedWishlistViewScreen(wishlistAdventure: WishlistItem2())
-//}
+#Preview {
+    DetailedWishlistViewScreen(wishlistAdventure: WishlistItem(id: 70, name: "viva's run", description: "run 100 miles", photoURL: ""))
+}
 

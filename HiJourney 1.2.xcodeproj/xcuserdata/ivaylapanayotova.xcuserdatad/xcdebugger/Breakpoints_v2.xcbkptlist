@@ -83,5 +83,147 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3262E1E7-78A1-422E-8BDF-3D249EB45358"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HiJourney 1.2/Model/AdventureModelLogic.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "AdventureModelLogic"
+            landmarkType = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C93EB7E7-37B4-421F-93C2-BC1259ABE10D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HiJourney 1.2/ScreenViews/CreateNewAdventureView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "C93EB7E7-37B4-421F-93C2-BC1259ABE10D - 5695a3d414b22aa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationBarItems&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(leading: &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in HiJourney_1_2.CreateNewAdventureView.body.getter : some"
+                  moduleName = "HiJourney 1.2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ivaylapanayotova/Documents/%D0%A2%D0%A3%D0%95%D0%A1/Diploma%20project/HiJourney-1.2Swift/HiJourney%201.2/ScreenViews/CreateNewAdventureView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "C93EB7E7-37B4-421F-93C2-BC1259ABE10D - 659ed11472d6571a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; SwiftUI.Image in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationBarItems&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(leading: &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in HiJourney_1_2.CreateNewAdventureView.body.getter : some"
+                  moduleName = "HiJourney 1.2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ivaylapanayotova/Documents/%D0%A2%D0%A3%D0%95%D0%A1/Diploma%20project/HiJourney-1.2Swift/HiJourney%201.2/ScreenViews/CreateNewAdventureView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "C93EB7E7-37B4-421F-93C2-BC1259ABE10D - 5695a3d414b23f0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationBarItems&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(leading: &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in HiJourney_1_2.CreateNewAdventureView.body.getter : some"
+                  moduleName = "HiJourney 1.2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ivaylapanayotova/Documents/%D0%A2%D0%A3%D0%95%D0%A1/Diploma%20project/HiJourney-1.2Swift/HiJourney%201.2/ScreenViews/CreateNewAdventureView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "C93EB7E7-37B4-421F-93C2-BC1259ABE10D - 659ed11472d65640"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; SwiftUI.Image in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationBarItems&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(leading: &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in HiJourney_1_2.CreateNewAdventureView.body.getter : some"
+                  moduleName = "HiJourney 1.2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ivaylapanayotova/Documents/%D0%A2%D0%A3%D0%95%D0%A1/Diploma%20project/HiJourney-1.2Swift/HiJourney%201.2/ScreenViews/CreateNewAdventureView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7B5E0526-9857-4707-B6EE-F213FADBB837"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../../var/folders/y0/3htvbzvd5t37vgjbm8tp6dd80000gn/T/swift-generated-sources/@__swiftmacro_13HiJourney_1_233_B5BC984545C289C24E00A26BBF4437C3Ll7PreviewfMf0_.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1"
+            endingLineNumber = "1"
+            landmarkName = "$s13HiJourney_1_233_B5BC984545C289C24E00A26BBF4437C3Ll7PreviewfMf0_15PreviewRegistryfMu_"
+            landmarkType = "37">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "14D9F1F6-0D01-4DC3-B7FA-3A10BA6B9BD9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HiJourney 1.2/ScreenViews/AdventureViewsAdventurer/DetailedAdventureView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F58F8CE0-DF9D-4FAC-B4B7-C7B1CB5FEE14"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HiJourney 1.2/ViewModel/AdventurerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "createUserAdventurer(username:email:password:profilephoto:validateUser:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

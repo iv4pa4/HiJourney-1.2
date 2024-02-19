@@ -8,39 +8,82 @@
 import SwiftUI
 
 class Connection: ObservableObject {
-    @Published private var model = AdventureModelLogic()
+    @Published private var model = CreatorModel()
+    @Published private var modelA = AdventurerViewModel()
+    @Published private var modelW = WishlistModel()
     @Published var adventures: [Adventure] = []
-    @Published var wishlist: [WishlistItem2] = []
+    @Published var wishlist: [WishlistItem] = []
+    var isSignedIn = false
     init() {
         // fetchData()
         //fetchWishlistData()
     }
     
-    func signIn() {
-        
+    func signIn(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        modelA.signIn(email: email, password: password) { result in
+            switch result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error)) 
+            }
+        }
     }
-    
-    
-//    func createUser(username: String, email: String, password: String, completion: @escaping (Result<Adventurer, Error>) -> Void) {
-//        // Call the createUser function from the model
-//        model.createUser(username: username, email: email, password: password) { result in
+
+
+
+    func getAdventurerByEmail(email: String, token: String) {
+        // Call the getAdventurerByEmail function from your model
+        modelA.getAdventurerByEmail(email: email, token: token) { result in
+            switch result {
+            case .success(let adventurer):
+                currentAdventurer = adventurer
+                // Print successful login
+                print("Successful login")
+            case .failure(let error):
+                // Failed to fetch adventurer, handle error
+                print("Failed to fetch adventurer: \(error)")
+            }
+        }
+    }
+
+//    func signInCreator(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
+//        model.signInCreator(email: email, password: password) { result in
 //            switch result {
-//            case .success(let adventurer):
-//                currentAdventurer = adventurer
-//                self.fetchWishlistData()
-//                completion(.success(adventurer))
+//            case .success:
+//                completion(.success(()))
 //            case .failure(let error):
 //                completion(.failure(error))
 //            }
 //        }
 //    }
+//
+//
+//
+//    func getCreatorByEmail(email: String, token: String) {
+//        model.getCreatorByEmail(email: email, token: token) { result in
+//            switch result {
+//            case .success(let creator):
+//                currentCreator = creator
+//                print("Successful login")
+//            case .failure(let error):
+//                print("Failed to fetch adventurer: \(error)")
+//            }
+//        }
+//    }
     
+//    func signInCreator(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
+//        model.signInCreator(email: email, password: password) { result in
+//            switch result {
+//            case .success:
+//                completion(.success(())) // Pass success result
+//            case .failure(let error):
+//                completion(.failure(error)) // Pass failure result
+//            }
+//        }
+//    }
     
-    
-    //    func createNewAdventure(name: String, description: String, completion: @escaping (Bool) -> Void){
-    //        model.createNewAdventure(name: name, description: description, completion: completion)
-    //    }
-    
+
     func setCurrentAdventurer(){
         model.setCurrentAdventurer()
     }
@@ -48,7 +91,9 @@ class Connection: ObservableObject {
     func createCurrentAdventurer(){
         model.createCurrentAdventurer()
     }
-    
+    func attendAdventures(adventurerId: Int, adventureId: Int){
+        modelA.attendAdventure(adventurerId: adventurerId, adventureId: adventureId)
+    }
     
     func fetchWishlistData(){
             guard let url = URL(string: "http://localhost:3001/adventurer/\(currentAdventurer.id)/wishlist") else {
@@ -66,7 +111,7 @@ class Connection: ObservableObject {
                 }
 
                 do {
-                    let result = try JSONDecoder().decode([WishlistItem2].self, from: data)
+                    let result = try JSONDecoder().decode([WishlistItem].self, from: data)
                     DispatchQueue.main.async {
                         self.wishlist = result // Use self.wishlist to access the property
                     }
@@ -76,27 +121,84 @@ class Connection: ObservableObject {
             }.resume()
         }
 
-    func createUser(username: String, email: String, password: String, completion: @escaping (Result<Adventurer, Error>) -> Void) {
-            model.createUser(username: username, email: email, password: password, validateUser: model.validateUser) { result in
+    func createUserAdventurer(username: String, email: String, password: String, profilephoto: String, completion: @escaping (Result<Adventurer, Error>) -> Void) {
+        modelA.createUserAdventurer(username: username, email: email, password: password, profilephoto: profilephoto, validateUser: modelA.validateUser) { result in
                 switch result {
                 case .success(let adventurer):
-                    // Update currentAdventurer
                     currentAdventurer = adventurer
-                    // Fetch wishlist data
-                    // Assuming fetchWishlistData is a method of your view model
                     self.fetchWishlistData()
-                    // Call completion with success
                     completion(.success(adventurer))
                 case .failure(let error):
-                    // Call completion with failure
+                    completion(.failure(error))
+                }
+            }
+        }
+    
+    func createUserCreator(username: String, email: String, password: String, completion: @escaping (Result<Creator, Error>) -> Void) {
+        model.createUserCreator(username: username, email: email, password: password, validateUserCreator: model.validateUserCreator) { result in
+                switch result {
+                case .success(let creator):
+                    currentCreator = creator
+                    //self.fetchWishlistData()
+                    completion(.success(creator))
+                case .failure(let error):
                     completion(.failure(error))
                 }
             }
         }
 
     func addToWishlist(adventurerId: Int, adventureId: Int){
-        model.addToWishlist(adventurerId: adventurerId, adventureId: adventureId)
+        modelW.addToWishlist(adventurerId: adventurerId, adventureId: adventureId)
     }
+    
+    func connectAdventurers(adventurerId1: Int, adventurerId2: Int, token: String){
+        modelA.connectAdventurers(adventurerId1: adventurerId1, adventurerId2: adventurerId2, token: token)
+    }
+    
+//    func fetchCreatorByEmail(email: String){
+//        model.fetchCreator(email: email) { result in
+//            switch result {
+//            case .success(let fetchedCreator):
+//                currentCreator.id = fetchedCreator.id
+//                currentCreator.username = fetchedCreator.username
+//                currentCreator.email = fetchedCreator.email
+//                currentCreator.password = fetchedCreator.password
+//            case .failure(let error):
+//                print("Error fetching creator: \(error)")
+//            }
+//        }
+//    }
+//    func validateCreator(email: String, password: String){
+//        model.validateCreator(email: email, password: password) { result in
+//            switch result {
+//            case .success(let token):
+//                print("Token: \(token)")
+//                jwtToken = token
+//                self.model.fetchCreatorByEmail(email: email){ result in
+//                    switch result {
+//                    case .success(let fetchedCreator):
+//                        currentCreator.id = fetchedCreator.id
+//                        currentCreator.username = fetchedCreator.username
+//                        currentCreator.email = fetchedCreator.email
+//                        currentCreator.password = fetchedCreator.password
+//                        self.isSignedIn = true
+//                    case .failure(let error):
+//                        print("Error fetching creator: \(error)")
+//                    }
+//                }
+//            case .failure(let error):
+//                print("Error: \(error.localizedDescription)")
+//            }
+//        }
+//    }
+    
+    func getSignedStatus() -> Bool {
+        return self.isSignedIn
+    }
+//    func signInCreator(email: String, password: String){
+//        validateCreator(email: email, password: password)
+//        
+//    }
     
 }
 

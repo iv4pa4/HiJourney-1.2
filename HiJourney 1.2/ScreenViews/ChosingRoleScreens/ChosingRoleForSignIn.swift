@@ -28,12 +28,12 @@ struct ChosingRoleForSignIn: View {
                         
                     }
             }
-        }.navigationBarBackButtonHidden()
+        }.navigationBarBackButtonHidden(true)
     }
     
     var adventurer: some View {
         NavigationLink(
-            destination: SignInScreenView(viewModel: viewModel),
+            destination: SignInViewScreen(viewModel: viewModel),
             label: {
                 details.adventurerDeatiledRoleView
             })
@@ -41,7 +41,7 @@ struct ChosingRoleForSignIn: View {
     //TODO: change to signup for creator
     var creator: some View {
         NavigationLink(
-            destination: SignInScreenCreatorView(viewModel: viewModel),
+            destination: SignInViewCreatorScreen(viewModel: viewModel),
             label: {
                 details.creatorDeatiledRoleView
             })

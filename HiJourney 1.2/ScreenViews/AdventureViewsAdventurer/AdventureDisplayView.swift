@@ -4,6 +4,8 @@ struct AdventureDisplayView: View {
 
     @ObservedObject var adventureFetcher = AdventureFetcher()
     @ObservedObject var viewModel: Connection
+    @State private var isPresentingSearchView = false // Track whether to show the search view
+    
     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 1)
 
     var body: some View {
@@ -12,7 +14,7 @@ struct AdventureDisplayView: View {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(adventureFetcher.adventures) { adventure in
                         NavigationLink(destination: DetailedAdventureView(adventure: adventure, viewModel: viewModel, viewModelAdv: AttendedAdventuresVModel())) {
-                            AdventureView(title: adventure.name, adventurePhoto: "rafting", profilePhoto: "profilePic")
+                            AdventureView(adventure: adventure)
                         }
                     }
                 }
@@ -22,12 +24,26 @@ struct AdventureDisplayView: View {
                 }
             }
             .navigationBarTitle("Adventures")
+            .navigationBarItems(trailing:
+                Button(action: {
+                    isPresentingSearchView.toggle()
+                }) {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.black)
+                        .padding(.top, 80)
+                }
+                .sheet(isPresented: $isPresentingSearchView) {
+                    AdventureSearchView()
+                }
+                                
+            )
         }
     }
 }
 
 // Preview
-#Preview {
-    AdventureDisplayView(viewModel: Connection())
+struct AdventureDisplayView_Previews: PreviewProvider {
+    static var previews: some View {
+        AdventureDisplayView(viewModel: Connection())
+    }
 }
-

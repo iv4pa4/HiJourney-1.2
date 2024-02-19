@@ -7,12 +7,36 @@
 
 import SwiftUI
 
+
+//struct Creator: Codable {
+//    var id: Int
+//    var username: String
+//    var email: String
+//    var password: String
+//    var createdAdventures: [Int]
+//}
+
 struct Creator: Codable {
     var id: Int
     var username: String
     var email: String
     var password: String
-    var createdAdventures: [Int]
+   // var profilephoto: String 
+}
+
+
+struct CreatorDTORes: Decodable {
+    let id: Int
+    let username: String
+    let email: String
+    let password: String
+}
+
+struct AdventureResponseDto: Hashable, Codable {
+    var id: Int
+    var name: String
+    var description: String
+    var attendedAdventurerIds: [Int]
 }
 
 
@@ -21,29 +45,34 @@ struct Adventure: Identifiable, Decodable {
     var name: String
     var description: String
     var creatorName: String
+    var photoURL: String
 }
 
-
-struct Adventurer: Codable, Identifiable, Hashable {
+struct SearchAdventure: Identifiable, Decodable {
     var id: Int
-    var username: String
-    var email: String
-    var password: String
-    var attendedAdventureIds: [Int]
-    var wishlistAdventureIds: [Int]
-    var connectedAdventurers: [Int]
-    
+    var name: String
+    var description: String
+    var attendedAdventurerIds: [Int]
+    var photoURL: String
 }
+
+struct AdventureRes: Identifiable, Decodable {
+    var id: Int
+    var name: String
+    var description: String
+}
+
 
 struct AdventurerResponse: Codable {
     var items: [Adventurer]
 }
 
-struct AdventurerDto: Codable {
+
+class CreatorDto : Codable {
     let username: String
     let email: String
     let password: String
-    
+
     init(username: String, email: String, password: String) {
         self.username = username
         self.email = email
@@ -51,24 +80,13 @@ struct AdventurerDto: Codable {
     }
 }
 
-struct WishlistItem2: Identifiable, Decodable {
-    var id: UUID // Use UUID instead of Int for the id
+
+struct WishlistItem: Identifiable, Decodable {
+    let id:  Int
     let name: String
     let description: String
-    
-    // Custom Decodable initializer to set a default value for id
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.description = try container.decode(String.self, forKey: .description)
-        self.id = UUID() // Generate a random UUID for id
-    }
-    
-    // CodingKeys to specify keys used for decoding
-    enum CodingKeys: String, CodingKey {
-        case name
-        case description
-    }
+    let photoURL: String
+
 }
 
 struct DiagonalGradientView: View {

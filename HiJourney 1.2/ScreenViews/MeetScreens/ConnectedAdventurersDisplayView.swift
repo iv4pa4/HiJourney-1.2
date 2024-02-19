@@ -8,20 +8,22 @@
 import SwiftUI
 //fix appearance
 struct ConnectedAdventurersDisplayView: View {
-    let jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ik1pbWlAZ21haWwuY29tIiwiaWF0IjoxNzA3ODY1NDM4LCJleHAiOjE3MDc4NjkwMzh9.65An1_GwdnyVoXEO-oN_6Ox7aAWH5wBysEjdas5q4t4"
     @State private var adventurers = [AdventurerDtoRes]()
+    var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     var body: some View {
-        List(adventurers, id: \.id) { adventurer in
-            VStack(alignment: .leading) {
-                Text("Adventurer ID: \(adventurer.id)")
-                Text("Username: \(adventurer.username)")
-                Text("Email: \(adventurer.email)")
-                // Display other properties as needed
+        VStack{
+            LazyVGrid(columns: columns, spacing: 20) {
+                ForEach(adventurers, id: \.id) {adventurer in
+                    VStack(alignment: .leading) {
+                        AdventurerDetailedView(adventurer: Adventurer(id: adventurer.id, username: adventurer.username, email: adventurer.email, password: "", attendedAdventureIds: adventurer.attendedAdventureIds, wishlistAdventureIds: adventurer.wishlistAdventureIds, connectedAdventurers: []))
+                    }
+                }
             }
-        }
-        .onAppear {
-            fetchAdventurers(id: 78)
+            .onAppear {
+                fetchAdventurers(id: currentAdventurer.id)
+            }
+            .navigationTitle("Connected adventurers")
         }
     }
     

@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import FirebaseStorage
+import FirebaseFirestore
+import URLImage
 
 struct SearchView: View {
     private var squareFrameW: CGFloat = 300
@@ -13,9 +16,10 @@ struct SearchView: View {
     private var squareFrameHPicture: CGFloat = 150
     private var squareFrameWPicture: CGFloat = 265
     private var cornerRadius: CGFloat = 20
-    var adventure: AdventureResponseDto
+    @State var retrivedImage = UIImage(named: "default_picture")!
+    var adventure: SearchAdventure
     
-    init(adventure: AdventureResponseDto) {
+    init(adventure: SearchAdventure) {
            self.adventure = adventure
        }
     
@@ -29,6 +33,9 @@ struct SearchView: View {
                     titleText(title: adventure.name)
                 }
             }
+        }
+        .onAppear{
+            retrivePhoto(url: adventure.photoURL)
         }
     }
     
@@ -46,7 +53,7 @@ struct SearchView: View {
     }
     
     func generateAdventureImage(url: String) -> some View {
-        Image(url)
+        Image(uiImage: retrivedImage)
             .resizable()
             .scaledToFit()
             .frame(maxWidth: squareFrameWPicture - 120)
@@ -62,10 +69,29 @@ struct SearchView: View {
             .foregroundColor(.black)
             .frame(maxWidth: .infinity)
     }
+    
+    func retrivePhoto(url: String){
+        Storage.storage().reference().child(url).downloadURL { (url, error) in
+            DispatchQueue.main.async {
+                guard let downloadURL = url else {
+                    // Handle error, perhaps display a placeholder image
+                    return
+                }
+        
+                URLSession.shared.dataTask(with: downloadURL) { data, response, error in
+                    guard let data = data else { return }
+                    if let image = UIImage(data: data) {
+                        retrivedImage = image
+                        print("Succesfull")
+                    }
+                }.resume()
+            }
+        }
+    }
 }
 
 
 
 #Preview {
-    SearchView(adventure: AdventureResponseDto(id: <#T##Int#>, name: <#T##String#>, description: <#T##String#>, attendedAdventurerIds: <#T##[Int]#>))
+    SearchView(adventure: SearchAdventure(id: 10, name: "ohio", description: "learning", attendedAdventurerIds: [], photoURL: ""))
 }

@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct HiJourney_1_2App: App {
     var body: some Scene {
         WindowGroup {
+            
             WelcomeScreenView(viewModel: Connection())
         }
+    }
+    
+    init(){
+        FirebaseApp.configure()
     }
 }
