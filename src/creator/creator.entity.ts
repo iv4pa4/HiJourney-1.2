@@ -21,13 +21,14 @@ export class Creator extends BaseEntity {
   @MinLength(6)
   password: string;
 
-  @ManyToMany(() => Adventure, { cascade: true })
+
+  @ManyToMany(() => Adventure, { cascade: true, })
   @JoinTable()
   createdAdventures: Adventure[];
 
+
   @BeforeInsert()
   async hashPassword() {
-    // Validate the entity before inserting
     const errors: ValidationError[] = await validate(this, { skipMissingProperties: true });
 
     if (errors.length > 0) {
@@ -45,7 +46,6 @@ export class CreatorDto {
   email: string;
   password: string;
 
-  // You can include any additional fields or validation logic here
 }
 
 export class CreatorResponseDto {

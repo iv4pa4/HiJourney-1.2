@@ -15,19 +15,12 @@ export class AdventurerController {
     
     @Get()
     @UseGuards(AuthenticationGuard)
-    async findAll(@Query() query: any = {}): Promise<Pagination<Adventurer>> { 
-        const options: FindOneOptions<Adventurer> = {
-           
-        };
-    
-        const adventurers = await paginate<Adventurer>(
-            this.adventurerService.getRepo(), 
-            query,
-            options,
-        );
-    
+    async findAll(@Query() query: any = {}): Promise<Adventurer[]> {
+        const adventurers = await this.adventurerService.findAll(query);
         return adventurers;
     }
+
+
 
     @Get(':id')
     @UseGuards(AuthenticationGuard)
@@ -59,9 +52,12 @@ export class AdventurerController {
     }
 
     @Post()
-    async createAdventurer(@Body() adventurerDto: AdventurerDto): Promise<Adventurer> { 
-        return await this.adventurerService.create(adventurerDto); 
-    }
+    async create(@Body() adventurerDto: AdventurerDto): Promise<Adventurer> {
+        const { profilephoto, ...rest } = adventurerDto;
+        
+        return await this.adventurerService.create({ ...rest, profilephoto });
+      }
+      
 
     @Post('validate')
     
@@ -74,7 +70,7 @@ export class AdventurerController {
         console.log(token);
         return { token };
     }
-    //return isValid;
+
     throw new UnauthorizedException('Invalid email or password');
 
     }
@@ -82,10 +78,16 @@ export class AdventurerController {
 
     @Patch(':id')
     @UseGuards(AuthenticationGuard)
-
-    async updateAdventurer(@Param('id') id: number, @Body() adventurer: AdventurerDto): Promise<Adventurer> { 
-        return this.adventurerService.update(id, adventurer); 
+    async update(@Param('id') id: number, @Body() adventurer: AdventurerDto): Promise<Adventurer> {
+        const { profilephoto, ...rest } = adventurer;
+      
+        return this.adventurerService.update(id, { ...rest, profilephoto });
     }
+      
+
+    // async updateAdventurer(@Param('id') id: number, @Body() adventurer: AdventurerDto): Promise<Adventurer> { 
+    //     return this.adventurerService.update(id, adventurer); 
+    // }
 
     @Delete(':id')
     @UseGuards(AuthenticationGuard)
@@ -116,7 +118,10 @@ export class AdventurerController {
     return adventurer;
     }
 
-    
+    @Get(':id/attended-adventures')
+  async getAttendedAdventures(@Param('id') id: number) {
+    return this.adventurerService.getAttendedAdventures(id);
+  }
 
     @Post(':adventurerId/add-to-wishlist/:adventureId')
     @UseGuards(AuthenticationGuard)
@@ -135,9 +140,9 @@ export class AdventurerController {
     }
 
     @Get(':adventurerId/wishlist')
-    //@UseGuards(AuthenticationGuard)
+    @UseGuards(AuthenticationGuard)
 
-    async displayWishlist(@Param('adventurerId') adventurerId: number): Promise<{ name: string; description: string; attendedAdventurerIds: number[] }[]> {
+    async displayWishlist(@Param('adventurerId') adventurerId: number): Promise<{ name: string; description: string; attendedAdventurerIds: number[]}[]> {
         return await this.adventurerService.displayWishlist(adventurerId);
     }
     

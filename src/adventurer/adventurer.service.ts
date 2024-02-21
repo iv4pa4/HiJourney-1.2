@@ -4,6 +4,8 @@ import { Repository, FindOneOptions } from 'typeorm';
 import { Adventurer, AdventurerDto, AdventurerResponseDto } from './adventurer.entity';
 import { paginate, Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate';
 import { AdventureService } from 'src/adventure/adventure.service';
+import * as bcrypt from 'bcrypt';
+
 
 @Injectable()
 export class AdventurerService {
@@ -17,40 +19,25 @@ export class AdventurerService {
     return this.adventurersRepository;
   }
 
-  async findAll(
-    page: number = 1,
-    limit: number = 10,
-    fields?: (keyof Adventurer)[],
-  ): Promise<Pagination<Adventurer>> {
-    const options: FindOneOptions<Adventurer> = {
-      select: fields || ['id', 'username', 'email', 'password','attendedAdventureIds', 'wishlistAdventureIds'],
-      //relations: ['attendedAdventures'], 
-    };
-
-    const paginationOptions: IPaginationOptions = { page, limit };
-
-    const result = await paginate<Adventurer>(
-      this.adventurersRepository,
-      paginationOptions,
-      options,
-    );
-
-    const adventurers: Pagination<Adventurer> = result as Pagination<Adventurer>;
-
+  async findAll(query: any = {}): Promise<Adventurer[]> {
+    const adventurers = await this.adventurersRepository.find({
+      where: query,
+    });
     return adventurers;
   }
 
+
   async findByEmail(email: string): Promise<Adventurer> {
     try {
-      const adventurer = await this.adventurersRepository.findOneOrFail({ where: { email } });
-      return adventurer;
+        const adventurer = await this.adventurersRepository.findOneOrFail({ where: { email } });
+        return adventurer;
     } catch (error) {
-      if (error.name === 'EntityNotFoundError') {
-        throw new NotFoundException('Adventurer not found');
-      }
-      throw error;
+        if (error.name === 'EntityNotFoundError') {
+            throw new NotFoundException('Adventurer not found');
+        }
+        throw error;
     }
-  }
+}
 
 
 
@@ -79,23 +66,28 @@ export class AdventurerService {
 
       return newAdventurer;
   }
-  //add more validation
+
   async validate(email: string, password: string): Promise<boolean> {
     const adventurer = await this.findByEmail(email);
-    if (adventurer && password === adventurer.password) {
-      return true;
+    if (adventurer) {
+        return await bcrypt.compare(password, adventurer.password);
     }
     return false;
-  }
-  
-
+}
 
   async create(adventurer: AdventurerDto): Promise<Adventurer> {
-    const newAdventurer = this.adventurersRepository.create(adventurer);
-    newAdventurer.wishlistAdventureIds = [];
-    newAdventurer.connectedAdventurers = [];
-    newAdventurer.attendedAdventureIds = [];
+    const { profilephoto, ...rest } = adventurer;
+    const newAdventurer = this.adventurersRepository.create({ ...rest, profilephoto });
+
     return await this.adventurersRepository.save(newAdventurer);
+  }
+  
+  async update(id: number, adventurer: AdventurerDto): Promise<Adventurer> {
+    const { profilephoto, ...rest } = adventurer;
+    const existingAdventurer = await this.getSingleAdventurer(id);
+    this.adventurersRepository.merge(existingAdventurer, { ...rest, profilephoto });
+    return await this.adventurersRepository.save(existingAdventurer);
+
   }
 
   async deleteAdventurer(id: number): Promise<Adventurer> {
@@ -104,23 +96,23 @@ export class AdventurerService {
     return adventurer;
   }
 
-  async update(id: number, adventurer: AdventurerDto): Promise<Adventurer> {
-    try {
-      const updatedAdventurer = await this.getSingleAdventurer(id);
+  // async update(id: number, adventurer: AdventurerDto): Promise<Adventurer> {
+  //   try {
+  //     const updatedAdventurer = await this.getSingleAdventurer(id);
 
-      if (!updatedAdventurer) {
-        throw new NotFoundException('Adventurer not found');
-      }
+  //     if (!updatedAdventurer) {
+  //       throw new NotFoundException('Adventurer not found');
+  //     }
 
-      this.adventurersRepository.merge(updatedAdventurer, adventurer);
-      return await this.adventurersRepository.save(updatedAdventurer);
-    } catch (error) {
-      if (error.name === 'EntityNotFound') {
-        throw new NotFoundException('Adventurer not found');
-      }
-      throw error;
-    }
-  }
+  //     this.adventurersRepository.merge(updatedAdventurer, adventurer);
+  //     return await this.adventurersRepository.save(updatedAdventurer);
+  //   } catch (error) {
+  //     if (error.name === 'EntityNotFound') {
+  //       throw new NotFoundException('Adventurer not found');
+  //     }
+  //     throw error;
+  //   }
+  // }
 
   async attendAdventure(adventurerId: number, adventureId: number): Promise<Adventurer> {
     const adventurer = await this.getSingleAdventurer(adventurerId);
@@ -136,7 +128,35 @@ export class AdventurerService {
     return await this.adventurersRepository.save(adventurer);
   }
 
-  
+  async getAttendedAdventures(adventurerId: number): Promise<{ id: number; name: string; description: string; }[]> {
+    const adventurer = await this.getSingleAdventurer(adventurerId);
+    
+    if (!adventurer) {
+      throw new NotFoundException('Adventurer not found');
+    }
+
+    const attendedAdventures: { id: number; name: string; description: string; photoURL: string }[] = [];
+
+    if (adventurer.attendedAdventureIds && adventurer.attendedAdventureIds.length > 0) {
+      for (const id of adventurer.attendedAdventureIds) {
+        try {
+          const adventure = await this.adventureService.getSingleAdventure(id);
+          attendedAdventures.push({
+            id: adventure.id,
+            name: adventure.name,
+            description: adventure.description,
+            //creatorName: adventure.creator.username ,
+            photoURL: adventure.photoURL
+          });
+        } catch (error) {
+          console.error(`Error fetching attended adventure with ID ${id}:`, error.message);
+        }
+      }
+    }
+
+    return attendedAdventures;
+}
+
 
   async addToWishlist(adventurerId: number, adventureId: number): Promise<Adventurer> {
     const adventurer = await this.getSingleAdventurer(adventurerId);
@@ -155,22 +175,24 @@ export class AdventurerService {
   }
   
 
-  async displayWishlist(adventurerId: number): Promise<{ name: string; description: string; attendedAdventurerIds: number[] }[]> {
+  async displayWishlist(adventurerId: number): Promise<{ id: number; name: string; description: string; photoURL: string; attendedAdventurerIds: number[] }[]> {
     const adventurer = await this.getSingleAdventurer(adventurerId);
     
     if (!adventurer) {
       throw new NotFoundException('Adventurer not found');
     }
   
-    const wishlist: { name: string; description: string; attendedAdventurerIds: number[] }[] = [];
+    const wishlist: { id: number; name: string; description: string; photoURL: string; attendedAdventurerIds: number[] }[] = [];
   
     if (adventurer.wishlistAdventureIds && adventurer.wishlistAdventureIds.length > 0) {
       for (const id of adventurer.wishlistAdventureIds) {
         try {
           const adventure = await this.adventureService.getSingleAdventure(id);
           wishlist.push({
+            id: adventure.id,
             name: adventure.name,
             description: adventure.description,
+            photoURL: adventure.photoURL,
             attendedAdventurerIds: adventure.attendedAdventurerIds,
           });
         } catch (error) {

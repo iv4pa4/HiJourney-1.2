@@ -12,8 +12,8 @@ import { JwtModule } from '@nestjs/jwt';
   imports: [
     TypeOrmModule.forFeature([Adventurer, Adventure]),
     JwtModule.register({
-      secret: 'your-secret-key', // Replace with your secret key
-      signOptions: { expiresIn: '1h' }, // Set token expiration
+      secret: 'your-secret-key', 
+      signOptions: { expiresIn: '1h' }, 
     }),
   ],
   controllers: [AdventurerController],

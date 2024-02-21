@@ -4,6 +4,8 @@ import { Repository, FindOneOptions } from 'typeorm';
 import { Creator, CreatorDto } from './creator.entity';
 import { paginate, Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate';
 import { Adventure, AdventureDto } from 'src/adventure/adventure.entity';
+import * as bcrypt from 'bcrypt';
+
 
 @Injectable()
 export class CreatorService {
@@ -18,28 +20,13 @@ export class CreatorService {
     return this.creatorsRepository;
   }
 
-  async findAll(
-    page: number = 1,
-    limit: number = 10,
-    fields?: (keyof Creator)[],
-  ): Promise<Pagination<Creator>> {
-    const options: FindOneOptions<Creator> = {
-      select: fields || ['id', 'username', 'email', 'password'],
-      relations: ['createdAdventures'],
-    };
-
-    const paginationOptions: IPaginationOptions = { page, limit };
-
-    const result = await paginate<Creator>(
-      this.creatorsRepository,
-      paginationOptions,
-      options,
-    );
-
-    const creators: Pagination<Creator> = result as Pagination<Creator>;
-
+  async findAll(query: any = {}): Promise<Creator[]> {
+    const creators = await this.creatorsRepository.find({
+      where: query,
+    });
     return creators;
   }
+  
 
   async getSingleCreator(id: number): Promise<Creator> {
     const creator = await this.creatorsRepository.findOneOrFail({
@@ -53,6 +40,26 @@ export class CreatorService {
     }
 
     return creator;
+  }
+
+  async findByEmail(email: string): Promise<Creator> {
+    try {
+      const creator = await this.creatorsRepository.findOneOrFail({ where: { email } });
+      return creator;
+    } catch (error) {
+      if (error.name === 'EntityNotFoundError') {
+        throw new NotFoundException('Creator not found');
+      }
+      throw error;
+    }
+  }
+
+  async validate(email: string, password: string): Promise<boolean> {
+    const adventurer = await this.findByEmail(email);
+    if (adventurer) {
+        return await bcrypt.compare(password, adventurer.password);
+    }
+    return false;
   }
 
   async create(creator: CreatorDto): Promise<Creator> {

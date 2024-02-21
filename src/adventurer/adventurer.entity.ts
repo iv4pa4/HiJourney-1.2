@@ -13,40 +13,58 @@ export class Adventurer extends BaseEntity {
   @IsNotEmpty()
   username: string;
 
-  //{unique: true}
   @Column()
   @IsNotEmpty()
   @IsEmail()
-  email: string;
+  email: string ;
 
   @Column()
   @IsNotEmpty()
   @MinLength(6)
   password: string;
 
+  @Column({ nullable: true }) 
+  profilephoto: string;
+
   @Column("int", { array: true, default: []})
   attendedAdventureIds: number[];
 
-  @Column("int", { array: true })
+  @Column("int", { array: true, default: [] })
   wishlistAdventureIds: number[];
 
 
   @Column("int", { array: true, default: []})
   connectedAdventurers: number[];
 
+  @BeforeInsert()
+  async hashPassword() {
+    const errors: ValidationError[] = await validate(this, { skipMissingProperties: true });
+
+    if (errors.length > 0) {
+      throw new Error(errors.toString());
+    }
+
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+
 }
 
 export class AdventurerDto {
-  @IsNotEmpty()
-  username: string;
 
-  @IsNotEmpty()
-  @IsEmail()
-  email: string;
+    @IsNotEmpty()
+    username: string;
+  
+    @IsNotEmpty()
+    @IsEmail()
+    email: string;
+  
+    @IsNotEmpty()
+    @MinLength(6)
+    password: string;
+  
+    profilephoto: string;
+  
 
-  @IsNotEmpty()
-  @MinLength(6)
-  password: string;
 }
 
 export class AdventurerResponseDto {
@@ -62,5 +80,6 @@ export class AdventurerResponseDto {
     this.email = adventurer.email;
     this.attendedAdventureIds = adventurer.attendedAdventureIds;
     this.wishlistAdventureIds = adventurer.wishlistAdventureIds;
+    
   }
 }

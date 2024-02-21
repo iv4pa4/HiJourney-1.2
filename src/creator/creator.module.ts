@@ -5,10 +5,15 @@ import { CreatorService } from './creator.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Creator } from './creator.entity';
 import { Adventure } from 'src/adventure/adventure.entity';  // Import Adventure entity
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Creator, Adventure]),  // Include Adventure entity in TypeOrmModule
+    TypeOrmModule.forFeature([Creator, Adventure]),
+    JwtModule.register({
+      secret: 'your-secret-key', 
+      signOptions: { expiresIn: '1h' }, 
+    }),  
   ],
   controllers: [CreatorController],
   providers: [CreatorService],

@@ -29,7 +29,7 @@ export class AdventureService {
 
   async findAll(fields?: (keyof Adventure)[]): Promise<AdventureResponseDto[]> {
     const options: FindOneOptions<Adventure> = {
-        select: fields || ['id', 'name', 'description'],
+        select: fields || ['id', 'name', 'description', 'photoURL'],
         relations: ['creator'] // Include the 'creator' relation to fetch creator data
     };
 
@@ -44,7 +44,7 @@ export class AdventureService {
   async getSingleAdventure(id: number): Promise<Adventure> {
     const adventure = await this.adventuresRepository.findOneOrFail({
       where: { id },
-      select: ['id', 'name', 'description'],
+      select: ['id', 'name', 'description', 'photoURL'],
     });
 
     if (!adventure) {
