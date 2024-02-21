@@ -4,7 +4,7 @@ struct AdventureDisplayView: View {
 
     @ObservedObject var adventureFetcher = AdventureFetcher()
     @ObservedObject var viewModel: Connection
-    @State private var isPresentingSearchView = false // Track whether to show the search view
+    @State private var isPresentingSearchView = false 
     
     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 1)
 
@@ -33,7 +33,7 @@ struct AdventureDisplayView: View {
                         .padding(.top, 80)
                 }
                 .sheet(isPresented: $isPresentingSearchView) {
-                    AdventureSearchView()
+                    AdventureSearchView(adventureProps: AdventureFetcher())
                 }
                                 
             )

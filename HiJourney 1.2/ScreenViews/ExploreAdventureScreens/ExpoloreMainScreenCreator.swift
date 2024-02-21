@@ -4,10 +4,12 @@ struct ExploreMainScreenCreator: View {
     //TODO: Remove back tags !!!
     @State var currentTab: TabCreator = .Explore
     @ObservedObject var viewModel: Connection
+    @ObservedObject var creatorProps: CreatorViewModel
 
-    init(viewModel: Connection) {
+    init(viewModel: Connection, creatorProps: CreatorViewModel) {
         UITabBar.appearance().isHidden = true
         self.viewModel = viewModel
+        self.creatorProps = creatorProps
     }
 
     @Namespace var animations
@@ -20,18 +22,18 @@ struct ExploreMainScreenCreator: View {
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(TabCreator.Explore)
             
-            CreateNewAdventureView()
+            CreateNewAdventureView(creatorProps: creatorProps)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(TabCreator.Add)
 
             AdventurerDisplayView(viewModel: AdventurerViewModel(), viewModelCon: viewModel)
-            AdventureSearchView()
+            AdventureSearchView(adventureProps: AdventureFetcher())
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(TabCreator.Search)
 
-            ProfileViewCreator(creator: currentCreator)
+            ProfileViewCreator(creator: currentCreator, creatorProps: creatorProps)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea()) // Change "primaryColor" to your primary color
                 .tag(TabCreator.Profile)
@@ -89,7 +91,7 @@ struct ExploreMainScreenCreator: View {
 }
 
 #Preview {
-    ExploreMainScreenCreator(viewModel: Connection())
+    ExploreMainScreenCreator(viewModel: Connection(), creatorProps: CreatorViewModel())
 }
 
 enum TabCreator: String, CaseIterable{

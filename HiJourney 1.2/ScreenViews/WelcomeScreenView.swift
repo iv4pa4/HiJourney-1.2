@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeScreenView: View {
     @ObservedObject var viewModel: Connection
+    @ObservedObject var creatorProps: CreatorViewModel
     private let rectangleWidth: CGFloat = 350
     private let rectangleHeight: CGFloat = 670
     private let offsetForButton: CGFloat = 240
@@ -33,7 +34,7 @@ struct WelcomeScreenView: View {
     
     var signUpLink: some View{
         NavigationLink(
-            destination: ChosingRoleScreen(viewModel: viewModel),
+            destination: ChosingRoleScreen(viewModel: viewModel, creatorProps: creatorProps),
             label: {
                 Text("Sign Up")
                     .frame(width: 128, height: 45)
@@ -48,7 +49,7 @@ struct WelcomeScreenView: View {
     
     var signInLink: some View{
         NavigationLink(
-            destination: ChosingRoleForSignIn(viewModel: viewModel),
+            destination: ChosingRoleForSignIn(viewModel: viewModel, creatorProps: creatorProps),
             label: {
                 Text("Sign in")
                     .frame(width: 128, height: 45)
@@ -86,5 +87,5 @@ struct WelcomeScreenView: View {
 
 
 #Preview {
-    WelcomeScreenView(viewModel: Connection())
+    WelcomeScreenView(viewModel: Connection(), creatorProps: CreatorViewModel())
 }

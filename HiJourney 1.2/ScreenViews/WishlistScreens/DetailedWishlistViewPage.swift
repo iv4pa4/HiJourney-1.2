@@ -1,8 +1,8 @@
 //
-//  DetailedAdventureView.swift
+//  DetailedWishlistViewPage.swift
 //  HiJourney 1.2
 //
-//  Created by Ivayla  Panayotova on 26.01.24.
+//  Created by Ivayla  Panayotova on 21.02.24.
 //
 
 import SwiftUI
@@ -11,10 +11,10 @@ import FirebaseFirestore
 import URLImage
 
 
-struct DetailedAdventureViewCreator: View {
-    var adventure: Adventure
+struct DetailedAdventureWishlistViewPage: View {
+    var adventure: WishlistItem
     @ObservedObject var viewModel: Connection
-    @ObservedObject var viewModelAdv: AttendedAdventuresVModel
+   // @ObservedObject var viewModelAdv: AttendedAdventuresVModel
     @State var retrivedImage = UIImage(named: "default_picture")!
 
     
@@ -46,7 +46,6 @@ struct DetailedAdventureViewCreator: View {
             
             
             VStack(alignment: .leading) {
-                // User information and adventure title
                 HStack {
                     Image("profilePic") // Profile image
                         .resizable()
@@ -82,5 +81,7 @@ struct DetailedAdventureViewCreator: View {
 }
 
 #Preview {
-    DetailedAdventureViewCreator(adventure: Adventure(id: 2, name: "String", description: "String", creatorName: "String", photoURL: ""), viewModel: Connection(), viewModelAdv: AttendedAdventuresVModel())
+    DetailedAdventureWishlistViewPage(adventure: WishlistItem(id: 2, name: "String", description: "String", photoURL: ""), viewModel: Connection())
 }
+
+

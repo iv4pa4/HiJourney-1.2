@@ -76,7 +76,6 @@ struct UploadPicView: View {
         Storage.storage().reference().child(url).downloadURL { (url, error) in
             DispatchQueue.main.async {
                 guard let downloadURL = url else {
-                    // Handle error, perhaps display a placeholder image
                     return
                 }
         

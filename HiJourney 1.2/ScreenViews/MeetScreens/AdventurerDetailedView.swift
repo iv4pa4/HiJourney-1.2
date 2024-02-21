@@ -28,14 +28,14 @@ struct AdventurerDetailedView: View {
         Rectangle()
             .fill(.white)
             .cornerRadius(9)
-            .frame(width: 90, height: 90) // Increased height to accommodate image and text
+            .frame(width: 90, height: 90)
     }
     var profileImage: some View {
         Image("profilePic")
             .resizable()
             .frame(width: 65, height: 65)
             .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-            .padding(.top, 3) // Adjusted padding
+            .padding(.top, 3)
     }
     
     var adventurerUsername: some View {

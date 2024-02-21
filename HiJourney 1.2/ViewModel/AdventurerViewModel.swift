@@ -9,8 +9,12 @@ import SwiftUI
 
 class AdventurerViewModel : ObservableObject {
     @Published var adventurers: [Adventurer] = []
-    @State private var connectedAdventurers = [AdventurerDtoRes]()
+   // @State private var connectedAdventurers = [AdventurerDtoRes]()
     @State var wishlistAdventures: [WishlistItem] = []
+    @Published var connectedAdventurers = [AdventurerDtoRes]()
+    @Published var wishlistAdventuresFetched: [WishlistItem] = []
+
+
 
     init() {
         fetchData()
@@ -244,7 +248,39 @@ class AdventurerViewModel : ObservableObject {
         }.resume()
     }
     
-    func fetchConnectedAdventurers(id: Int) {
+//    func fetchConnectedAdventurers(id: Int) {
+//        let urlString = "http://localhost:3001/adventurer/\(id)/connected-adventurers"
+//        guard let url = URL(string: urlString) else {
+//            print("Invalid URL")
+//            return
+//        }
+//        
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "GET"
+//        request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
+//        
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+//            if let error = error {
+//                print("Error: \(error)")
+//                return
+//            }
+//            
+//            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+//                print("Invalid response")
+//                return
+//            }
+//            
+//            if let data = data {
+//                do {
+//                    self.connectedAdventurers = try JSONDecoder().decode([AdventurerDtoRes].self, from: data)
+//                } catch {
+//                    print("Error decoding JSON: \(error)")
+//                }
+//            }
+//        }.resume()
+//    }
+    
+    func fetchAdventurers(id: Int) {
         let urlString = "http://localhost:3001/adventurer/\(id)/connected-adventurers"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
@@ -275,6 +311,39 @@ class AdventurerViewModel : ObservableObject {
             }
         }.resume()
     }
+    
+    func fetchWishlistData(){
+        guard let url = URL(string: "http://localhost:3001/adventurer/\(currentAdventurer.id)/wishlist") else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data, error == nil else {
+                print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("JSON response: \(jsonString)")
+            }
+            
+            do {
+                let result = try JSONDecoder().decode([WishlistItem].self, from: data)
+                DispatchQueue.main.async {
+                    self.wishlistAdventuresFetched = result
+                }
+            } catch {
+                print("Error decoding JSON: \(error)")
+            }
+        }.resume()
+    }
+    
+
     
 }
 

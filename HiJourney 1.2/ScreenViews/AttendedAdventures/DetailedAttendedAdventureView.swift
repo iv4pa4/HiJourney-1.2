@@ -1,8 +1,8 @@
 //
-//  DetailedAdventureView.swift
+//  DetailedAttendedAdventureView.swift
 //  HiJourney 1.2
 //
-//  Created by Ivayla  Panayotova on 26.01.24.
+//  Created by Ivayla  Panayotova on 21.02.24.
 //
 
 import SwiftUI
@@ -10,9 +10,8 @@ import FirebaseStorage
 import FirebaseFirestore
 import URLImage
 
-
-struct DetailedAdventureViewCreator: View {
-    var adventure: Adventure
+struct DetailedAttendedAdventureView: View {
+    var adventure: AdventureRes
     @ObservedObject var viewModel: Connection
     @ObservedObject var viewModelAdv: AttendedAdventuresVModel
     @State var retrivedImage = UIImage(named: "default_picture")!
@@ -42,11 +41,10 @@ struct DetailedAdventureViewCreator: View {
 //                    }
 //                }
 //            }
-//            .padding()
+            .padding()
             
             
             VStack(alignment: .leading) {
-                // User information and adventure title
                 HStack {
                     Image("profilePic") // Profile image
                         .resizable()
@@ -54,7 +52,7 @@ struct DetailedAdventureViewCreator: View {
                         .frame(width: 50, height: 50)
                     Text(adventure.name).font(.title)
                     Spacer()
-                    
+
                 }
             }
             
@@ -66,21 +64,23 @@ struct DetailedAdventureViewCreator: View {
         .padding()
         .onAppear{
             PhotoRetriever.retrievePhoto(url: adventure.photoURL) { image in
-                            if let image = image {
-                                self.retrivedImage = image
-                            } else {
-                                print("failed")
-                            }
-                        }
+                if let image = image {
+                    self.retrivedImage = image
+                } else {
+                    print("failed")
+                }
+            }
         }
-        
         Spacer()
         
     }
-      
     
 }
 
-#Preview {
-    DetailedAdventureViewCreator(adventure: Adventure(id: 2, name: "String", description: "String", creatorName: "String", photoURL: ""), viewModel: Connection(), viewModelAdv: AttendedAdventuresVModel())
-}
+
+//#Preview {
+//    DetailedAttendedAdventureView(adventure: ad, viewModel: Connection(), viewModelAdv: AttendedAdventuresVModel())
+//}
+
+
+

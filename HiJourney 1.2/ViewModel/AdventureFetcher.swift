@@ -14,6 +14,7 @@ struct AdventureDto : Codable{
 
 class AdventureFetcher: ObservableObject {
     @Published var adventures: [Adventure] = []
+    @Published var foundAdventures: [SearchAdventure] = []
     
     func fetchData() {
         guard let url = URL(string: "http://localhost:3001/adventure") else {
@@ -77,5 +78,71 @@ class AdventureFetcher: ObservableObject {
             }
         }.resume()
     }
-
+    
+    func searchAdventureByName(name: String) {
+        guard let url = URL(string: "http://localhost:3001/adventure/search/\(name)") else {
+            print("Invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                return
+            }
+            
+            if let data = data {
+                do {
+                    let decodedAdventures = try JSONDecoder().decode([SearchAdventure].self, from: data)
+                    DispatchQueue.main.async {
+                        self.foundAdventures = decodedAdventures
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error.localizedDescription)")
+                }
+            }
+        }.resume()
+    }
+    
+    func searchAdventureByDescription(desc: String) {
+        guard let url = URL(string: "http://localhost:3001/adventure/search/description/\(desc)") else {
+            print("Invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                return
+            }
+            
+            if let data = data {
+                do {
+                    let decodedAdventures = try JSONDecoder().decode([SearchAdventure].self, from: data)
+                    DispatchQueue.main.async {
+                        self.foundAdventures = decodedAdventures
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error.localizedDescription)")
+                }
+            }
+        }.resume()
+    }
+    
 }

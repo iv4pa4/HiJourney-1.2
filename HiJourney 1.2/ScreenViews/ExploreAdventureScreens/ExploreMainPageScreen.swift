@@ -23,7 +23,7 @@ struct ExploreMainPageScreen: View {
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(Tab.Explore)
             
-            WishlistAdventuresDisplayView()
+            WishlistAdventuresDisplayView(adventurerProps: AdventurerViewModel())
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(Tab.WishList)

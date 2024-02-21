@@ -1,9 +1,10 @@
 //
-//  DetailedAdventureView.swift
+//  CreatedAdventureDetailedPage.swift
 //  HiJourney 1.2
 //
-//  Created by Ivayla  Panayotova on 26.01.24.
+//  Created by Ivayla  Panayotova on 21.02.24.
 //
+
 
 import SwiftUI
 import FirebaseStorage
@@ -11,10 +12,10 @@ import FirebaseFirestore
 import URLImage
 
 
-struct DetailedAdventureViewCreator: View {
+struct CreatedAdventureDetailedPage: View {
     var adventure: Adventure
     @ObservedObject var viewModel: Connection
-    @ObservedObject var viewModelAdv: AttendedAdventuresVModel
+    @ObservedObject var creatorProps: CreatorViewModel
     @State var retrivedImage = UIImage(named: "default_picture")!
 
     
@@ -82,5 +83,9 @@ struct DetailedAdventureViewCreator: View {
 }
 
 #Preview {
-    DetailedAdventureViewCreator(adventure: Adventure(id: 2, name: "String", description: "String", creatorName: "String", photoURL: ""), viewModel: Connection(), viewModelAdv: AttendedAdventuresVModel())
+    CreatedAdventureDetailedPage(adventure: Adventure(id: 2, name: "String", description: "String", creatorName: "String", photoURL: ""), viewModel: Connection(), creatorProps: CreatorViewModel())
 }
+
+
+
+

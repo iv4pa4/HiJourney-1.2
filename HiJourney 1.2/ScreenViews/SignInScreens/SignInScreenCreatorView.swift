@@ -12,8 +12,9 @@ import SwiftUI
 struct SignInViewCreatorScreen: View {
     @State private var email = ""
     @State private var password = ""
-    @State private var isSignedIn = false // Track sign-in status
+    @State private var isSignedIn = false 
     @ObservedObject var viewModel: Connection
+    @ObservedObject var creatorProps: CreatorViewModel
     private let rectangleWidth: CGFloat = 350
     private let rectangleHeight: CGFloat = 670
     private let offsetForButton: CGFloat = 260
@@ -33,7 +34,7 @@ struct SignInViewCreatorScreen: View {
             }
             
             .background(NavigationLink(
-                destination: ExploreMainScreenCreator(viewModel: viewModel), // New view to navigate to
+                destination: ExploreMainScreenCreator(viewModel: viewModel, creatorProps: creatorProps),
                 isActive: $isSignedIn,
                 label: { EmptyView() }
             ))
@@ -114,5 +115,5 @@ struct SignInViewCreatorScreen: View {
 }
 
 #Preview {
-    SignInViewCreatorScreen(viewModel: Connection())
+    SignInViewCreatorScreen(viewModel: Connection(), creatorProps: CreatorViewModel())
 }

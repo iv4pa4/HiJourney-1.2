@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D70497722B838E1B00FBB43C /* AttendedAdventuresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70497712B838E1B00FBB43C /* AttendedAdventuresView.swift */; };
+		D70497742B83997E00FBB43C /* CreatedAdventures.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70497732B83997E00FBB43C /* CreatedAdventures.swift */; };
+		D70497762B85E4D500FBB43C /* PhotoRetriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70497752B85E4D500FBB43C /* PhotoRetriver.swift */; };
+		D70497782B85E73700FBB43C /* PhotoUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70497772B85E73700FBB43C /* PhotoUploader.swift */; };
+		D704977C2B86015A00FBB43C /* CreatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D704977B2B86015A00FBB43C /* CreatorViewModel.swift */; };
+		D70497802B8604DA00FBB43C /* DetailedCreatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D704977F2B8604DA00FBB43C /* DetailedCreatedView.swift */; };
 		D7434C152B81227B00EE87AE /* AdventurerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7434C142B81227B00EE87AE /* AdventurerViewModel.swift */; };
 		D7434C172B820B2300EE87AE /* DetailedViewNotWishlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7434C162B820B2300EE87AE /* DetailedViewNotWishlist.swift */; };
 		D7434C1A2B8251C900EE87AE /* SotoACM in Frameworks */ = {isa = PBXBuildFile; productRef = D7434C192B8251C900EE87AE /* SotoACM */; };
@@ -71,7 +77,6 @@
 		D74932AB2B7C1AA600C0CAE5 /* DetailedAdventurerViewProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74932AA2B7C1AA600C0CAE5 /* DetailedAdventurerViewProfile.swift */; };
 		D74932AF2B7C2BB800C0CAE5 /* ConnectedAdventurersDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74932AE2B7C2BB800C0CAE5 /* ConnectedAdventurersDisplayView.swift */; };
 		D74932B32B7C398F00C0CAE5 /* AttendedAdventuresVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74932B22B7C398F00C0CAE5 /* AttendedAdventuresVModel.swift */; };
-		D74932B52B7C39F500C0CAE5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74932B42B7C39F500C0CAE5 /* ContentView.swift */; };
 		D75185AD2B5BDCD100D685CF /* AdventurerDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185AC2B5BDCD100D685CF /* AdventurerDisplayView.swift */; };
 		D75185AF2B5BFC4100D685CF /* AdventureDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185AE2B5BFC4000D685CF /* AdventureDisplayView.swift */; };
 		D75185B12B5BFCC200D685CF /* TypesStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185B02B5BFCC200D685CF /* TypesStructs.swift */; };
@@ -95,7 +100,6 @@
 		D7A6FE3D2B7EDF0A0052FDAF /* WishlistAdventuresModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6FE3C2B7EDF0A0052FDAF /* WishlistAdventuresModel.swift */; };
 		D7A6FE3F2B7EE5B30052FDAF /* AdventurerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6FE3E2B7EE5B30052FDAF /* AdventurerModel.swift */; };
 		D7A6FE412B7EFAC40052FDAF /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6FE402B7EFAC40052FDAF /* ImageViewModel.swift */; };
-		D7A6FE432B7EFAEA0052FDAF /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6FE422B7EFAEA0052FDAF /* ImageView.swift */; };
 		D7A6FE462B7F602C0052FDAF /* AdventureSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6FE452B7F602C0052FDAF /* AdventureSearchView.swift */; };
 		D7A6FE482B7F6A8D0052FDAF /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6FE472B7F6A8D0052FDAF /* SearchView.swift */; };
 		D7CC15CF2B31851E00F45436 /* HiJourney_1_2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */; };
@@ -105,9 +109,18 @@
 		D7CC15E22B31854D00F45436 /* ExploreMainPageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */; };
 		D7CC15E82B31855600F45436 /* CreatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15E62B31855600F45436 /* CreatorModel.swift */; };
 		D7CC15EB2B31855D00F45436 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC15EA2B31855D00F45436 /* Connection.swift */; };
+		D7E4A2CE2B8618190017AAF2 /* CreatedAdventureDetailedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E4A2CD2B8618190017AAF2 /* CreatedAdventureDetailedPage.swift */; };
+		D7E4A2D02B861B910017AAF2 /* DetailedWishlistViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E4A2CF2B861B910017AAF2 /* DetailedWishlistViewPage.swift */; };
+		D7E4A2D22B86288D0017AAF2 /* DetailedAttendedAdventureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E4A2D12B86288D0017AAF2 /* DetailedAttendedAdventureView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D70497712B838E1B00FBB43C /* AttendedAdventuresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendedAdventuresView.swift; sourceTree = "<group>"; };
+		D70497732B83997E00FBB43C /* CreatedAdventures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedAdventures.swift; sourceTree = "<group>"; };
+		D70497752B85E4D500FBB43C /* PhotoRetriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRetriver.swift; sourceTree = "<group>"; };
+		D70497772B85E73700FBB43C /* PhotoUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUploader.swift; sourceTree = "<group>"; };
+		D704977B2B86015A00FBB43C /* CreatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorViewModel.swift; sourceTree = "<group>"; };
+		D704977F2B8604DA00FBB43C /* DetailedCreatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedCreatedView.swift; sourceTree = "<group>"; };
 		D7434C142B81227B00EE87AE /* AdventurerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventurerViewModel.swift; sourceTree = "<group>"; };
 		D7434C162B820B2300EE87AE /* DetailedViewNotWishlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewNotWishlist.swift; sourceTree = "<group>"; };
 		D7434C232B8251FF00EE87AE /* UploadPicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPicView.swift; sourceTree = "<group>"; };
@@ -118,7 +131,6 @@
 		D74932AA2B7C1AA600C0CAE5 /* DetailedAdventurerViewProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedAdventurerViewProfile.swift; sourceTree = "<group>"; };
 		D74932AE2B7C2BB800C0CAE5 /* ConnectedAdventurersDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAdventurersDisplayView.swift; sourceTree = "<group>"; };
 		D74932B22B7C398F00C0CAE5 /* AttendedAdventuresVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendedAdventuresVModel.swift; sourceTree = "<group>"; };
-		D74932B42B7C39F500C0CAE5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D75185AC2B5BDCD100D685CF /* AdventurerDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventurerDisplayView.swift; sourceTree = "<group>"; };
 		D75185AE2B5BFC4000D685CF /* AdventureDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventureDisplayView.swift; sourceTree = "<group>"; };
 		D75185B02B5BFCC200D685CF /* TypesStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesStructs.swift; sourceTree = "<group>"; };
@@ -142,7 +154,6 @@
 		D7A6FE3C2B7EDF0A0052FDAF /* WishlistAdventuresModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistAdventuresModel.swift; sourceTree = "<group>"; };
 		D7A6FE3E2B7EE5B30052FDAF /* AdventurerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventurerModel.swift; sourceTree = "<group>"; };
 		D7A6FE402B7EFAC40052FDAF /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
-		D7A6FE422B7EFAEA0052FDAF /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		D7A6FE452B7F602C0052FDAF /* AdventureSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventureSearchView.swift; sourceTree = "<group>"; };
 		D7A6FE472B7F6A8D0052FDAF /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		D7CC15CB2B31851E00F45436 /* HiJourney 1.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HiJourney 1.2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +164,9 @@
 		D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreMainPageScreen.swift; sourceTree = "<group>"; };
 		D7CC15E62B31855600F45436 /* CreatorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorModel.swift; sourceTree = "<group>"; };
 		D7CC15EA2B31855D00F45436 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		D7E4A2CD2B8618190017AAF2 /* CreatedAdventureDetailedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedAdventureDetailedPage.swift; sourceTree = "<group>"; };
+		D7E4A2CF2B861B910017AAF2 /* DetailedWishlistViewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedWishlistViewPage.swift; sourceTree = "<group>"; };
+		D7E4A2D12B86288D0017AAF2 /* DetailedAttendedAdventureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedAttendedAdventureView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,8 +237,10 @@
 		D74932A62B7C0F9100C0CAE5 /* WishlistScreens */ = {
 			isa = PBXGroup;
 			children = (
+				D7434C162B820B2300EE87AE /* DetailedViewNotWishlist.swift */,
 				D795767E2B7B5BC300B38BB2 /* DetailedWishlistViewScreen.swift */,
 				D795767C2B7B56D700B38BB2 /* WishlistAdventuresDisplayView.swift */,
+				D7E4A2CF2B861B910017AAF2 /* DetailedWishlistViewPage.swift */,
 			);
 			path = WishlistScreens;
 			sourceTree = "<group>";
@@ -244,10 +260,12 @@
 			isa = PBXGroup;
 			children = (
 				D7CC15EA2B31855D00F45436 /* Connection.swift */,
+				D704977B2B86015A00FBB43C /* CreatorViewModel.swift */,
 				D74932B22B7C398F00C0CAE5 /* AttendedAdventuresVModel.swift */,
 				D75AD0E02B73635B009CF949 /* AdventureFetcher.swift */,
 				D7A6FE402B7EFAC40052FDAF /* ImageViewModel.swift */,
 				D7434C142B81227B00EE87AE /* AdventurerViewModel.swift */,
+				D70497732B83997E00FBB43C /* CreatedAdventures.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -285,7 +303,6 @@
 			children = (
 				D7CC15DD2B31854D00F45436 /* ExploreMainPageScreen.swift */,
 				D7A6FE312B7E86FD0052FDAF /* ExpoloreMainScreenCreator.swift */,
-				D74932B42B7C39F500C0CAE5 /* ContentView.swift */,
 			);
 			path = ExploreAdventureScreens;
 			sourceTree = "<group>";
@@ -293,7 +310,7 @@
 		D78FBD0F2B318912001E3644 /* ScreenViews */ = {
 			isa = PBXGroup;
 			children = (
-				D7A6FE422B7EFAEA0052FDAF /* ImageView.swift */,
+				D7E4A2D32B862D030017AAF2 /* SearchAdventureViews */,
 				D7A6FE342B7E89CA0052FDAF /* AdventureViewsCreator */,
 				D7A6FE332B7E89760052FDAF /* AdventureViewsAdventurer */,
 				D74932A72B7C112300C0CAE5 /* MeetScreens */,
@@ -302,8 +319,9 @@
 				D76DC5822B73BB4B006FBD7D /* SignInScreens */,
 				D76DC5812B73BB1C006FBD7D /* SignUpScreens */,
 				D7A6FE392B7E8B950052FDAF /* ProfileViews */,
-				D75185BA2B638A0E00D685CF /* CreateNewAdventureView.swift */,
+				D7E4A2D72B862EE10017AAF2 /* AttendedAdventures */,
 				D7CC15DC2B31854D00F45436 /* WelcomeScreenView.swift */,
+				D7E4A2D62B862EA50017AAF2 /* CreatedAdventures */,
 				D74932A62B7C0F9100C0CAE5 /* WishlistScreens */,
 			);
 			path = ScreenViews;
@@ -324,7 +342,6 @@
 			isa = PBXGroup;
 			children = (
 				D75185B82B6385EE00D685CF /* DetailedAdventureView.swift */,
-				D7434C162B820B2300EE87AE /* DetailedViewNotWishlist.swift */,
 				D75185B62B630E4A00D685CF /* AdventureView.swift */,
 				D75185AE2B5BFC4000D685CF /* AdventureDisplayView.swift */,
 			);
@@ -334,8 +351,6 @@
 		D7A6FE342B7E89CA0052FDAF /* AdventureViewsCreator */ = {
 			isa = PBXGroup;
 			children = (
-				D7A6FE452B7F602C0052FDAF /* AdventureSearchView.swift */,
-				D7A6FE472B7F6A8D0052FDAF /* SearchView.swift */,
 				D7A6FE352B7E8A010052FDAF /* AdventureDisplayViewCreator.swift */,
 				D7A6FE372B7E8A5F0052FDAF /* DetailedAdventureViewCreator.swift */,
 			);
@@ -373,6 +388,9 @@
 				D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */,
 				D7434C232B8251FF00EE87AE /* UploadPicView.swift */,
 				D7434C442B82619A00EE87AE /* ImagePicker.swift */,
+				D7E4A2D52B862E350017AAF2 /* NewAdventuresScreens */,
+				D70497772B85E73700FBB43C /* PhotoUploader.swift */,
+				D70497752B85E4D500FBB43C /* PhotoRetriver.swift */,
 				D78FBD102B318940001E3644 /* Model */,
 				D78FBD0F2B318912001E3644 /* ScreenViews */,
 				D75185B52B63094400D685CF /* ViewModel */,
@@ -389,6 +407,41 @@
 				D7CC15D52B31852000F45436 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D7E4A2D32B862D030017AAF2 /* SearchAdventureViews */ = {
+			isa = PBXGroup;
+			children = (
+				D7A6FE452B7F602C0052FDAF /* AdventureSearchView.swift */,
+				D7A6FE472B7F6A8D0052FDAF /* SearchView.swift */,
+			);
+			path = SearchAdventureViews;
+			sourceTree = "<group>";
+		};
+		D7E4A2D52B862E350017AAF2 /* NewAdventuresScreens */ = {
+			isa = PBXGroup;
+			children = (
+				D75185BA2B638A0E00D685CF /* CreateNewAdventureView.swift */,
+			);
+			path = NewAdventuresScreens;
+			sourceTree = "<group>";
+		};
+		D7E4A2D62B862EA50017AAF2 /* CreatedAdventures */ = {
+			isa = PBXGroup;
+			children = (
+				D704977F2B8604DA00FBB43C /* DetailedCreatedView.swift */,
+				D7E4A2CD2B8618190017AAF2 /* CreatedAdventureDetailedPage.swift */,
+			);
+			path = CreatedAdventures;
+			sourceTree = "<group>";
+		};
+		D7E4A2D72B862EE10017AAF2 /* AttendedAdventures */ = {
+			isa = PBXGroup;
+			children = (
+				D70497712B838E1B00FBB43C /* AttendedAdventuresView.swift */,
+				D7E4A2D12B86288D0017AAF2 /* DetailedAttendedAdventureView.swift */,
+			);
+			path = AttendedAdventures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -528,8 +581,9 @@
 				D7A6FE3D2B7EDF0A0052FDAF /* WishlistAdventuresModel.swift in Sources */,
 				D74932AF2B7C2BB800C0CAE5 /* ConnectedAdventurersDisplayView.swift in Sources */,
 				D75185B32B615E4700D685CF /* SignUpScreenView.swift in Sources */,
+				D70497782B85E73700FBB43C /* PhotoUploader.swift in Sources */,
 				D7CC15E12B31854D00F45436 /* WelcomeScreenView.swift in Sources */,
-				D7A6FE432B7EFAEA0052FDAF /* ImageView.swift in Sources */,
+				D704977C2B86015A00FBB43C /* CreatorViewModel.swift in Sources */,
 				D75AD0EB2B739F8E009CF949 /* ChosingRoleScreen.swift in Sources */,
 				D7CC15E82B31855600F45436 /* CreatorModel.swift in Sources */,
 				D76DC5862B73BC55006FBD7D /* SignUpScreenViewCreator.swift in Sources */,
@@ -543,20 +597,23 @@
 				D74932B32B7C398F00C0CAE5 /* AttendedAdventuresVModel.swift in Sources */,
 				D7434C452B82619A00EE87AE /* ImagePicker.swift in Sources */,
 				D76DC5802B73B7BF006FBD7D /* ChosingRoleForSignIn.swift in Sources */,
-				D74932B52B7C39F500C0CAE5 /* ContentView.swift in Sources */,
 				D7CC15CF2B31851E00F45436 /* HiJourney_1_2App.swift in Sources */,
 				D7A6FE382B7E8A5F0052FDAF /* DetailedAdventureViewCreator.swift in Sources */,
 				D795767D2B7B56D700B38BB2 /* WishlistAdventuresDisplayView.swift in Sources */,
+				D70497742B83997E00FBB43C /* CreatedAdventures.swift in Sources */,
 				D7A6FE322B7E86FD0052FDAF /* ExpoloreMainScreenCreator.swift in Sources */,
+				D7E4A2D22B86288D0017AAF2 /* DetailedAttendedAdventureView.swift in Sources */,
 				D75185AF2B5BFC4100D685CF /* AdventureDisplayView.swift in Sources */,
 				D7A6FE482B7F6A8D0052FDAF /* SearchView.swift in Sources */,
 				D7A6FE462B7F602C0052FDAF /* AdventureSearchView.swift in Sources */,
 				D7434C242B8251FF00EE87AE /* UploadPicView.swift in Sources */,
 				D75185AD2B5BDCD100D685CF /* AdventurerDisplayView.swift in Sources */,
 				D75185B12B5BFCC200D685CF /* TypesStructs.swift in Sources */,
+				D70497722B838E1B00FBB43C /* AttendedAdventuresView.swift in Sources */,
 				D7434C172B820B2300EE87AE /* DetailedViewNotWishlist.swift in Sources */,
 				D76DC5882B73BCB7006FBD7D /* SignInScreenCreatorView.swift in Sources */,
 				D7CC15E22B31854D00F45436 /* ExploreMainPageScreen.swift in Sources */,
+				D7E4A2D02B861B910017AAF2 /* DetailedWishlistViewPage.swift in Sources */,
 				D7A6FE3B2B7E8BB70052FDAF /* ProfileViewCreator.swift in Sources */,
 				D75185B92B6385EE00D685CF /* DetailedAdventureView.swift in Sources */,
 				D795767F2B7B5BC300B38BB2 /* DetailedWishlistViewScreen.swift in Sources */,
@@ -564,7 +621,10 @@
 				D7A6FE362B7E8A010052FDAF /* AdventureDisplayViewCreator.swift in Sources */,
 				D75185BD2B638CAC00D685CF /* ProfileView.swift in Sources */,
 				D74932AB2B7C1AA600C0CAE5 /* DetailedAdventurerViewProfile.swift in Sources */,
+				D7E4A2CE2B8618190017AAF2 /* CreatedAdventureDetailedPage.swift in Sources */,
+				D70497762B85E4D500FBB43C /* PhotoRetriver.swift in Sources */,
 				D75185BB2B638A0E00D685CF /* CreateNewAdventureView.swift in Sources */,
+				D70497802B8604DA00FBB43C /* DetailedCreatedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

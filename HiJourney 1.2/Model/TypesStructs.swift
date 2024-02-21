@@ -41,6 +41,15 @@ struct Adventure: Identifiable, Decodable {
     var photoURL: String
 }
 
+struct AdventureFromCreator: Codable {
+    let id: Int
+    let name: String
+    let description: String
+    let photoURL: String
+    let attendedAdventurerIds: [Int]
+    let creator: Creator
+}
+
 struct SearchAdventure: Identifiable, Decodable {
     var id: Int
     var name: String
@@ -53,6 +62,7 @@ struct AdventureRes: Identifiable, Decodable {
     var id: Int
     var name: String
     var description: String
+    var photoURL: String
 }
 
 

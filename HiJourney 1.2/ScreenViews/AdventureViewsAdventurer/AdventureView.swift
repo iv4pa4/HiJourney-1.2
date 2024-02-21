@@ -15,6 +15,7 @@ struct AdventureView: View {
     private let squareFrame:CGFloat = 320
     let adventure: Adventure
     @State var retrivedImage = UIImage(named: "default_picture")!
+    //var imageSet : UploadPicView
     //var retrivedPhoto = UIImage()
     
     var body: some View {
@@ -23,7 +24,6 @@ struct AdventureView: View {
             whiteBase
             VStack{
                 adventureImage
-                //Spacer()
                 HStack{
                     titleText
                     Spacer()
@@ -38,7 +38,13 @@ struct AdventureView: View {
         }
         .shadow(radius: 5)
         .onAppear{
-            retrivePhoto(url: adventure.photoURL)
+            PhotoRetriever.retrievePhoto(url: adventure.photoURL) { image in
+                            if let image = image {
+                                self.retrivedImage = image
+                            } else {
+                                print("failed")
+                            }
+                        }
         }
         
     }
@@ -79,29 +85,6 @@ struct AdventureView: View {
         Text("Anna Smith").font(.headline)
     }
     
-    func photoSet(url: String) -> UIImage{
-        let photoSet = UploadPicView(url: url)
-        return photoSet.retrivedImage
-    }
-    
-    func retrivePhoto(url: String){
-        Storage.storage().reference().child(url).downloadURL { (url, error) in
-            DispatchQueue.main.async {
-                guard let downloadURL = url else {
-                    // Handle error, perhaps display a placeholder image
-                    return
-                }
-        
-                URLSession.shared.dataTask(with: downloadURL) { data, response, error in
-                    guard let data = data else { return }
-                    if let image = UIImage(data: data) {
-                        retrivedImage = image
-                        print("Succesfull")
-                    }
-                }.resume()
-            }
-        }
-    }
        
 
 }

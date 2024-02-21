@@ -27,7 +27,7 @@ struct ProfileView: View {
                     .fontWeight(.medium)
                     .padding(.top, 20)
                 
-                NavigationLink(destination: ConnectedAdventurersDisplayView()) {
+                NavigationLink(destination: ConnectedAdventurersDisplayView(adventurerProps: AdventurerViewModel())) {
                     Text("View Connected Adventurers")
                 }
                 
@@ -36,9 +36,11 @@ struct ProfileView: View {
                         .font(.title2)
                         .padding(.top, 20)
                 } else {
-                    LazyVGrid(columns: columns, spacing: 2) {
+                    LazyVGrid(columns: columns, spacing: 1) {
                         ForEach(attendedAdventuresVM.attendedAdventures, id: \.id) { adventure in
-                            Text(adventure.name) // Display attended adventure name
+                            NavigationLink(destination: DetailedAttendedAdventureView(adventure: adventure, viewModel: Connection(), viewModelAdv: attendedAdventuresVM)) {
+                                                            AttendedAdventuresView(adventure: adventure)
+                                                        }
                         }
                     }
                     .padding(.top, 20)
@@ -47,7 +49,6 @@ struct ProfileView: View {
                 Spacer()
             }
             .onAppear {
-                // Fetch attended adventures when the view appears
                 attendedAdventuresVM.getAttendedAdventures(adventurerId: adventurer.id)
             }
         }

@@ -59,15 +59,6 @@ class Connection: ObservableObject {
 
 
 
-    
-
-    func setCurrentAdventurer(){
-        model.setCurrentAdventurer()
-    }
-    
-    func createCurrentAdventurer(){
-        model.createCurrentAdventurer()
-    }
     func attendAdventures(adventurerId: Int, adventureId: Int){
         modelA.attendAdventure(adventurerId: adventurerId, adventureId: adventureId)
     }

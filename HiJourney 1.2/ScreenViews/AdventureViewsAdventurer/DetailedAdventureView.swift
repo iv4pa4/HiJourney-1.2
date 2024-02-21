@@ -46,7 +46,6 @@ struct DetailedAdventureView: View {
             
             
             VStack(alignment: .leading) {
-                // User information and adventure title
                 HStack {
                     Image("profilePic") // Profile image
                         .resizable()
@@ -78,29 +77,17 @@ struct DetailedAdventureView: View {
         }
         .padding()
         .onAppear{
-            retrivePhoto(url: adventure.photoURL)
+            PhotoRetriever.retrievePhoto(url: adventure.photoURL) { image in
+                            if let image = image {
+                                self.retrivedImage = image
+                            } else {
+                                print("failed")
+                            }
+                        }
         }
         
         Spacer()
         
-    }
-    func retrivePhoto(url: String){
-        Storage.storage().reference().child(url).downloadURL { (url, error) in
-            DispatchQueue.main.async {
-                guard let downloadURL = url else {
-                    // Handle error, perhaps display a placeholder image
-                    return
-                }
-        
-                URLSession.shared.dataTask(with: downloadURL) { data, response, error in
-                    guard let data = data else { return }
-                    if let image = UIImage(data: data) {
-                        retrivedImage = image
-                        print("Succesfull")
-                    }
-                }.resume()
-            }
-        }
     }
       
     
