@@ -81,7 +81,10 @@ struct DetailedAdventurerViewProfile: View {
     }
     //BUG
     func connectAdventurers(adventurerId1: Int, adventurerId2: Int) {
-        viewModel.connectAdventurers(adventurerId1: adventurerId1, adventurerId2: adventurerId2, token: jwtToken)
+        if let jwtToken = getJWTTokenFromKeychain() {
+            print("JWT token retrieved successfully")
+            viewModel.connectAdventurers(adventurerId1: adventurerId1, adventurerId2: adventurerId2, token: jwtToken)
+        }
     }
 }
 

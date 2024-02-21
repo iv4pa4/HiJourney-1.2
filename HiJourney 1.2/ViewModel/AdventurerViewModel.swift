@@ -26,27 +26,31 @@ class AdventurerViewModel : ObservableObject {
         }
 
         var request = URLRequest(url: url)
-        request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data, error == nil else {
-                print("Error: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
-
-            if let jsonString = String(data: data, encoding: .utf8) {
-                print("JSON response: \(jsonString)")
-            }
-
-            do {
-                let result = try JSONDecoder().decode([Adventurer].self, from: data)
-                DispatchQueue.main.async {
-                    self.adventurers = result
+        if let jwtToken = getJWTTokenFromKeychain() {
+            print("JWT token retrieved successfully")
+            
+            request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
+            
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                guard let data = data, error == nil else {
+                    print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                    return
                 }
-            } catch {
-                print("Error decoding JSON: \(error)")
-            }
-        }.resume()
+                
+                if let jsonString = String(data: data, encoding: .utf8) {
+                    print("JSON response: \(jsonString)")
+                }
+                
+                do {
+                    let result = try JSONDecoder().decode([Adventurer].self, from: data)
+                    DispatchQueue.main.async {
+                        self.adventurers = result
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }.resume()
+        }
     }
     
     
@@ -74,7 +78,7 @@ class AdventurerViewModel : ObservableObject {
                         validateUser(email, password) { result in
                             switch result {
                             case .success(let token):
-                                jwtToken = token
+                                let saveResult = saveJWTTokenToKeychain(token: token)
                                 currentAdventurer.id = adventurer.id
                                 currentAdventurer.username = adventurer.username
                                 currentAdventurer.email = adventurer.email
@@ -169,8 +173,13 @@ class AdventurerViewModel : ObservableObject {
         validateUser(email: email, password: password) { result in
             switch result {
             case .success(let token):
-                jwtToken = token
-                print("Token: \(token)")
+                let saveResult = saveJWTTokenToKeychain(token: token)
+                if saveResult {
+                    print("JWT token saved successfully!")
+                } else {
+                    print("Failed to save JWT token.")
+                }
+                //print("Token: \(token)")
                 
                 self.getAdventurerByEmail(email: email, token: token) { result in
                     switch result {
@@ -231,21 +240,24 @@ class AdventurerViewModel : ObservableObject {
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error)")
-                return
-            }
+        if let jwtToken = getJWTTokenFromKeychain() {
+            print("JWT token retrieved successfully:", jwtToken)
+            request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
             
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                print("Invalid response")
-                return
-            }
-            
-            print("Adventure attended successfully!")
-        }.resume()
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Error: \(error)")
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                    print("Invalid response")
+                    return
+                }
+                
+                print("Adventure attended successfully!")
+            }.resume()
+        }
     }
     
 //    func fetchConnectedAdventurers(id: Int) {
@@ -289,27 +301,31 @@ class AdventurerViewModel : ObservableObject {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error)")
-                return
-            }
+        if let jwtToken = getJWTTokenFromKeychain() {
+            print("JWT token retrieved successfully")
             
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                print("Invalid response")
-                return
-            }
+            request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
             
-            if let data = data {
-                do {
-                    self.connectedAdventurers = try JSONDecoder().decode([AdventurerDtoRes].self, from: data)
-                } catch {
-                    print("Error decoding JSON: \(error)")
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Error: \(error)")
+                    return
                 }
-            }
-        }.resume()
+                
+                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                    print("Invalid response")
+                    return
+                }
+                
+                if let data = data {
+                    do {
+                        self.connectedAdventurers = try JSONDecoder().decode([AdventurerDtoRes].self, from: data)
+                    } catch {
+                        print("Error decoding JSON: \(error)")
+                    }
+                }
+            }.resume()
+        }
     }
     
     func fetchWishlistData(){
@@ -319,28 +335,30 @@ class AdventurerViewModel : ObservableObject {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        
-        request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data, error == nil else {
-                print("Error: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
+        if let jwtToken = getJWTTokenFromKeychain() {
+            print("JWT token retrieved successfully")
+            request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
             
-            if let jsonString = String(data: data, encoding: .utf8) {
-                print("JSON response: \(jsonString)")
-            }
-            
-            do {
-                let result = try JSONDecoder().decode([WishlistItem].self, from: data)
-                DispatchQueue.main.async {
-                    self.wishlistAdventuresFetched = result
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                guard let data = data, error == nil else {
+                    print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                    return
                 }
-            } catch {
-                print("Error decoding JSON: \(error)")
-            }
-        }.resume()
+                
+                if let jsonString = String(data: data, encoding: .utf8) {
+                    print("JSON response: \(jsonString)")
+                }
+                
+                do {
+                    let result = try JSONDecoder().decode([WishlistItem].self, from: data)
+                    DispatchQueue.main.async {
+                        self.wishlistAdventuresFetched = result
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }.resume()
+        }
     }
     
 

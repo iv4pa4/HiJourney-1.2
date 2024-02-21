@@ -21,6 +21,8 @@ class CreatorViewModel : ObservableObject{
             
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
+        if let jwtToken = getJWTTokenFromKeychain() {
+            print("JWT token retrieved successfully")
             request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
             
             URLSession.shared.dataTask(with: request) { data, response, error in
@@ -38,6 +40,7 @@ class CreatorViewModel : ObservableObject{
                 
                 print("Failed to decode response")
             }.resume()
+        }
         }
     
     func createAdventure(eventName: String, eventDescription: String, photoURL: String, completion: @escaping (AdventureFromCreator?) -> Void){

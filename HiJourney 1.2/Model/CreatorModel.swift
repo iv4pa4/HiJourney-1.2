@@ -7,26 +7,81 @@
 
 import SwiftUI
 import CryptoKit
+import Security
+
 
 
 var currentAdventurer: Adventurer = Adventurer(id: 23, username: "iva", email: "String", password: "String", attendedAdventureIds: [], wishlistAdventureIds: [], connectedAdventurers: [])
 var currentCreator: Creator = Creator(id: 34, username: "String", email: "String", password: "String")
 //
-var jwtToken: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwiaWF0IjoxNzA4NTE3MzU5LCJleHAiOjE3MDg1MjA5NTl9.HCUTk3OF-S0t2DNXaxy7AtX0glgsgIhEkRv6tNhNhug"
 
+func saveJWTTokenToKeychain(token: String) -> Bool {
+    let tokenData = token.data(using: .utf8)!
+    
+    let query: [String: Any] = [
+        kSecClass as String: kSecClassGenericPassword,
+        kSecAttrAccount as String: "TokenForAuth",
+        kSecValueData as String: tokenData,
+        kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlocked
+    ]
+    
+    let deleteResult = SecItemDelete(query as CFDictionary)
+    guard deleteResult == errSecSuccess || deleteResult == errSecItemNotFound else {
+        print("Error deleting existing token:", deleteResult)
+        return false
+    }
+    
+    let resultCode = SecItemAdd(query as CFDictionary, nil)
+    guard resultCode == errSecSuccess else {
+        print("Error saving token to keychain:", resultCode)
+        return false
+    }
+    
+    return true
+}
 
+func getJWTTokenFromKeychain() -> String? {
+    let query: [String: Any] = [
+        kSecClass as String: kSecClassGenericPassword,
+        kSecAttrAccount as String: "TokenForAuth",
+        kSecReturnData as String: kCFBooleanTrue!,
+        kSecMatchLimit as String: kSecMatchLimitOne
+    ]
+    
+    var item: CFTypeRef?
+    let resultCode = SecItemCopyMatching(query as CFDictionary, &item)
+    guard resultCode == errSecSuccess, let tokenData = item as? Data else {
+        print("Error retrieving token from keychain:", resultCode)
+        return nil
+    }
+    
+    guard let token = String(data: tokenData, encoding: .utf8) else {
+        print("Error decoding token data to string")
+        return nil
+    }
+    
+    return token
+}
 
 struct CreatorModel {
     var wishlist: [WishlistItem] = []
     
-  
+
+
+
+
     
     func signInCreator(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
         validateUserCreator(email: email, password: password) { result in
             switch result {
             case .success(let token):
-                jwtToken = token
-                print("Token: \(token)")
+                let saveResult = saveJWTTokenToKeychain(token: token)
+                if saveResult {
+                    print("JWT token saved successfully!")
+                } else {
+                    print("Failed to save JWT token.")
+                }
+                //print("Token: \(token)")
                 
                 self.getCreatorByEmail(email: email, token: token) { result in
                     switch result {
@@ -70,7 +125,12 @@ struct CreatorModel {
                        validateUserCreator(email, password) { result in
                            switch result {
                            case .success(let token):
-                               jwtToken = token
+                               let saveResult = saveJWTTokenToKeychain(token: token)
+                               if saveResult {
+                                   print("JWT token saved successfully!")
+                               } else {
+                                   print("Failed to save JWT token.")
+                               }
                                currentCreator.id = creator.id
                                currentCreator.username = creator.username
                                currentCreator.email = creator.email
@@ -184,8 +244,13 @@ struct CreatorModel {
             }
             
             if let decodedResponse = try? JSONDecoder().decode(TokenResponse.self, from: data) {
-                print("Token: \(decodedResponse.token)")
-                jwtToken = decodedResponse.token
+                //print("Token: \(decodedResponse.token)")
+                let saveResult = saveJWTTokenToKeychain(token: decodedResponse.token)
+                if saveResult {
+                    print("JWT token saved successfully!")
+                } else {
+                    print("Failed to save JWT token.")
+                }
             } else {
                 print("Invalid response from server")
             }
@@ -203,6 +268,9 @@ struct CreatorModel {
            var request = URLRequest(url: url)
            request.httpMethod = "POST"
            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            if let jwtToken = getJWTTokenFromKeychain() {
+                print("JWT token retrieved successfully:", jwtToken)
+
            request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
            
            let requestBody: [String: Any] = [
@@ -240,6 +308,10 @@ struct CreatorModel {
                }
            }
            task.resume()
+            } else {
+                print("Failed to retrieve JWT token.")
+            }
        }
+        
     
 }

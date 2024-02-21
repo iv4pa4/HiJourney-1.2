@@ -140,7 +140,6 @@ struct SignUpScreenViewCreator: View {
             case .success:
                 DispatchQueue.main.async {
                     self.navigateToExplore = true
-                    print(jwtToken)
                 }
             case .failure(let error):
                 print("User NOT created \(error)")
