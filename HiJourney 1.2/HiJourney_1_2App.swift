@@ -13,7 +13,7 @@ struct HiJourney_1_2App: App {
     var body: some Scene {
         WindowGroup {
             
-            WelcomeScreenView(viewModel: Connection(), creatorProps: CreatorViewModel())
+            WelcomeScreenView(viewModel: Connection(), creatorProps: CreatorViewModel(), userSession: UserSession())
         }
     }
     

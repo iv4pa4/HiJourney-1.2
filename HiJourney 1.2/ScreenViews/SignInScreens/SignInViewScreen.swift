@@ -12,8 +12,9 @@ import SwiftUI
 struct SignInViewScreen: View {
     @State private var email = ""
     @State private var password = ""
-    @State private var isSignedIn = false // Track sign-in status
+    @State private var isSignedIn = false
     @ObservedObject var viewModel: Connection
+    @ObservedObject var userSession: UserSession
     private let rectangleWidth: CGFloat = 350
     private let rectangleHeight: CGFloat = 670
     private let offsetForButton: CGFloat = 260
@@ -33,7 +34,7 @@ struct SignInViewScreen: View {
             }
             
             .background(NavigationLink(
-                destination: ExploreMainPageScreen(viewModel: viewModel), // New view to navigate to
+                destination: ExploreMainPageScreen(viewModel: viewModel, userSession: userSession), // New view to navigate to
                 isActive: $isSignedIn,
                 label: { EmptyView() }
             ))
@@ -93,9 +94,9 @@ struct SignInViewScreen: View {
             viewModel.signIn(email: email, password: password) { result in
                 switch result {
                 case .success:
-                    isSignedIn = true // Set sign-in status to true upon successful sign-in
+                    isSignedIn = true
                 case .failure(let error):
-                    // Handle sign-in failure here (e.g., display an error message)
+                    
                     print("Sign-in failed: \(error.localizedDescription)")
                 }
             }
@@ -115,5 +116,5 @@ struct SignInViewScreen: View {
 }
 
 #Preview {
-    SignInViewScreen(viewModel: Connection())
+    SignInViewScreen(viewModel: Connection(), userSession: UserSession())
 }

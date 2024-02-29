@@ -10,9 +10,10 @@ import SwiftUI
 
 class AttendedAdventuresVModel: ObservableObject {
     @Published var attendedAdventures: [AdventureRes] = []
+    var userSession = UserSession()
     
     func getAttendedAdventures(adventurerId: Int) {
-        let urlString = "http://localhost:3001/adventurer/\(adventurerId)/attended-adventures"
+        let urlString = "\(urlForAdventurer)/\(adventurerId)/attended-adventures"
         
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
@@ -24,24 +25,21 @@ class AttendedAdventuresVModel: ObservableObject {
         request.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            // Handle errors
             if let error = error {
                 print("Error: \(error)")
                 return
             }
             
-            // Ensure there is data
             guard let data = data else {
                 print("No data received")
                 return
             }
             
             do {
-                // Decode the received data into an array of Adventure objects
+               
                 let decoder = JSONDecoder()
                 let attendedAdventures = try decoder.decode([AdventureRes].self, from: data)
                 
-                // Update attendedAdventures with the fetched data
                 DispatchQueue.main.async {
                     self.attendedAdventures = attendedAdventures
                 }
@@ -51,48 +49,42 @@ class AttendedAdventuresVModel: ObservableObject {
         }.resume()
     }
     
-    func getCurrAttendedAdventures() {
+    func getCurrAttendedAdventures(id: Int) {
         // Construct the URL with the adventurerId
-        let urlString = "http://localhost:3001/adventurer/\(currentAdventurer.id)/attended-adventures"
-        
-        guard let url = URL(string: urlString) else {
-            print("Invalid URL")
-            return
-        }
-        
-        // Create a URLRequest with the URL
-        var request = URLRequest(url: url)
-        
-        // Set the HTTP method to GET
-        request.httpMethod = "GET"
-        
-        // Perform the data task
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            // Handle errors
-            if let error = error {
-                print("Error: \(error)")
+            let urlString = "\(urlForAdventurer)/\(id)/attended-adventures"
+            
+            guard let url = URL(string: urlString) else {
+                print("Invalid URL")
                 return
             }
             
-            // Ensure there is data
-            guard let data = data else {
-                print("No data received")
-                return
-            }
+            var request = URLRequest(url: url)
             
-            do {
-                // Decode the received data into an array of Adventure objects
-                let decoder = JSONDecoder()
-                let attendedAdventures = try decoder.decode([AdventureRes].self, from: data)
-                
-                // Update attendedAdventures with the fetched data
-                DispatchQueue.main.async {
-                    self.attendedAdventures = attendedAdventures
+            request.httpMethod = "GET"
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Error: \(error)")
+                    return
                 }
-            } catch {
-                print("Error decoding JSON: \(error)")
-            }
-        }.resume()
+                
+                guard let data = data else {
+                    print("No data received")
+                    return
+                }
+                
+                do {
+                   
+                    let decoder = JSONDecoder()
+                    let attendedAdventures = try decoder.decode([AdventureRes].self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        self.attendedAdventures = attendedAdventures
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }.resume()
     }
 }
 

@@ -6,6 +6,7 @@ import SwiftUI
 struct AdventurerDisplayView: View {
     @ObservedObject var viewModel : AdventurerViewModel
     @ObservedObject var viewModelCon : Connection
+    @ObservedObject var userSession : UserSession
     @State private var selectedAdventurer: Adventurer?
     
     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
@@ -29,7 +30,7 @@ struct AdventurerDisplayView: View {
             }
             .navigationBarTitle("Meet")
             .sheet(item: $selectedAdventurer) { adventurer in
-                DetailedAdventurerViewProfile(adventurer: adventurer, viewModel: viewModelCon)
+                DetailedAdventurerViewProfile(adventurer: adventurer, viewModel: viewModelCon, userSession: userSession, attendedModel: AttendedAdventuresVModel())
             }
             .edgesIgnoringSafeArea(.bottom)
             
@@ -39,6 +40,6 @@ struct AdventurerDisplayView: View {
 
 
 #Preview {
-    AdventurerDisplayView(viewModel: AdventurerViewModel(), viewModelCon: Connection() )
+    AdventurerDisplayView(viewModel: AdventurerViewModel(), viewModelCon: Connection(), userSession: UserSession() )
 }
 

@@ -10,6 +10,7 @@ import SwiftUI
 struct ChosingRoleScreen: View {
     @ObservedObject var viewModel: Connection
     @ObservedObject var creatorProps: CreatorViewModel
+    @ObservedObject var userSession: UserSession
     private let rectangleWidth: CGFloat = 350
     private let rectangleHeight: CGFloat = 670
     private let offsetForButton: CGFloat = 240
@@ -38,7 +39,7 @@ struct ChosingRoleScreen: View {
     
     var adventurer: some View {
         NavigationLink(
-            destination: SignUpScreenView(viewModel: viewModel),
+            destination: SignUpScreenView(viewModel: viewModel, userSession: userSession),
             label: {
                 details.adventurerDeatiledRoleView
             })
@@ -46,7 +47,7 @@ struct ChosingRoleScreen: View {
     //TODO: change to signup for creator
     var creator: some View {
         NavigationLink(
-            destination: SignUpScreenViewCreator(viewModel: viewModel, creatorProps: CreatorViewModel()),
+            destination: SignUpScreenViewCreator(viewModel: viewModel,userSession: userSession,creatorProps: CreatorViewModel()),
             label: {
                 details.creatorDeatiledRoleView
             })
@@ -67,5 +68,5 @@ struct ChosingRoleScreen: View {
 
 
 #Preview {
-    ChosingRoleScreen(viewModel: Connection(), creatorProps: CreatorViewModel())
+    ChosingRoleScreen(viewModel: Connection(), creatorProps: CreatorViewModel(), userSession: UserSession())
 }

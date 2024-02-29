@@ -27,6 +27,7 @@ struct SignUpScreenViewCreator: View {
     private let signUpTextCornerRadius: CGFloat = 30
     private let signUpTextFontSize: CGFloat = 15
     @ObservedObject var viewModel: Connection
+    @ObservedObject var userSession: UserSession
     @ObservedObject var creatorProps: CreatorViewModel
     var body: some View {
         NavigationView{
@@ -37,7 +38,7 @@ struct SignUpScreenViewCreator: View {
                 signUpText
                 textFieldUsername
                 button
-                NavigationLink(destination: ExploreMainScreenCreator(viewModel: viewModel, creatorProps: creatorProps), isActive: $navigateToExplore) {
+                NavigationLink(destination: ExploreMainScreenCreator(viewModel: viewModel, creatorProps: creatorProps, userSession: userSession), isActive: $navigateToExplore) {
                     EmptyView()
                                 }.navigationBarBackButtonHidden()
             }
@@ -153,5 +154,5 @@ struct SignUpScreenViewCreator: View {
 
 
 #Preview {
-    SignUpScreenViewCreator(viewModel: Connection(), creatorProps: CreatorViewModel())
+    SignUpScreenViewCreator(viewModel: Connection(),userSession: UserSession(), creatorProps: CreatorViewModel())
 }

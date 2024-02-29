@@ -10,8 +10,8 @@ import SwiftUI
 
 struct AdventureDisplayViewCreator: View {
 
-    @ObservedObject var adventureFetcher = AdventureFetcher()
-    @ObservedObject var viewModel: Connection
+    @StateObject var adventureFetcher = AdventureFetcher()
+    @StateObject var viewModel: Connection
     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 1)
 
     var body: some View {

@@ -10,6 +10,7 @@ import SwiftUI
 struct ConnectedAdventurersDisplayView: View {
     //@State private var adventurers = [AdventurerDtoRes]()
     @ObservedObject var adventurerProps : AdventurerViewModel
+    @ObservedObject var userSession : UserSession
     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     var body: some View {
@@ -22,7 +23,8 @@ struct ConnectedAdventurersDisplayView: View {
                 }
             }
             .onAppear {
-                adventurerProps.fetchAdventurers(id: currentAdventurer.id)
+                    adventurerProps.fetchAdventurers(id: currentAdventurer.id)
+                
             }
             .navigationTitle("Connected adventurers")
         }
@@ -33,5 +35,5 @@ struct ConnectedAdventurersDisplayView: View {
 
 
 #Preview {
-    ConnectedAdventurersDisplayView(adventurerProps: AdventurerViewModel())
+    ConnectedAdventurersDisplayView(adventurerProps: AdventurerViewModel(), userSession: UserSession())
 }

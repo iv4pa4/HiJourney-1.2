@@ -58,7 +58,7 @@ struct SearchAdventure: Identifiable, Decodable {
     var photoURL: String
 }
 
-struct AdventureRes: Identifiable, Decodable {
+struct AdventureRes: Identifiable, Decodable, Hashable {
     var id: Int
     var name: String
     var description: String

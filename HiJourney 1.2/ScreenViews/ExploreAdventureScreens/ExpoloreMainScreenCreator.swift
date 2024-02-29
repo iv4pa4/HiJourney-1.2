@@ -5,11 +5,16 @@ struct ExploreMainScreenCreator: View {
     @State var currentTab: TabCreator = .Explore
     @ObservedObject var viewModel: Connection
     @ObservedObject var creatorProps: CreatorViewModel
+    @ObservedObject var userSession: UserSession
+    //var currentCreator: Creator
+    
 
-    init(viewModel: Connection, creatorProps: CreatorViewModel) {
+    init(viewModel: Connection, creatorProps: CreatorViewModel, userSession: UserSession) {
         UITabBar.appearance().isHidden = true
         self.viewModel = viewModel
         self.creatorProps = creatorProps
+        self.userSession = userSession
+        
     }
 
     @Namespace var animations
@@ -27,7 +32,7 @@ struct ExploreMainScreenCreator: View {
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(TabCreator.Add)
 
-            AdventurerDisplayView(viewModel: AdventurerViewModel(), viewModelCon: viewModel)
+            AdventurerDisplayView(viewModel: AdventurerViewModel(), viewModelCon: viewModel, userSession: userSession)
             AdventureSearchView(adventureProps: AdventureFetcher())
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
@@ -91,7 +96,7 @@ struct ExploreMainScreenCreator: View {
 }
 
 #Preview {
-    ExploreMainScreenCreator(viewModel: Connection(), creatorProps: CreatorViewModel())
+    ExploreMainScreenCreator(viewModel: Connection(), creatorProps: CreatorViewModel(), userSession: UserSession())
 }
 
 enum TabCreator: String, CaseIterable{

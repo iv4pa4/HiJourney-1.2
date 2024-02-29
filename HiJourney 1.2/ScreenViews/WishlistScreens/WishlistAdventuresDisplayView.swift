@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct WishlistAdventuresDisplayView: View {
-    @State private var adventurerId: Int = currentAdventurer.id// Set the default adventurer ID
-    //@State private var wishlistAdventures: [WishlistItem] = []
+    @ObservedObject var userSession = UserSession()
+    //@State private var adventurerId: Int = currentAdventurer.id// 
     @ObservedObject var adventurerProps : AdventurerViewModel
     
     var body: some View {

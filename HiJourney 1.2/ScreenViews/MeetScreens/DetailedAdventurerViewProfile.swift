@@ -11,6 +11,8 @@ struct DetailedAdventurerViewProfile: View {
     let images = ["rafting", "adventure", "wp3", "rafting"]
     let adventurer: Adventurer
     @ObservedObject var viewModel: Connection
+    @ObservedObject var userSession: UserSession
+    @StateObject var attendedModel: AttendedAdventuresVModel
     
     @State private var isConnectButtonDisabled = false
     @State private var isConnectionSuccessful = false // Track connection state
@@ -24,7 +26,7 @@ struct DetailedAdventurerViewProfile: View {
     var body: some View {
         ScrollView {
             VStack {
-                Image("profilePic")
+                Image("c")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 100, height: 100)
@@ -48,26 +50,26 @@ struct DetailedAdventurerViewProfile: View {
                 }
                 
                 LazyVGrid(columns: columns, spacing: 2) {
-                    ForEach(images, id: \.self) { image in
-                        Image(image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 100, height: 100)
-                            .clipped()
+                    ForEach(attendedModel.attendedAdventures, id: \.self) { adventure in
+                       AttendedAdventuresView(adventure: adventure)
                     }
                 }
                 .padding(.top, 20)
                 
                 Spacer()
             }
+            .onAppear{
+                attendedModel.getCurrAttendedAdventures(id: adventurer.id)
+            }
         }
     }
     
     var buttonConnect: some View{
         Button(action: {
-            connectAdventurers(adventurerId1: currentAdventurer.id, adventurerId2: adventurer.id)
-            isConnectButtonDisabled = true
-            isConnectionSuccessful = true // Set connection successful when button is pressed
+                connectAdventurers(adventurerId1: currentAdventurer.id, adventurerId2: adventurer.id)
+                isConnectButtonDisabled = true
+                isConnectionSuccessful = true
+            
         }) {
             Text("Connect")
         }
@@ -81,7 +83,7 @@ struct DetailedAdventurerViewProfile: View {
     }
     //BUG
     func connectAdventurers(adventurerId1: Int, adventurerId2: Int) {
-        if let jwtToken = getJWTTokenFromKeychain() {
+        if let jwtToken = userSession.getJWTTokenFromKeychain() {
             print("JWT token retrieved successfully")
             viewModel.connectAdventurers(adventurerId1: adventurerId1, adventurerId2: adventurerId2, token: jwtToken)
         }
@@ -90,7 +92,7 @@ struct DetailedAdventurerViewProfile: View {
 
 
 #Preview {
-    DetailedAdventurerViewProfile(adventurer: Adventurer(id: 9, username: "test", email: "", password: "", attendedAdventureIds: [], wishlistAdventureIds: [], connectedAdventurers: []), viewModel:Connection())
+    DetailedAdventurerViewProfile(adventurer: Adventurer(id: 9, username: "test", email: "", password: "", attendedAdventureIds: [], wishlistAdventureIds: [], connectedAdventurers: []), viewModel:Connection(), userSession: UserSession(), attendedModel: AttendedAdventuresVModel())
 }
 
 

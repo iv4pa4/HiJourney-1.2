@@ -1,8 +1,10 @@
 import SwiftUI
 
 struct ProfileView: View {
-    let adventurer: Adventurer
-    @ObservedObject var attendedAdventuresVM = AttendedAdventuresVModel()
+    @ObservedObject var userSession : UserSession
+    @StateObject var attendedAdventuresVM = AttendedAdventuresVModel()
+    
+    
     
     let columns = [
         GridItem(.flexible()),
@@ -13,7 +15,7 @@ struct ProfileView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Image("profilePic")
+                Image("c")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 100, height: 100)
@@ -22,12 +24,12 @@ struct ProfileView: View {
                     .shadow(radius: 10)
                     .padding(.top, 50)
 
-                Text(adventurer.username)
+                Text(currentAdventurer.username)
                     .font(.title)
                     .fontWeight(.medium)
                     .padding(.top, 20)
                 
-                NavigationLink(destination: ConnectedAdventurersDisplayView(adventurerProps: AdventurerViewModel())) {
+                NavigationLink(destination: ConnectedAdventurersDisplayView(adventurerProps: AdventurerViewModel(), userSession: userSession)) {
                     Text("View Connected Adventurers")
                 }
                 
@@ -49,7 +51,7 @@ struct ProfileView: View {
                 Spacer()
             }
             .onAppear {
-                attendedAdventuresVM.getAttendedAdventures(adventurerId: adventurer.id)
+                attendedAdventuresVM.getAttendedAdventures(adventurerId: currentAdventurer.id)
             }
         }
     }
@@ -57,6 +59,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(adventurer: Adventurer(id: 78, username: "test", email: "", password: "", attendedAdventureIds: [], wishlistAdventureIds: [], connectedAdventurers: [79, 80]))
+        ProfileView(userSession: UserSession())
     }
 }

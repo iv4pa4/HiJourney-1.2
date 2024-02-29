@@ -10,15 +10,16 @@ import Foundation
 
 struct WishlistModel{
     var wishlist: [WishlistItem] = []
+    var userSession = UserSession()
     
     func addToWishlist(adventurerId: Int, adventureId: Int) {
-        guard let url = URL(string: "http://localhost:3001/adventurer/\(adventurerId)/add-to-wishlist/\(adventureId)") else {
+        guard let url = URL(string: "\(urlForAdventurer)/\(adventurerId)/add-to-wishlist/\(adventureId)") else {
             return
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        if let jwtToken = getJWTTokenFromKeychain() {
+        if let jwtToken = userSession.getJWTTokenFromKeychain() {
             print("JWT token retrieved successfully:", jwtToken)
             request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
             

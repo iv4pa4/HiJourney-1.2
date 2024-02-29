@@ -11,6 +11,15 @@ import FirebaseFirestore
 import URLImage
 
 struct CreateNewAdventureView: View {
+    private let offsetShowZone: CGFloat = 50
+    private let offsetShowLogo: CGFloat = -162
+    private let offsetSignUpText: CGFloat = -60
+    private let signUpTextWidth: CGFloat = 128
+    private let signUpTextHeight: CGFloat = 45
+    private let signUpTextCornerRadius: CGFloat = 30
+    private let signUpTextFontSize: CGFloat = 15
+
+
     @State private var eventName = ""
     @State private var eventDescription = ""
     @State var imageURL: String = ""
@@ -27,9 +36,23 @@ struct CreateNewAdventureView: View {
             VStack {
                 TextField("Event Name", text: $eventName)
                     .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
+                   // .offset(y:90)
+                    .autocorrectionDisabled()
+                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .textContentType(nil)
                 
                 TextField("Event Description", text: $eventDescription)
                     .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
+                   // .offset(y:90)
+                    .autocorrectionDisabled()
+                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .textContentType(nil)
                 
                 if let selectedImage = selectedImage {
                     Image(uiImage: selectedImage)
@@ -40,18 +63,23 @@ struct CreateNewAdventureView: View {
                     isPickerShowing =  true
                 } label: {
                     Text("Choose image")
+                        .foregroundColor(Color("BlueForButtons"))
                 }
                 
                 Button(action: {
                     createEvent()
                 }) {
                     Text("Create Event")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
+                        .frame(width: signUpTextWidth, height: signUpTextHeight)
+                        .foregroundColor(.black)
+                        .background(Color("BlueForButtons"))
+                        .clipShape(RoundedRectangle(cornerRadius: signUpTextCornerRadius))
+                       // .offset(y: offsetForButton)
+                        .font(.custom("Poppins-Bold", size:signUpTextFontSize))
+
                 }
                 .padding()
+                
             }
             .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
                 ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)

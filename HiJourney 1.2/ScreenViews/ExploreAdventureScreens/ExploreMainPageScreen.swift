@@ -4,12 +4,17 @@ struct ExploreMainPageScreen: View {
     //TODO: Remove back tags !!!
     @State var currentTab: Tab = .Explore
     @ObservedObject var viewModel: Connection
+    @ObservedObject var userSession: UserSession
+    var currAdv: Adventurer
     var iconFrame: CGFloat = 25
     var textPadding: CGFloat = 50
 
-    init(viewModel: Connection) {
+    init(viewModel: Connection, userSession: UserSession) {
         UITabBar.appearance().isHidden = true
         self.viewModel = viewModel
+        self.userSession = userSession
+        currAdv = currentAdventurer
+        
     }
 
     @Namespace var animations
@@ -29,12 +34,12 @@ struct ExploreMainPageScreen: View {
                 .tag(Tab.WishList)
 
            
-            AdventurerDisplayView(viewModel: AdventurerViewModel(), viewModelCon: viewModel)
+            AdventurerDisplayView(viewModel: AdventurerViewModel(), viewModelCon: viewModel, userSession: userSession)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(Tab.Add)
 
-            ProfileView(adventurer: currentAdventurer)
+            ProfileView(userSession: userSession)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primaryColor").ignoresSafeArea())
                 .tag(Tab.Profile)
@@ -92,7 +97,7 @@ struct ExploreMainPageScreen: View {
 }
 
 #Preview {
-    ExploreMainPageScreen(viewModel: Connection())
+    ExploreMainPageScreen(viewModel: Connection(), userSession: UserSession())
 }
 
 enum Tab: String, CaseIterable{

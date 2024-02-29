@@ -10,10 +10,11 @@ import Foundation
 class CreatorViewModel : ObservableObject{
     @Published var createdAdventures: [AdventureFromCreator] = []
     @Published private var model = CreatorModel()
+    var userSession = UserSession()
 
 
     func getAdventures(creatorId: Int) {
-            guard let url = URL(string: "http://localhost:3001/creator/\(creatorId)/adventures") else {
+            guard let url = URL(string: "\(urlForCreator)/\(creatorId)/adventures") else {
                 print("Invalid URL")
                 return
             }
@@ -21,7 +22,7 @@ class CreatorViewModel : ObservableObject{
             
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
-        if let jwtToken = getJWTTokenFromKeychain() {
+        if let jwtToken = userSession.getJWTTokenFromKeychain() {
             print("JWT token retrieved successfully")
             request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
             

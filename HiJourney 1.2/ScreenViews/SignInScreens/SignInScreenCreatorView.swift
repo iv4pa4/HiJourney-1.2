@@ -15,6 +15,7 @@ struct SignInViewCreatorScreen: View {
     @State private var isSignedIn = false 
     @ObservedObject var viewModel: Connection
     @ObservedObject var creatorProps: CreatorViewModel
+    @ObservedObject var userSession: UserSession
     private let rectangleWidth: CGFloat = 350
     private let rectangleHeight: CGFloat = 670
     private let offsetForButton: CGFloat = 260
@@ -34,7 +35,7 @@ struct SignInViewCreatorScreen: View {
             }
             
             .background(NavigationLink(
-                destination: ExploreMainScreenCreator(viewModel: viewModel, creatorProps: creatorProps),
+                destination: ExploreMainScreenCreator(viewModel: viewModel, creatorProps: creatorProps, userSession: userSession),
                 isActive: $isSignedIn,
                 label: { EmptyView() }
             ))
@@ -115,5 +116,5 @@ struct SignInViewCreatorScreen: View {
 }
 
 #Preview {
-    SignInViewCreatorScreen(viewModel: Connection(), creatorProps: CreatorViewModel())
+    SignInViewCreatorScreen(viewModel: Connection(), creatorProps: CreatorViewModel(), userSession: UserSession())
 }

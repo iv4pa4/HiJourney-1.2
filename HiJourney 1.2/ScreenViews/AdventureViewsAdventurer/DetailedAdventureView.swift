@@ -15,6 +15,7 @@ struct DetailedAdventureView: View {
     var adventure: Adventure
     @ObservedObject var viewModel: Connection
     @ObservedObject var viewModelAdv: AttendedAdventuresVModel
+    @ObservedObject var userSession = UserSession()
     @State var retrivedImage = UIImage(named: "default_picture")!
 
     
@@ -54,16 +55,18 @@ struct DetailedAdventureView: View {
                     Text(adventure.name).font(.title)
                     Spacer()
                     Button(action: {
-                        viewModel.addToWishlist(adventurerId: currentAdventurer.id, adventureId: adventure.id)
-                        viewModel.fetchWishlistData()
+                            viewModel.addToWishlist(adventurerId: currentAdventurer.id, adventureId: adventure.id)
+                            viewModel.fetchWishlistData()
+                        
                     }) {
                         Image(systemName: isAddedToWishlist ? "heart.fill" : "heart")
                     }
                     .padding()
                     
                     Button(action: {
-                        viewModel.attendAdventures(adventurerId: currentAdventurer.id, adventureId: adventure.id)
-                        viewModelAdv.getCurrAttendedAdventures()
+
+                            viewModel.attendAdventures(adventurerId: currentAdventurer.id, adventureId: adventure.id)
+                        viewModelAdv.getCurrAttendedAdventures(id: currentAdventurer.id)
                     }) {
                         Text("Jump in")
                     }

@@ -14,6 +14,7 @@ struct DetailedViewNotWishlist: View {
     var adventure: Adventure
     @ObservedObject var viewModel: Connection
     @ObservedObject var viewModelAdv: AttendedAdventuresVModel
+    @ObservedObject var userSession: UserSession
     @State var retrivedImage = UIImage(named: "default_picture")!
 
     
@@ -55,8 +56,10 @@ struct DetailedViewNotWishlist: View {
 
                     
                     Button(action: {
+                        
                         viewModel.attendAdventures(adventurerId: currentAdventurer.id, adventureId: adventure.id)
-                        viewModelAdv.getCurrAttendedAdventures()
+                        viewModelAdv.getCurrAttendedAdventures(id: currentAdventurer.id)
+                        
                     }) {
                         Text("Jump in")
                     }
@@ -86,5 +89,5 @@ struct DetailedViewNotWishlist: View {
 
 
 #Preview {
-    DetailedViewNotWishlist(adventure: ad, viewModel: Connection(), viewModelAdv: AttendedAdventuresVModel())
+    DetailedViewNotWishlist(adventure: ad, viewModel: Connection(), viewModelAdv: AttendedAdventuresVModel(), userSession: UserSession())
 }

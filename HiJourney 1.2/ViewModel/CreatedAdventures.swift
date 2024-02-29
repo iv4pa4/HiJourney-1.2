@@ -9,27 +9,28 @@ import SwiftUI
 
 class AttendedAdventuresViewModel: ObservableObject {
     @Published var adventures: [Adventure] = []
+    var userSession = UserSession()
     
     func fetchAdventures() {
-        guard let url = URL(string: "http://localhost:3001/adventurer/\(currentCreator.id)/attended-adventures") else {
-            print("Invalid URL")
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else {
-                print("No data in response: \(error?.localizedDescription ?? "Unknown error")")
+            guard let url = URL(string: "\(urlForAdventurer)/\(currentCreator.id)/attended-adventures") else {
+                print("Invalid URL")
                 return
             }
             
-            do {
-                let decodedData = try JSONDecoder().decode([Adventure].self, from: data)
-                DispatchQueue.main.async {
-                    self.adventures = decodedData
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let data = data else {
+                    print("No data in response: \(error?.localizedDescription ?? "Unknown error")")
+                    return
                 }
-            } catch {
-                print("Error decoding JSON: \(error.localizedDescription)")
-            }
-        }.resume()
+                
+                do {
+                    let decodedData = try JSONDecoder().decode([Adventure].self, from: data)
+                    DispatchQueue.main.async {
+                        self.adventures = decodedData
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error.localizedDescription)")
+                }
+            }.resume()
     }
 }

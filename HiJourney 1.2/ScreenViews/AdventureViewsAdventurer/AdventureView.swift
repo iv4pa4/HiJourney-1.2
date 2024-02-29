@@ -13,6 +13,8 @@ import URLImage
 
 struct AdventureView: View {
     private let squareFrame:CGFloat = 320
+   
+
     let adventure: Adventure
     @State var retrivedImage = UIImage(named: "default_picture")!
     //var imageSet : UploadPicView
@@ -48,6 +50,8 @@ struct AdventureView: View {
         }
         
     }
+    
+   
     
     var showzone: some View {
         DiagonalGradientView(squareFrame: squareFrame).cornerRadius(30)

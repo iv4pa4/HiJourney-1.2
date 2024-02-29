@@ -31,7 +31,7 @@ struct AdventurerDetailedView: View {
             .frame(width: 90, height: 90)
     }
     var profileImage: some View {
-        Image("profilePic")
+        Image("c")
             .resizable()
             .frame(width: 65, height: 65)
             .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)

@@ -15,9 +15,15 @@ struct AdventureDto : Codable{
 class AdventureFetcher: ObservableObject {
     @Published var adventures: [Adventure] = []
     @Published var foundAdventures: [SearchAdventure] = []
+    var userSession = UserSession()
+    
+    init() {
+        
+    }
     
     func fetchData() {
-        guard let url = URL(string: "http://localhost:3001/adventure") else {
+        
+        guard let url = URL(string: urlForAdventure) else {
             print("Invalid URL")
             return
         }
@@ -26,7 +32,7 @@ class AdventureFetcher: ObservableObject {
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        if let jwtToken = getJWTTokenFromKeychain() {
+        if let jwtToken = userSession.getJWTTokenFromKeychain() {
             print("JWT token retrieved successfully")
             request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
         } else {
@@ -63,43 +69,42 @@ class AdventureFetcher: ObservableObject {
             print("Failed to encode adventureDto")
             return
         }
-        
-        let url = URL(string: "http://localhost:3001/creator/\(currentCreator.id)/adventures")!
+        let url = URL(string: "\(urlForCreator)/\(currentCreator.id)/adventures")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let jwtToken = getJWTTokenFromKeychain() {
-            print("JWT token retrieved successfully")
-            
-            request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
-            request.httpBody = jsonData
-            
-            URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {
-                    print("Error: \(error?.localizedDescription ?? "Unknown error")")
-                    return
-                }
+            if let jwtToken = userSession.getJWTTokenFromKeychain() {
+                print("JWT token retrieved successfully")
                 
-                if let httpResponse = response as? HTTPURLResponse {
-                    if (200...299).contains(httpResponse.statusCode) {
-                        print("Adventure created successfully")
-                    } else {
-                        print("Error response: \(httpResponse.statusCode)")
+                request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
+                request.httpBody = jsonData
+                
+                URLSession.shared.dataTask(with: request) { data, response, error in
+                    guard let data = data, error == nil else {
+                        print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                        return
                     }
-                }
-            }.resume()
+                    
+                    if let httpResponse = response as? HTTPURLResponse {
+                        if (200...299).contains(httpResponse.statusCode) {
+                            print("Adventure created successfully")
+                        } else {
+                            print("Error response: \(httpResponse.statusCode)")
+                        }
+                    }
+                }.resume()
         }
     }
     
     func searchAdventureByName(name: String) {
-        guard let url = URL(string: "http://localhost:3001/adventure/search/\(name)") else {
+        guard let url = URL(string: "\(urlForAdventure)/search/\(name)") else {
             print("Invalid URL")
             return
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        if let jwtToken = getJWTTokenFromKeychain() {
+        if let jwtToken = userSession.getJWTTokenFromKeychain() {
             print("JWT token retrieved successfully")
             
             request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
@@ -129,14 +134,14 @@ class AdventureFetcher: ObservableObject {
     }
     
     func searchAdventureByDescription(desc: String) {
-        guard let url = URL(string: "http://localhost:3001/adventure/search/description/\(desc)") else {
+        guard let url = URL(string: "\(urlForAdventure)/search/description/\(desc)") else {
             print("Invalid URL")
             return
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        if let jwtToken = getJWTTokenFromKeychain() {
+        if let jwtToken = userSession.getJWTTokenFromKeychain() {
             print("JWT token retrieved successfully")
             
             request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")

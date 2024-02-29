@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileViewCreator: View {
     let creator: Creator
-    @ObservedObject var creatorProps : CreatorViewModel
+    @StateObject var creatorProps : CreatorViewModel
 
     let columns = [
         GridItem(.flexible()),

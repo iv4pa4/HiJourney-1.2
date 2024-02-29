@@ -13,7 +13,7 @@ class AdventurerViewModel : ObservableObject {
     @State var wishlistAdventures: [WishlistItem] = []
     @Published var connectedAdventurers = [AdventurerDtoRes]()
     @Published var wishlistAdventuresFetched: [WishlistItem] = []
-
+    var userSession = UserSession()
 
 
     init() {
@@ -21,12 +21,12 @@ class AdventurerViewModel : ObservableObject {
     }
 
     func fetchData() {
-        guard let url = URL(string: "http://localhost:3001/adventurer") else {
+        guard let url = URL(string: urlForAdventurer) else {
             return
         }
 
         var request = URLRequest(url: url)
-        if let jwtToken = getJWTTokenFromKeychain() {
+        if let jwtToken = userSession.getJWTTokenFromKeychain() {
             print("JWT token retrieved successfully")
             
             request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
@@ -56,7 +56,7 @@ class AdventurerViewModel : ObservableObject {
     
      func createUserAdventurer(username: String, email: String, password: String, profilephoto: String, validateUser: @escaping (String, String, @escaping (Result<String, Error>) -> Void) -> Void, completion: @escaping (Result<Adventurer, Error>) -> Void) {
         let adventurerDto = AdventurerDto(username: username, email: email, password: password, profilephoto: profilephoto)
-        guard let url = URL(string: "http://localhost:3001/adventurer") else {
+        guard let url = URL(string: urlForAdventurer) else {
             let error = NSError(domain: "com.example", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
             completion(.failure(error))
             return
@@ -78,13 +78,9 @@ class AdventurerViewModel : ObservableObject {
                         validateUser(email, password) { result in
                             switch result {
                             case .success(let token):
-                                let saveResult = saveJWTTokenToKeychain(token: token)
-                                currentAdventurer.id = adventurer.id
-                                currentAdventurer.username = adventurer.username
-                                currentAdventurer.email = adventurer.email
-                                currentAdventurer.password = adventurer.password
-                                currentAdventurer.profilephoto = adventurer.profilephoto
-                                
+                                let saveResult = self.userSession.saveJWTTokenToKeychain(token: token)
+                                let currAdv = Adventurer(id: adventurer.id, username: adventurer.username, email: adventurer.email, password: adventurer.password, attendedAdventureIds: [], wishlistAdventureIds: [], connectedAdventurers: [])
+                                currentAdventurer = currAdv
                                 completion(.success(adventurer))
                             case .failure(let error):
                                 completion(.failure(error))
@@ -103,7 +99,7 @@ class AdventurerViewModel : ObservableObject {
     
     func validateUser(email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
         let parameters = ["email": email, "password": password]
-        guard let url = URL(string: "http://localhost:3001/adventurer/validate") else {
+        guard let url = URL(string: "\(urlForAdventurer)/validate") else {
             let error = NSError(domain: "com.example", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
             completion(.failure(error))
             return
@@ -143,7 +139,7 @@ class AdventurerViewModel : ObservableObject {
     }
     
     func getAdventurerByEmail(email: String, token: String, completion: @escaping (Result<Adventurer, Error>) -> Void) {
-        guard let url = URL(string: "http://localhost:3001/adventurer/email/\(email)") else {
+        guard let url = URL(string: "\(urlForAdventurer)/email/\(email)") else {
             completion(.failure(NSError(domain: "com.example", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }
@@ -161,7 +157,6 @@ class AdventurerViewModel : ObservableObject {
             do {
                 let adventurer = try JSONDecoder().decode(Adventurer.self, from: data)
                 currentAdventurer = adventurer
-                print(currentAdventurer.username)
                 completion(.success(adventurer))
             } catch {
                 completion(.failure(error))
@@ -173,7 +168,7 @@ class AdventurerViewModel : ObservableObject {
         validateUser(email: email, password: password) { result in
             switch result {
             case .success(let token):
-                let saveResult = saveJWTTokenToKeychain(token: token)
+                let saveResult = self.userSession.saveJWTTokenToKeychain(token: token)
                 if saveResult {
                     print("JWT token saved successfully!")
                 } else {
@@ -200,7 +195,7 @@ class AdventurerViewModel : ObservableObject {
     }
     
     func connectAdventurers(adventurerId1: Int, adventurerId2: Int, token: String) {
-        let urlString = "http://localhost:3001/adventurer/connect/\(adventurerId1)/with/\(adventurerId2)"
+        let urlString = "\(urlForAdventurer)/connect/\(adventurerId1)/with/\(adventurerId2)"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return
@@ -232,7 +227,7 @@ class AdventurerViewModel : ObservableObject {
     }
     
     func attendAdventure(adventurerId: Int, adventureId: Int) {
-        let urlString = "http://localhost:3001/adventurer/\(adventurerId)/attend/\(adventureId)"
+        let urlString = "\(urlForAdventurer)/\(adventurerId)/attend/\(adventureId)"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return
@@ -240,7 +235,7 @@ class AdventurerViewModel : ObservableObject {
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        if let jwtToken = getJWTTokenFromKeychain() {
+        if let jwtToken = self.userSession.getJWTTokenFromKeychain() {
             print("JWT token retrieved successfully:", jwtToken)
             request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
             
@@ -260,40 +255,8 @@ class AdventurerViewModel : ObservableObject {
         }
     }
     
-//    func fetchConnectedAdventurers(id: Int) {
-//        let urlString = "http://localhost:3001/adventurer/\(id)/connected-adventurers"
-//        guard let url = URL(string: urlString) else {
-//            print("Invalid URL")
-//            return
-//        }
-//        
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "GET"
-//        request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
-//        
-//        URLSession.shared.dataTask(with: request) { data, response, error in
-//            if let error = error {
-//                print("Error: \(error)")
-//                return
-//            }
-//            
-//            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-//                print("Invalid response")
-//                return
-//            }
-//            
-//            if let data = data {
-//                do {
-//                    self.connectedAdventurers = try JSONDecoder().decode([AdventurerDtoRes].self, from: data)
-//                } catch {
-//                    print("Error decoding JSON: \(error)")
-//                }
-//            }
-//        }.resume()
-//    }
-    
     func fetchAdventurers(id: Int) {
-        let urlString = "http://localhost:3001/adventurer/\(id)/connected-adventurers"
+        let urlString = "\(urlForAdventurer)/\(id)/connected-adventurers"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return
@@ -301,7 +264,7 @@ class AdventurerViewModel : ObservableObject {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        if let jwtToken = getJWTTokenFromKeychain() {
+        if let jwtToken = self.userSession.getJWTTokenFromKeychain() {
             print("JWT token retrieved successfully")
             
             request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
@@ -329,35 +292,36 @@ class AdventurerViewModel : ObservableObject {
     }
     
     func fetchWishlistData(){
-        guard let url = URL(string: "http://localhost:3001/adventurer/\(currentAdventurer.id)/wishlist") else {
+        
+        guard let url = URL(string: "\(urlForAdventurer)/\(currentAdventurer.id)/wishlist") else {
             return
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        if let jwtToken = getJWTTokenFromKeychain() {
-            print("JWT token retrieved successfully")
-            request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
-            
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
-                guard let data = data, error == nil else {
-                    print("Error: \(error?.localizedDescription ?? "Unknown error")")
-                    return
-                }
+            if let jwtToken = self.userSession.getJWTTokenFromKeychain() {
+                print("JWT token retrieved successfully")
+                request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
                 
-                if let jsonString = String(data: data, encoding: .utf8) {
-                    print("JSON response: \(jsonString)")
-                }
-                
-                do {
-                    let result = try JSONDecoder().decode([WishlistItem].self, from: data)
-                    DispatchQueue.main.async {
-                        self.wishlistAdventuresFetched = result
+                URLSession.shared.dataTask(with: request) { (data, response, error) in
+                    guard let data = data, error == nil else {
+                        print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                        return
                     }
-                } catch {
-                    print("Error decoding JSON: \(error)")
-                }
-            }.resume()
+                    
+                    if let jsonString = String(data: data, encoding: .utf8) {
+                        print("JSON response: \(jsonString)")
+                    }
+                    
+                    do {
+                        let result = try JSONDecoder().decode([WishlistItem].self, from: data)
+                        DispatchQueue.main.async {
+                            self.wishlistAdventuresFetched = result
+                        }
+                    } catch {
+                        print("Error decoding JSON: \(error)")
+                    }
+                }.resume()
         }
     }
     
