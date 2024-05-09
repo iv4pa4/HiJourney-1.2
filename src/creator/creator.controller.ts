@@ -55,7 +55,6 @@ export class CreatorController {
     if (isValid) {
         const payload = { email };
         const token = this.jwtService.sign(payload);
-        console.log(token);
         return { token };
     }
     throw new UnauthorizedException('Invalid email or password');
