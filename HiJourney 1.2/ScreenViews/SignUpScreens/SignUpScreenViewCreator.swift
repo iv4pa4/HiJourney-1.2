@@ -126,7 +126,7 @@ struct SignUpScreenViewCreator: View {
     
     var signUpText: some View{
         Text("Sign up")
-            .font(.largeTitle)
+            .font(.custom("Poppins-Bold", size:45))
             .foregroundColor(.black)
             .offset(y: offsetSignUpText)
             .autocorrectionDisabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)

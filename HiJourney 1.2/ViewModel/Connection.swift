@@ -92,6 +92,7 @@ class Connection: ObservableObject {
         modelA.createUserAdventurer(username: username, email: email, password: password, profilephoto: profilephoto, validateUser: modelA.validateUser) { result in
                 switch result {
                 case .success(let adventurer):
+                    AdventurerSaver.saveAdventurer(adventurer)
                     currentAdventurer = adventurer
                     self.fetchWishlistData()
                     completion(.success(adventurer))

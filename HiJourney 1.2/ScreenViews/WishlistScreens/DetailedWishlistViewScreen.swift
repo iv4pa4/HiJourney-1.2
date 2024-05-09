@@ -64,7 +64,7 @@ struct DetailedWishlistViewScreen: View {
     func titleText(title: String) -> some View {
         Text(title)
             .bold()
-            .font(.headline)
+            .font(.custom("Poppins-Bold", size:20))
             .foregroundColor(.black)
             .frame(maxWidth: .infinity)
     }

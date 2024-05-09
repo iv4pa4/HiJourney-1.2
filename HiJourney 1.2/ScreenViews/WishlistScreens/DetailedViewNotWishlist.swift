@@ -51,7 +51,8 @@ struct DetailedViewNotWishlist: View {
                         .resizable()
                         .clipShape(Circle())
                         .frame(width: 50, height: 50)
-                    Text(adventure.name).font(.title)
+                    Text(adventure.name)
+                        .font(.custom("Poppins-Bold", size:25))
                     Spacer()
 
                     
@@ -67,7 +68,7 @@ struct DetailedViewNotWishlist: View {
             }
             
             Text(adventure.description)
-                .font(.title3)
+                .font(.custom("Poppins-Bold", size:15))
                 .lineLimit(3)
             
         }

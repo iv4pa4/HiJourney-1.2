@@ -85,12 +85,14 @@
 		D75185B92B6385EE00D685CF /* DetailedAdventureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185B82B6385EE00D685CF /* DetailedAdventureView.swift */; };
 		D75185BB2B638A0E00D685CF /* CreateNewAdventureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185BA2B638A0E00D685CF /* CreateNewAdventureView.swift */; };
 		D75185BD2B638CAC00D685CF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75185BC2B638CAC00D685CF /* ProfileView.swift */; };
+		D75484EB2BD2629100D9F811 /* AdventurerSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75484EA2BD2629100D9F811 /* AdventurerSaver.swift */; };
 		D75AD0E12B73635B009CF949 /* AdventureFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75AD0E02B73635B009CF949 /* AdventureFetcher.swift */; };
 		D75AD0EB2B739F8E009CF949 /* ChosingRoleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75AD0EA2B739F8E009CF949 /* ChosingRoleScreen.swift */; };
 		D75AD0ED2B73A34E009CF949 /* DetailedRoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75AD0EC2B73A34E009CF949 /* DetailedRoleView.swift */; };
 		D76DC5802B73B7BF006FBD7D /* ChosingRoleForSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76DC57F2B73B7BF006FBD7D /* ChosingRoleForSignIn.swift */; };
 		D76DC5862B73BC55006FBD7D /* SignUpScreenViewCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76DC5852B73BC55006FBD7D /* SignUpScreenViewCreator.swift */; };
 		D76DC5882B73BCB7006FBD7D /* SignInScreenCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76DC5872B73BCB7006FBD7D /* SignInScreenCreatorView.swift */; };
+		D77E25A62BECB88100D48908 /* TestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77E25A52BECB88100D48908 /* TestTest.swift */; };
 		D795767D2B7B56D700B38BB2 /* WishlistAdventuresDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795767C2B7B56D700B38BB2 /* WishlistAdventuresDisplayView.swift */; };
 		D795767F2B7B5BC300B38BB2 /* DetailedWishlistViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795767E2B7B5BC300B38BB2 /* DetailedWishlistViewScreen.swift */; };
 		D7A6FE322B7E86FD0052FDAF /* ExpoloreMainScreenCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6FE312B7E86FD0052FDAF /* ExpoloreMainScreenCreator.swift */; };
@@ -114,7 +116,18 @@
 		D7E4A2D02B861B910017AAF2 /* DetailedWishlistViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E4A2CF2B861B910017AAF2 /* DetailedWishlistViewPage.swift */; };
 		D7E4A2D22B86288D0017AAF2 /* DetailedAttendedAdventureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E4A2D12B86288D0017AAF2 /* DetailedAttendedAdventureView.swift */; };
 		D7E4A2D92B864ACD0017AAF2 /* CurrentUserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E4A2D82B864ACD0017AAF2 /* CurrentUserSession.swift */; };
+		D7FB93B32BD2A9970022BC26 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D7FB93B22BD2A9960022BC26 /* Poppins-Bold.ttf */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D77E25A72BECB88100D48908 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7CC15C32B31851E00F45436 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7CC15CA2B31851E00F45436;
+			remoteInfo = "HiJourney 1.2";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D70497712B838E1B00FBB43C /* AttendedAdventuresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendedAdventuresView.swift; sourceTree = "<group>"; };
@@ -141,12 +154,15 @@
 		D75185B82B6385EE00D685CF /* DetailedAdventureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedAdventureView.swift; sourceTree = "<group>"; };
 		D75185BA2B638A0E00D685CF /* CreateNewAdventureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewAdventureView.swift; sourceTree = "<group>"; };
 		D75185BC2B638CAC00D685CF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D75484EA2BD2629100D9F811 /* AdventurerSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventurerSaver.swift; sourceTree = "<group>"; };
 		D75AD0E02B73635B009CF949 /* AdventureFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventureFetcher.swift; sourceTree = "<group>"; };
 		D75AD0EA2B739F8E009CF949 /* ChosingRoleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosingRoleScreen.swift; sourceTree = "<group>"; };
 		D75AD0EC2B73A34E009CF949 /* DetailedRoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedRoleView.swift; sourceTree = "<group>"; };
 		D76DC57F2B73B7BF006FBD7D /* ChosingRoleForSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChosingRoleForSignIn.swift; sourceTree = "<group>"; };
 		D76DC5852B73BC55006FBD7D /* SignUpScreenViewCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenViewCreator.swift; sourceTree = "<group>"; };
 		D76DC5872B73BCB7006FBD7D /* SignInScreenCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreenCreatorView.swift; sourceTree = "<group>"; };
+		D77E25A32BECB88100D48908 /* TestTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D77E25A52BECB88100D48908 /* TestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTest.swift; sourceTree = "<group>"; };
 		D795767C2B7B56D700B38BB2 /* WishlistAdventuresDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistAdventuresDisplayView.swift; sourceTree = "<group>"; };
 		D795767E2B7B5BC300B38BB2 /* DetailedWishlistViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedWishlistViewScreen.swift; sourceTree = "<group>"; };
 		D7A6FE312B7E86FD0052FDAF /* ExpoloreMainScreenCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpoloreMainScreenCreator.swift; sourceTree = "<group>"; };
@@ -171,9 +187,18 @@
 		D7E4A2CF2B861B910017AAF2 /* DetailedWishlistViewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedWishlistViewPage.swift; sourceTree = "<group>"; };
 		D7E4A2D12B86288D0017AAF2 /* DetailedAttendedAdventureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedAttendedAdventureView.swift; sourceTree = "<group>"; };
 		D7E4A2D82B864ACD0017AAF2 /* CurrentUserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserSession.swift; sourceTree = "<group>"; };
+		D7FB93B22BD2A9960022BC26 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		D7FB93B42BD2AB450022BC26 /* HiJourney-1-2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "HiJourney-1-2-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D77E25A02BECB88100D48908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7CC15C82B31851E00F45436 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -311,6 +336,14 @@
 			path = ExploreAdventureScreens;
 			sourceTree = "<group>";
 		};
+		D77E25A42BECB88100D48908 /* TestTest */ = {
+			isa = PBXGroup;
+			children = (
+				D77E25A52BECB88100D48908 /* TestTest.swift */,
+			);
+			path = TestTest;
+			sourceTree = "<group>";
+		};
 		D78FBD0F2B318912001E3644 /* ScreenViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				D7CC15CD2B31851E00F45436 /* HiJourney 1.2 */,
+				D77E25A42BECB88100D48908 /* TestTest */,
 				D7CC15CC2B31851E00F45436 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -382,6 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				D7CC15CB2B31851E00F45436 /* HiJourney 1.2.app */,
+				D77E25A32BECB88100D48908 /* TestTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -389,12 +424,15 @@
 		D7CC15CD2B31851E00F45436 /* HiJourney 1.2 */ = {
 			isa = PBXGroup;
 			children = (
+				D7FB93B42BD2AB450022BC26 /* HiJourney-1-2-Info.plist */,
+				D7FB93B22BD2A9960022BC26 /* Poppins-Bold.ttf */,
 				D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */,
 				D7434C232B8251FF00EE87AE /* UploadPicView.swift */,
 				D7434C442B82619A00EE87AE /* ImagePicker.swift */,
 				D7E4A2D52B862E350017AAF2 /* NewAdventuresScreens */,
 				D70497772B85E73700FBB43C /* PhotoUploader.swift */,
 				D7E4A2D82B864ACD0017AAF2 /* CurrentUserSession.swift */,
+				D75484EA2BD2629100D9F811 /* AdventurerSaver.swift */,
 				D7C0967E2B886E8500C0A2DE /* Constants.swift */,
 				D70497752B85E4D500FBB43C /* PhotoRetriver.swift */,
 				D78FBD102B318940001E3644 /* Model */,
@@ -453,6 +491,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D77E25A22BECB88100D48908 /* TestTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D77E25AB2BECB88100D48908 /* Build configuration list for PBXNativeTarget "TestTest" */;
+			buildPhases = (
+				D77E259F2BECB88100D48908 /* Sources */,
+				D77E25A02BECB88100D48908 /* Frameworks */,
+				D77E25A12BECB88100D48908 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D77E25A82BECB88100D48908 /* PBXTargetDependency */,
+			);
+			name = TestTest;
+			productName = TestTest;
+			productReference = D77E25A32BECB88100D48908 /* TestTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D7CC15CA2B31851E00F45436 /* HiJourney 1.2 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D7CC15D92B31852000F45436 /* Build configuration list for PBXNativeTarget "HiJourney 1.2" */;
@@ -533,9 +589,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					D77E25A22BECB88100D48908 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = D7CC15CA2B31851E00F45436;
+					};
 					D7CC15CA2B31851E00F45436 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -561,11 +621,19 @@
 			projectRoot = "";
 			targets = (
 				D7CC15CA2B31851E00F45436 /* HiJourney 1.2 */,
+				D77E25A22BECB88100D48908 /* TestTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D77E25A12BECB88100D48908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7CC15C92B31851E00F45436 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -573,12 +641,21 @@
 				D7CC15D62B31852000F45436 /* Preview Assets.xcassets in Resources */,
 				D7CC15D32B31852000F45436 /* Assets.xcassets in Resources */,
 				D7434C522B82A12E00EE87AE /* GoogleService-Info.plist in Resources */,
+				D7FB93B32BD2A9970022BC26 /* Poppins-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D77E259F2BECB88100D48908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D77E25A62BECB88100D48908 /* TestTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7CC15C72B31851E00F45436 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -622,6 +699,7 @@
 				D76DC5882B73BCB7006FBD7D /* SignInScreenCreatorView.swift in Sources */,
 				D7CC15E22B31854D00F45436 /* ExploreMainPageScreen.swift in Sources */,
 				D7E4A2D02B861B910017AAF2 /* DetailedWishlistViewPage.swift in Sources */,
+				D75484EB2BD2629100D9F811 /* AdventurerSaver.swift in Sources */,
 				D7A6FE3B2B7E8BB70052FDAF /* ProfileViewCreator.swift in Sources */,
 				D75185B92B6385EE00D685CF /* DetailedAdventureView.swift in Sources */,
 				D795767F2B7B5BC300B38BB2 /* DetailedWishlistViewScreen.swift in Sources */,
@@ -638,7 +716,53 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D77E25A82BECB88100D48908 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D7CC15CA2B31851E00F45436 /* HiJourney 1.2 */;
+			targetProxy = D77E25A72BECB88100D48908 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		D77E25A92BECB88100D48908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q6AG3WP543;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = iv4pa4.TestTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HiJourney 1.2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HiJourney 1.2";
+			};
+			name = Debug;
+		};
+		D77E25AA2BECB88100D48908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q6AG3WP543;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = iv4pa4.TestTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HiJourney 1.2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HiJourney 1.2";
+			};
+			name = Release;
+		};
 		D7CC15D72B31852000F45436 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -769,6 +893,9 @@
 				DEVELOPMENT_TEAM = Q6AG3WP543;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "HiJourney-1-2-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -798,6 +925,9 @@
 				DEVELOPMENT_TEAM = Q6AG3WP543;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "HiJourney-1-2-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -819,6 +949,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D77E25AB2BECB88100D48908 /* Build configuration list for PBXNativeTarget "TestTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D77E25A92BECB88100D48908 /* Debug */,
+				D77E25AA2BECB88100D48908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D7CC15C62B31851E00F45436 /* Build configuration list for PBXProject "HiJourney 1.2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

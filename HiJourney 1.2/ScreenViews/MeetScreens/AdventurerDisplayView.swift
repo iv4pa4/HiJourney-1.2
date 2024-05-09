@@ -16,14 +16,18 @@ struct AdventurerDisplayView: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(viewModel.adventurers, id: \.id) { adventurer in
-                        Button(action: {
-                            self.selectedAdventurer = adventurer
-                        }) {
-                            AdventurerDetailedView(adventurer: adventurer)
-                                .background(Color.gray.opacity(0.2)) // Optional styling
-                                .cornerRadius(10)
+                        if adventurer.id == currentAdventurer.id || currentAdventurer.connectedAdventurers.contains(adventurer.id){
                         }
-                        .buttonStyle(PlainButtonStyle())
+                        else{
+                            Button(action: {
+                                self.selectedAdventurer = adventurer
+                            }) {
+                                AdventurerDetailedView(adventurer: adventurer)
+                                    .background(Color.gray.opacity(0.2)) // Optional styling
+                                    .cornerRadius(10)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
                     }
                 }
                 .padding()

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 var currentAdventurer = Adventurer(id: 0, username: "error", email: "error", password: "error", attendedAdventureIds: [], wishlistAdventureIds: [], connectedAdventurers: [])
  var currentCreator = Creator(id: 0, username: "error", email: "error", password: "error")
 

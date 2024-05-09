@@ -65,7 +65,7 @@ struct SearchView: View {
     func titleText(title: String) -> some View {
         Text(title)
             .bold()
-            .font(.headline)
+            .font(.custom("Poppins-Bold", size:15))
             .foregroundColor(.black)
             .frame(maxWidth: .infinity)
     }

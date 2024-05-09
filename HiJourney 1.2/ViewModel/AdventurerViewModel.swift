@@ -180,6 +180,8 @@ class AdventurerViewModel : ObservableObject {
                     switch result {
                     case .success(let adventurer):
                         currentAdventurer = adventurer
+                        AdventurerSaver.saveAdventurer(adventurer)
+
                         print("Current Adventurer: \(adventurer.username)")
                         completion(.success(()))
                     case .failure(let error):
@@ -325,6 +327,10 @@ class AdventurerViewModel : ObservableObject {
         }
     }
     
+    
+    func automaticSignIn( completion: @escaping (Result<Void, Error>) -> Void) {
+        
+    }
 
     
 }

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct DetailedAdventurerViewProfile: View {
-    let images = ["rafting", "adventure", "wp3", "rafting"]
     let adventurer: Adventurer
     @ObservedObject var viewModel: Connection
     @ObservedObject var userSession: UserSession
@@ -36,14 +35,14 @@ struct DetailedAdventurerViewProfile: View {
                     .padding(.top, 50)
                 
                 Text(adventurer.username)
-                    .font(.title)
+                    .font(.custom("Poppins-Bold", size:25))
                     .fontWeight(.medium)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal)
                 
                 if isConnectionSuccessful {
                     Text("Connected") // Show "Connected" text if connection is successful
-                        .foregroundColor(.gray) // Lighter color
+                        .foregroundColor(.gray) 
                         .padding(.top, 10)
                 } else {
                     buttonConnect

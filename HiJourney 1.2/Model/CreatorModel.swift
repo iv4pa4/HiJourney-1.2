@@ -31,6 +31,7 @@ struct CreatorModel {
                     switch result {
                     case .success(let creator):
                         currentCreator = creator
+                        CreatorSaver.saveCreator(creator)
                         print("Current Creator: \(creator.username)")
                         completion(.success(()))
                     case .failure(let error):
@@ -77,7 +78,8 @@ struct CreatorModel {
                                }
                                let currCreator = Creator(id: creator.id, username: creator.username, email: creator.email, password: creator.password)
                                currentCreator = creator
-                               
+                               CreatorSaver.saveCreator(creator)
+
                                completion(.success(creator))
                            case .failure(let error):
                                completion(.failure(error))
@@ -154,6 +156,8 @@ struct CreatorModel {
             do {
                 let creator = try JSONDecoder().decode(Creator.self, from: data)
                 currentCreator = creator
+                CreatorSaver.saveCreator(creator)
+
                 completion(.success(creator))
             } catch {
                 completion(.failure(error))

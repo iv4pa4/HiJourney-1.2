@@ -73,7 +73,7 @@ struct AdventureView: View {
     }
     var titleText: some View {
         Text(adventure.name)
-            .font(.title)
+            .font(.custom("Poppins-Bold", size:25))
             .fontWeight(.bold)
             .foregroundColor(.black)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -86,7 +86,7 @@ struct AdventureView: View {
             .cornerRadius(30)
     }
     var profileText: some View {
-        Text("Anna Smith").font(.headline)
+        Text("Anna Smith").font(.custom("Poppins-Bold", size:25))
     }
     
        

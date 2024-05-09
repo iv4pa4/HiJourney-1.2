@@ -58,7 +58,7 @@ struct SignInViewScreen: View {
     
     var signInText: some View{
         Text("Sign in")
-            .font(.largeTitle)
+            .font(.custom("Poppins-Bold", size:40))
             .foregroundColor(.black)
             .offset(y: -50)
     }
