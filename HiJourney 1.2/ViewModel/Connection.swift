@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol ConnectionProtocol{
+protocol ConnectionProtocol: ObservableObject{
     //func signIn(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void)
     //func signInCreator(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void)
     //func getAdventurerByEmail(email: String, token: String)
