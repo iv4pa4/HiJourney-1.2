@@ -347,6 +347,7 @@
 		D78FBD0F2B318912001E3644 /* ScreenViews */ = {
 			isa = PBXGroup;
 			children = (
+				D7E4A2D52B862E350017AAF2 /* NewAdventuresScreens */,
 				D7E4A2D32B862D030017AAF2 /* SearchAdventureViews */,
 				D7A6FE342B7E89CA0052FDAF /* AdventureViewsCreator */,
 				D7A6FE332B7E89760052FDAF /* AdventureViewsAdventurer */,
@@ -429,7 +430,6 @@
 				D7CC15CE2B31851E00F45436 /* HiJourney_1_2App.swift */,
 				D7434C232B8251FF00EE87AE /* UploadPicView.swift */,
 				D7434C442B82619A00EE87AE /* ImagePicker.swift */,
-				D7E4A2D52B862E350017AAF2 /* NewAdventuresScreens */,
 				D70497772B85E73700FBB43C /* PhotoUploader.swift */,
 				D7E4A2D82B864ACD0017AAF2 /* CurrentUserSession.swift */,
 				D75484EA2BD2629100D9F811 /* AdventurerSaver.swift */,

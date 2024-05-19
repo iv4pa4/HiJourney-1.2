@@ -74,21 +74,6 @@ struct ProfileView: View {
         isLogedOut = true
     }
 
-    func resetAppState() {
-        // Reset user defaults
-        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-        
-        // Clear caches or other temporary data
-        // You need to implement this based on how your app manages data
-        
-        // Dismiss all view controllers and navigate back to the root view controller
-        if let window = UIApplication.shared.keyWindow {
-            window.rootViewController?.dismiss(animated: false, completion: nil)
-            let welcomeScreen = WelcomeScreenView(viewModel: Connection(), creatorProps: CreatorViewModel(), userSession: UserSession())
-            let hostingController = UIHostingController(rootView: welcomeScreen)
-            window.rootViewController = hostingController
-        }
-    }
 }
 
 
