@@ -60,9 +60,9 @@ struct WelcomeScreenView: View {
     
                 
     func trySignIn() {
-        var jwt = userSession.getJWTTokenFromKeychain()
-        var adventurer = AdventurerSaver.loadAdventurer()
-        var creator = CreatorSaver.loadCreator()
+        let jwt = userSession.getJWTTokenFromKeychain()
+        let adventurer = AdventurerSaver.loadAdventurer()
+        let creator = CreatorSaver.loadCreator()
         if jwt != nil {
             if adventurer != nil{
                 currentAdventurer = adventurer!

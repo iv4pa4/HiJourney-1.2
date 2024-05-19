@@ -47,10 +47,6 @@ struct SignUpScreenViewCreator: View {
     }
     var button: some View {
         Button(action: {
-            print(username)
-            print(email)
-            print(password)
-            print(repassword)
             createUserCreator(username: self.username, email: self.email, password: self.password)
         }) {
             Text("Sign Up")
@@ -144,7 +140,6 @@ struct SignUpScreenViewCreator: View {
                 }
             case .failure(let error):
                 print("User NOT created \(error)")
-                // Handle the failure case as needed
             }
         }
     }

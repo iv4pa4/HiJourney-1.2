@@ -62,7 +62,7 @@ struct UploadPicView: View {
         }
         let path = "\(adventureName)\(UUID().uuidString)"
         let fileRef = storageRef.child(path)
-        let uploadTask = fileRef.putData(imageData!, metadata: nil){ metadata,
+        _ = fileRef.putData(imageData!, metadata: nil){ metadata,
             error in
             if error == nil && metadata != nil {
                 

@@ -25,7 +25,7 @@ struct AdventureSearchView: View {
             .shadow(color: .black, radius: 4, x: 3, y: 4)
             
             List(adventureProps.foundAdventures, id: \.id) { adventure in
-                var adv = Adventure(id: adventure.id, name: adventure.name, description: adventure.description,creatorName: "", photoURL: adventure.photoURL)
+                let adv = Adventure(id: adventure.id, name: adventure.name, description: adventure.description,creatorName: "", photoURL: adventure.photoURL)
                 NavigationLink(destination: DetailedAdventureViewCreator(adventure: adv, viewModel: Connection(), viewModelAdv: AttendedAdventuresVModel())) {
                     SearchView(adventure: adventure)
                 }

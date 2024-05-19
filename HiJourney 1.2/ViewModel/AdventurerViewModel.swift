@@ -78,7 +78,7 @@ class AdventurerViewModel : ObservableObject {
                         validateUser(email, password) { result in
                             switch result {
                             case .success(let token):
-                                let saveResult = self.userSession.saveJWTTokenToKeychain(token: token)
+                                _ = self.userSession.saveJWTTokenToKeychain(token: token)
                                 let currAdv = Adventurer(id: adventurer.id, username: adventurer.username, email: adventurer.email, password: adventurer.password, attendedAdventureIds: [], wishlistAdventureIds: [], connectedAdventurers: [])
                                 currentAdventurer = currAdv
                                 completion(.success(adventurer))
@@ -174,7 +174,6 @@ class AdventurerViewModel : ObservableObject {
                 } else {
                     print("Failed to save JWT token.")
                 }
-                //print("Token: \(token)")
                 
                 self.getAdventurerByEmail(email: email, token: token) { result in
                     switch result {
@@ -182,7 +181,6 @@ class AdventurerViewModel : ObservableObject {
                         currentAdventurer = adventurer
                         AdventurerSaver.saveAdventurer(adventurer)
 
-                        print("Current Adventurer: \(adventurer.username)")
                         completion(.success(()))
                     case .failure(let error):
                         print("Error fetching adventurer: \(error)")
@@ -238,7 +236,6 @@ class AdventurerViewModel : ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         if let jwtToken = self.userSession.getJWTTokenFromKeychain() {
-            print("JWT token retrieved successfully:", jwtToken)
             request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
             
             URLSession.shared.dataTask(with: request) { data, response, error in

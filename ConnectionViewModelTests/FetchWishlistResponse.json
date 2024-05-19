@@ -1,0 +1,14 @@
+[
+    {
+        "id": 4,
+        "name": "Hiking",
+        "description": ":)",
+        "photoURL": "HikingEB897123-A5EC-4952-8622-4724EB955E19"
+    },
+    {
+        "id": 6,
+        "name": "Walk",
+        "description": "Walking",
+        "photoURL": "Walk2D80C427-B8DB-419B-8B6E-1739C108ACF0"
+    }
+]
