@@ -1,6 +1,5 @@
 //
 //  Mockable.swift
-//  TestTest
 //
 //  Created by Ivayla  Panayotova on 19.05.24.
 //
