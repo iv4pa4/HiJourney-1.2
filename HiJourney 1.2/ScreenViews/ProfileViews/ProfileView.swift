@@ -49,6 +49,7 @@ struct ProfileView: View {
                             NavigationLink(destination: DetailedAttendedAdventureView(adventure: adventure, viewModel: Connection(), viewModelAdv: attendedAdventuresVM)) {
                                 AttendedAdventuresView(adventure: adventure)
                             }
+                            
                         }
                     }
                     .padding(.top, 20)
@@ -61,8 +62,9 @@ struct ProfileView: View {
                 destination: WelcomeScreenView(viewModel: Connection(), creatorProps: CreatorViewModel(), userSession: UserSession()),
                 isActive: $isLogedOut,
                 label: { EmptyView() }
-            ))
-            
+            )
+                .navigationBarBackButtonHidden())
+            .navigationBarBackButtonHidden()
             .onAppear {
                 attendedAdventuresVM.getAttendedAdventures(adventurerId: currentAdventurer.id)
             }
