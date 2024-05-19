@@ -30,17 +30,6 @@ struct DetailedAttendedAdventureView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             
-            // Scrollable horizontal images
-//            ScrollView(.horizontal, showsIndicators: false) {
-//                HStack {
-//                    ForEach(0..<5) { _ in
-//                        Image("rafting")
-//                            .resizable()
-//                            .frame(width: 80, height: 80)
-//                            .cornerRadius(10)
-//                    }
-//                }
-//            }
             .padding()
             
             

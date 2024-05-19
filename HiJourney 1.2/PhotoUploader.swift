@@ -19,7 +19,7 @@ struct PhotoUploader {
         let path = "\(adventureName)\(UUID().uuidString)"
         let fileRef = storageRef.child(path)
         
-        let uploadTask = fileRef.putData(imageData, metadata: nil) { metadata, error in
+        _ = fileRef.putData(imageData, metadata: nil) { metadata, error in
             if let error = error {
                 print("Error uploading image: \(error.localizedDescription)")
                 completion(nil)

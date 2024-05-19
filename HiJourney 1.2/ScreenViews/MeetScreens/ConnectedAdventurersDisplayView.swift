@@ -14,13 +14,12 @@ struct ConnectedAdventurersDisplayView: View {
     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
     var body: some View {
-        VStack{
+        ScrollView {
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(adventurerProps.connectedAdventurers, id: \.id) {adventurer in
-                    VStack(alignment: .leading) {
+                    
                         AdventurerDetailedView(adventurer: Adventurer(id: adventurer.id, username: adventurer.username, email: adventurer.email, password: "", attendedAdventureIds: adventurer.attendedAdventureIds, wishlistAdventureIds: adventurer.wishlistAdventureIds, connectedAdventurers: []))
                     }
-                }
             }
             .onAppear {
                     adventurerProps.fetchAdventurers(id: currentAdventurer.id)

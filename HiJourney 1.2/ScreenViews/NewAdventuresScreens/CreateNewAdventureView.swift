@@ -107,9 +107,6 @@ struct CreateNewAdventureView: View {
                 return
             }
             imageURL = imagePath
-            print(eventName)
-            print(eventDescription)
-            print(imageURL)
             creatorProps.createAdventure(eventName: eventName, eventDescription: eventDescription, photoURL: imageURL) { createdAdventure in
                             if let createdAdventure = createdAdventure {
                                 self.createdAdventure = createdAdventure

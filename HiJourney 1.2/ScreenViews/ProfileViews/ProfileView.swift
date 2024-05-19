@@ -18,6 +18,8 @@ struct ProfileView: View {
                     Spacer()
                     Button("Logout", action: logout)
                         .padding()
+                        .font(.custom("Poppins-Bold", size:15))
+                        .foregroundStyle( .navBarBg)
                 }
                 
                 Image("c")
@@ -36,6 +38,9 @@ struct ProfileView: View {
                 
                 NavigationLink(destination: ConnectedAdventurersDisplayView(adventurerProps: AdventurerViewModel(), userSession: userSession)) {
                     Text("View Connected Adventurers")
+                        .font(.custom("Poppins-Bold", size:15))
+                        .foregroundStyle(.navBarBg)
+                        
                 }
                 
                 if attendedAdventuresVM.attendedAdventures.isEmpty {
@@ -59,21 +64,20 @@ struct ProfileView: View {
             }
             
             .background(NavigationLink(
-                destination: WelcomeScreenView(viewModel: Connection(), creatorProps: CreatorViewModel(), userSession: UserSession()),
-                isActive: $isLogedOut,
-                label: { EmptyView() }
-            )
-                .navigationBarBackButtonHidden())
-            .navigationBarBackButtonHidden()
-            .onAppear {
-                attendedAdventuresVM.getAttendedAdventures(adventurerId: currentAdventurer.id)
-            }
-        }
-    }
+                            destination: WelcomeScreenView(viewModel: Connection(), creatorProps: CreatorViewModel(), userSession: UserSession()),
+                            isActive: $isLogedOut,
+                            label: { EmptyView() }
+                        ))
 
+                        .onAppear {
+                            attendedAdventuresVM.getAttendedAdventures(adventurerId: currentAdventurer.id)
+                        }
+                    }
+                }
     func logout() {
         AdventurerSaver.deleteAdventurer()
         isLogedOut = true
+        
     }
 
 }

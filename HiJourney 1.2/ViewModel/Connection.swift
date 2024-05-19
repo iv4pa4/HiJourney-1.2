@@ -7,7 +7,21 @@
 
 import SwiftUI
 
-class Connection: ObservableObject {
+protocol ConnectionProtocol: ObservableObject{
+    //func signIn(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void)
+    //func signInCreator(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void)
+    //func getAdventurerByEmail(email: String, token: String)
+    //func attendAdventures(adventurerId: Int, adventureId: Int)
+    func fetchWishlistData()
+    //func createUserAdventurer(username: String, email: String, password: String, profilephoto: String, completion: @escaping (Result<Adventurer, Error>) -> Void)
+    //func createUserCreator(username: String, email: String, password: String, completion: @escaping (Result<Creator, Error>) -> Void)
+    //func addToWishlist(adventurerId: Int, adventureId: Int)
+    //func connectAdventurers(adventurerId1: Int, adventurerId2: Int, token: String)
+    //func getSignedStatus() -> Bool
+    
+}
+
+class Connection: ObservableObject, ConnectionProtocol{
     @Published private var model = CreatorModel()
     @Published private var modelA = AdventurerViewModel()
     @Published private var modelW = WishlistModel()
@@ -74,7 +88,6 @@ class Connection: ObservableObject {
                 }
                 
                 if let jsonString = String(data: data, encoding: .utf8) {
-                    print("JSON response: \(jsonString)")
                 }
                 
                 do {

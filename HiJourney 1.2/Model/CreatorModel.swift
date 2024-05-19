@@ -32,7 +32,6 @@ struct CreatorModel {
                     case .success(let creator):
                         currentCreator = creator
                         CreatorSaver.saveCreator(creator)
-                        print("Current Creator: \(creator.username)")
                         completion(.success(()))
                     case .failure(let error):
                         print("Error fetching adventurer: \(error)")
@@ -76,7 +75,7 @@ struct CreatorModel {
                                } else {
                                    print("Failed to save JWT token.")
                                }
-                               let currCreator = Creator(id: creator.id, username: creator.username, email: creator.email, password: creator.password)
+                               _ = Creator(id: creator.id, username: creator.username, email: creator.email, password: creator.password)
                                currentCreator = creator
                                CreatorSaver.saveCreator(creator)
 
@@ -212,7 +211,6 @@ struct CreatorModel {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         if let jwtToken = userSession.getJWTTokenFromKeychain() {
-            print("JWT token retrieved successfully:", jwtToken)
             
             request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
             
@@ -235,7 +233,6 @@ struct CreatorModel {
                         if let responseData = try? JSONSerialization.jsonObject(with: data, options: []),
                            let json = responseData as? [String: Any],
                            let createdAdventure = try? JSONDecoder().decode(AdventureFromCreator.self, from: data) {
-                            print("Adventure created successfully:", json)
                             completion(createdAdventure)
                         } else {
                             print("Failed to decode created adventure")

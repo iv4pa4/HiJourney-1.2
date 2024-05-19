@@ -19,7 +19,7 @@ struct WishlistAdventuresDisplayView: View {
                             }
                         }
                     }
-                }
+                } 
                 .padding()
             }
             .navigationBarTitle("Wishlist")

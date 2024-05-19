@@ -20,7 +20,6 @@ struct WishlistModel{
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         if let jwtToken = userSession.getJWTTokenFromKeychain() {
-            print("JWT token retrieved successfully:", jwtToken)
             request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
             
             URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -30,7 +29,6 @@ struct WishlistModel{
                 }
                 
                 if let jsonString = String(data: data, encoding: .utf8) {
-                    print("JSON response: \(jsonString)")
                     print("Successful")
                 }
                 
